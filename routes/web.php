@@ -32,9 +32,9 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::post('login', [AuthController::class, "login"])->name('auth.login');
-Route::get('formulario-persona', [RegisterPersonController::class, "register"])->name('form.person');
+Route::get('registro-postulante', [RegisterPersonController::class, "register"])->name('form.person');
 Route::post('registro-persona', [RegisterPersonController::class, "store"])->name('register.person');
-Route::get('formulario-empresa', [RegisterInstitutionController::class, "register"])->name('form.institution');
+Route::get('registro-empresa', [RegisterInstitutionController::class, "register"])->name('form.institution');
 Route::post('registro-empresa', [RegisterInstitutionController::class, "store"])->name('register.institution');
 
 Route::post('logout', [AuthController::class, "logout"])->name('auth.logout')->middleware('auth');

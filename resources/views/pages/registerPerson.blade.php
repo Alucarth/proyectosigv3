@@ -17,7 +17,7 @@
                 </a>
                 <div class="my-auto">
                     <img alt="Rubick Tailwind HTML Admin Template" class="-intro-x w-1/2 -mt-16"
-                        src="{{ asset('dist/images/pge.svg') }}">
+                        src="{{ asset('img/logomain.svg') }}">
                     <!--<div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">Unos pocos clics más para<br>
                         regístrar en su cuenta. </div>
                     <div class="-intro-x mt-5 text-lg text-white text-opacity-70 dark:text-gray-500">Encuentra ofertas

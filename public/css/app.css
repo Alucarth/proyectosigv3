@@ -1,3 +1,6 @@
+@import url(http://fonts.cdnfonts.com/css/roboto);
+@import url(http://fonts.cdnfonts.com/css/gill-sans);
+@import url(http://fonts.googleapis.com/css?family=Lobster|Fontdiner+Swanky|Crafty+Girls|Pacifico|Satisfy|Gloria+Hallelujah|Bangers|Audiowide|Sacramento);
 /*
 * iziToast | v1.4.0
 * http://izitoast.marcelodolce.com
@@ -1197,4 +1200,6 @@
   }
 }
 
-
+.txlabel {
+  font-family: "Gill Sans", sans-serif;
+}

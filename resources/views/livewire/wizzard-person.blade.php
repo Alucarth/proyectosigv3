@@ -15,7 +15,7 @@
                     class="w-10 h-10 rounded-full btn bg-gray-200 dark:bg-dark-1 text-gray-600 mx-2">5</button>
             </div>
             <div class="px-5 mt-10">
-                <div class="font-medium text-center text-lg">Completa datos personales</div>
+                <div class="font-medium text-center text-lg">Completa tus datos personales</div>
             </div>
             <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5">
                 <div class="font-medium text-base">Datos complementarios</div>
@@ -23,6 +23,7 @@
                     <div class="col-span-12 sm:col-span-3">
                         <label class="form-label">CI</label>
                         <input wire:model="ci" type="text" class="form-control" placeholder="1234567">
+                        @error('ci') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                     </div>
                     <div class="col-span-12 sm:col-span-3">
                         <label class="form-label">Expedido</label>
@@ -38,6 +39,7 @@
                             <option>BE</option>
                             <option>PD</option>
                         </select>
+                        @error('expedido') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                     </div>
                     <div class="col-span-12 sm:col-span-3">
                         <label>Genero</label>
@@ -53,14 +55,17 @@
                                 <label class="form-check-label">Femenino</label>
                             </div>
                         </div>
+                        @error('genero') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                     </div>
                     <div class="col-span-12 sm:col-span-3">
                         <label class="form-label">Edad</label>
                         <input wire:model="edad" type="text" class="form-control" placeholder="22">
+                        @error('edad') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                     </div>
                     <div class="col-span-12 sm:col-span-3">
                         <label class="form-label">Fecha de Nacimiento</label>
                         <input wire:model="nacimiento" class="form-control block mx-auto" type="date">
+                        @error('nacimiento') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                     </div>
                     <div class="col-span-12 sm:col-span-3">
                         <label class="form-label">Departamento</label>
@@ -70,10 +75,12 @@
                                 <option value="{{ $department->id }}">{{ $department->nombre }}</option>
                             @endforeach
                         </select>
+                        @error('departamento') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                     </div>
                     <div class="col-span-12 sm:col-span-6">
                         <label class="form-label">Direccion</label>
                         <input wire:model="direccion" type="text" class="form-control" placeholder="Av. central">
+                        @error('direccion') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                     </div>
                     <div class="col-span-12 sm:col-span-3">
                         <label class="form-label">Estado Civil</label>
@@ -84,6 +91,7 @@
                             <option>Viudo</option>
                             <option>Divorciado</option>
                         </select>
+                        @error('estadoCivil') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                     </div>
                     <div class="col-span-12 sm:col-span-3">
                         <label>Es Madre/Padre/Ambos</label>
@@ -99,10 +107,12 @@
                                 <label class="form-check-label">No</label>
                             </div>
                         </div>
+                        @error('hijos') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                     </div>
                     <div class="col-span-12 sm:col-span-3">
                         <label class="form-label">Telefono</label>
                         <input wire:model="telefonoPersona" type="text" class="form-control" placeholder="2212563">
+                        @error('telefonoPersona') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                     </div>
                     <div class="col-span-12 sm:col-span-3">
                     </div>
@@ -111,14 +121,17 @@
                             <div class="col-span-12 sm:col-span-3">
                                 <label class="form-label">Nombre del hijo(a)</label>
                                 <input wire:model="nombreHijo" type="text" class="form-control" placeholder="jose">
+                                @error('nombreHijo') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                             </div>
                             <div class="col-span-12 sm:col-span-3">
                                 <label class="form-label">Fecha de Nacimiento</label>
                                 <input wire:model="nacimientoHijo" class="form-control block mx-auto" type="date">
+                                @error('nacimientoHijo') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                             </div>
                             <div class="col-span-12 sm:col-span-3">
                                 <label class="form-label">Certificado</label>
                                 <input wire:model='archivoHijo' type="file" accept=".jpg, .bmp, .png, .pdf" class="form-control" placeholder="22">
+                                @error('archivoHijo') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                             </div>
                             <div class="col-span-12 sm:col-span-3 pt-6">
                                 <button wire:click='saveHijo' class="btn btn-secondary">Añadir</button>
@@ -159,11 +172,13 @@
                                 <option value="{{ $problem->id }}">{{ $problem->nombre }}</option>
                             @endforeach
                         </select>
+                        @error('problema') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                     </div>
                     <div class="col-span-12 sm:col-span-4">
                         <label class="form-label">Detalle</label>
                         <input wire:model='detalle' type="text" class="form-control"
                             placeholder="Detalle de la dificultad">
+                        @error('problema') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                     </div>
                     <div class="col-span-12 sm:col-span-4 pt-6">
                         <button wire:click='saveDifficulty' class="btn btn-secondary">Añadir</button>
@@ -203,6 +218,7 @@
                                 <label class="form-check-label">No</label>
                             </div>
                         </div>
+                        @error('discapacidad') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                     </div>
                     @if ($discapacidad)
                         <form class="col-span-12 gap-2 sm:col-span-12 flex items-center"
@@ -328,6 +344,7 @@
                             <label class="form-label">Institución</label>
                             <input wire:model='institutionFormacion' type="text" class="form-control"
                                 placeholder="Univalle">
+                            @error('institutionFormacion') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                         </div>
                         <div class="col-span-12 sm:col-span-3">
                             <label class="form-label">Carrera</label>
@@ -337,6 +354,7 @@
                                     <option value="{{ $career->id }}">{{ $career->nombre }}</option>
                                 @endforeach
                             </select>
+                            @error('carrera') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                         </div>
                         <div class="col-span-12 sm:col-span-3">
                             <label class="form-label">Grado Académico</label>
@@ -347,14 +365,17 @@
                                 <option>Licenciatura</option>
                                 <option>Técnico</option>
                             </select>
+                            @error('gradoFormacion') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                         </div>
                         <div class="col-span-12 sm:col-span-3">
                             <label class="form-label">Fecha de Titulación / Egreso</label>
                             <input wire:model='egresoFormacion' class="form-control block mx-auto" type="date">
+                            @error('egresoFormacion') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                         </div>
                         <div class="col-span-12 sm:col-span-3">
                             <label class="form-label">Titulo / Certificado Académico</label>
                             <input wire:model='archivoFormacion' type="file" class="form-control">
+                            @error('archivoFormacion') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                         </div>
                         <div class="col-span-12 sm:col-span-3 pt-6">
                             <button type="submit" class="btn btn-secondary">Añadir</button>

@@ -4492,20 +4492,19 @@ __webpack_require__.r(__webpack_exports__);
 console.log('iniciando modulo js '); // window.Chart = require('chart.js');
 
 window.iziToast = __webpack_require__(/*! izitoast */ "./node_modules/izitoast/dist/js/iziToast.js");
-var error_tag = document.getElementById('error_message');
-console.log(error_tag);
-
-if (error_tag) {
-  var error_messages = JSON.parse(error_tag.getAttribute('data'));
-  iziToast.error({
-    title: 'Error',
-    message: 'Illegal operation'
-  });
-}
-
-function alerta() {
-  console.log('lanzando evento');
-} // console.log('cargando chart');
+var error_tag = document.getElementById('error_message'); // console.log(error_tag)
+// if(error_tag )
+// {
+//     var error_messages = JSON.parse(error_tag.getAttribute('data'))
+//     iziToast.error({
+//         title: 'Error',
+//         message: 'Illegal operation',
+//     });
+// }
+// function alerta(){
+//     console.log('lanzando evento')
+// }
+// console.log('cargando chart');
 // var ctx = document.getElementById('myChart');
 // var estadistica = JSON.parse(ctx.getAttribute('data'));
 // let estadisticaValues=[];

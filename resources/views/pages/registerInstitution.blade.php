@@ -33,16 +33,18 @@
                     <!--<div class="intro-x mt-2 text-gray-500 dark:text-gray-500 xl:hidden text-center">Unos pocos clics más
                         para regístrar en su cuenta. Encuentra ofertas laborales para ti en un solo lugar
                     </div>-->
-                    @include('layout.partials.errors')
+                    {{-- @include('layout.partials.errors') --}}
                     <form method="post" action="{{ route('register.institution') }}">
                         @csrf
                         <div class="intro-x mt-8">
                             <input type="text" class="intro-x login__input form-control py-3 px-4 border-gray-300 block"
                                 placeholder="Razon Social" name="razonSocial" value="{{ old('razonSocial') }}">
+                                @error('razonSocial') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                             <input type="text"
                                 class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4"
                                 placeholder="Nombre Comercial" name="nombreComercial"
                                 value="{{ old('nombreComercial') }}">
+                                @error('nombreComercial') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
 
                             <div class="intro-x login__input py-3 px-4 border-gray-300 block mt-4">
                                 <label class="form-label">Tipo de Sociedad</label>
@@ -52,22 +54,27 @@
                                         <option value="{{ $society->id }}">{{ $society->nombre }}</option>
                                     @endforeach
                                 </select>
+                                @error('society') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                             </div>
                             <input type="text"
                                 class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4"
                                 placeholder="NIT" name="nit" value="{{ old('nit') }}">
+                                @error('nit') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                             <input type="text"
                                 class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4"
                                 placeholder="Email" name="email" value="{{ old('email') }}">
+                                @error('email') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                             <input type="password"
                                 class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4"
                                 placeholder="Password" name="password">
+                                @error('password') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                             <div class="intro-x py-3 px-4 block mt-4 flex items-center">
                                 <span>{!! captcha_img() !!}</span>
                             </div>
                             <input type="text" name="captcha"
                                 class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4"
                                 placeholder="captcha">
+                                @error('captcha') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                         </div>
                         <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
                             <button type="submit"

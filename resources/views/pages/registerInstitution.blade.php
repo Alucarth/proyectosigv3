@@ -79,6 +79,8 @@
                         <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
                             <button type="submit"
                                 class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">Registrar</button>
+                            <!-- <button  type="button" class="btn btn-elevated-secondary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top" onclick="" >Ir a inicio.</button> -->
+                            <button id="hideLogin" type="button" class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top" onclick="window.location='/';" >Ir a inicio.</button>
                         </div>
                     </form>
                 </div>

@@ -36,7 +36,7 @@
                     @include('layout.partials.errors')
                     @include('layout.partials.flashMessage')
                     <div id="panelRegistro" class="">
-                    <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left mt-8">Registro de postulaciones:</h2>
+                    <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left mt-8">Registro de Postulaciones:</h2>
                         <div class="intro-x">
                             <div class="box px-5 py-3 flex items-left ">
                             <a class="btn btn-outline-secondary py-3 px-4 w-full xl:w-80 mt-3 xl:mt-2 align-top zoom-in"

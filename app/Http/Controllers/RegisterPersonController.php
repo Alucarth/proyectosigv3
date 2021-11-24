@@ -15,7 +15,7 @@ class RegisterPersonController extends Controller
 {
     public function person()
     {
-        $person = Person::find(auth()->user()->person_id);
+        $person = Person::where('user_id', auth()->user()->id)->first();
         return view('pages.dataPerson', compact("person"));
     }
 
@@ -40,27 +40,30 @@ class RegisterPersonController extends Controller
         DB::beginTransaction();
 
         try {
-            $person = new Person();
-            $person->nombres = $request->nombres;
-            $person->paterno = $request->paterno;
-            $person->materno = $request->materno;
-            $person->save();
+            
 
             $user = new User();
-            $user->person_id = $person->id;
+            // $user->person_id = $person->id;
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
             $user->codigo = Str::uuid()->toString();
             $user->activation = 1;
             $user->save();
-            Log::info('se registro al usuario y la persona');
-            Mail::to($request->email)->send(new Confirmation($user));
-            Log::info('envio exitoso');
+
+            $person = new Person();
+            $person->nombres = $request->nombres;
+            $person->paterno = $request->paterno;
+            $person->materno = $request->materno;
+            $person->user_id = $user->id;
+            $person->save();
+
+
+            //Mail::to($request->email)->send(new Confirmation($user));
 
             $user->assignRole('persona');
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->intended('/')->with("alert", "El correo ya esta en uso");
+            return redirect()->intended('/')->with("alert", "Algo salio mal, intentalo nuevamente");
         }
 
         DB::commit();

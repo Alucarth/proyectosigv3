@@ -14,7 +14,7 @@ class CreatePeopleTable extends Migration
     public function up()
     {
         Schema::create('people', function (Blueprint $table) {
-            $table->id();
+            $table->id();            
             $table->string('nombres');
             $table->string('paterno');
             $table->string('materno');
@@ -39,30 +39,32 @@ class CreatePeopleTable extends Migration
             $table->unsignedBigInteger('department_id')->nullable();
             $table->string('direccion')->nullable();
             $table->enum('estado_civil', [
-                'Soltero',
-                'Casado',
-                'Viudo',
-                'Divorciado'
+                'SOLTERO',
+                'CASADO',
+                'VIUDO',
+                'DIVORCIADO'
             ])->nullable();
             $table->boolean('hijos')->nullable();
             $table->boolean('discapacidad')->nullable();
             $table->enum('tipo_discapacidad', [
-                'Físico',
-                'Motora',
-                'Intelectual',
-                'Auditiva',
-                'Visual',
-                'Mental/psíquica',
-                'Múltiple'
+                'FÍSICO',
+                'MOTORA',
+                'INTELECTUAL',
+                'AUDITIVA',
+                'VISUAL',
+                'MENTAL/PSÍQUICA',
+                'MÚLTIPLE'
             ])->nullable();
             $table->string('certificado_discapacidad')->nullable();
             $table->string('telefono')->nullable();
             $table->integer('step')->default(1);
             $table->boolean('validacion_segip')->default(0);
             $table->string('estado')->default("REGISTRADO");
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
 
             $table->foreign('department_id')->references('id')->on('departments');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

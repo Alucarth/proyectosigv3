@@ -15,10 +15,10 @@ class ProblemSeeder extends Seeder
     public function run()
     {
         //
-        $problem = Problem::create(['nombre' => 'Falta de Experiencia']);
-        $problem = Problem::create(['nombre' => 'Problemas con el horario laboral']);
-        $problem = Problem::create(['nombre' => 'Cuidado de Adulto Mayor']);
-        $problem = Problem::create(['nombre' => 'Cuidado de niños en etapa inicial']);
-        $problem = Problem::create(['nombre' => 'Otros']);        
+        $problem = Problem::create(['nombre' => 'FALTA DE EXPERIENCIA']);
+        $problem = Problem::create(['nombre' => 'PROBLEMAS CON EL HORARIO LABORAL']);
+        $problem = Problem::create(['nombre' => 'CUIDADO DE ADULTO MAYOR']);
+        $problem = Problem::create(['nombre' => 'CUIDADO DE NIÑOS EN ETAPA INICIAL']);
+        $problem = Problem::create(['nombre' => 'OTROS']);        
     }
 }

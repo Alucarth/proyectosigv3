@@ -15,9 +15,9 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('person_id')->nullable();
-            $table->unsignedBigInteger('institution_id')->nullable();
-            $table->unsignedBigInteger('official_id')->nullable();
+            // $table->unsignedBigInteger('person_id')->nullable();
+            // $table->unsignedBigInteger('institution_id')->nullable();
+            // $table->unsignedBigInteger('official_id')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('codigo');
@@ -25,10 +25,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-
-            $table->foreign('person_id')->references('id')->on('people');
-            $table->foreign('institution_id')->references('id')->on('institutions');
-            $table->foreign('official_id')->references('id')->on('officials');
+            // $table->foreign('person_id')->references('id')->on('people');
+            // $table->foreign('institution_id')->references('id')->on('institutions');
+            // $table->foreign('official_id')->references('id')->on('officials');
         });
     }
 

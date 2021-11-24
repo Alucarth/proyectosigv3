@@ -22,6 +22,7 @@ class FormOfficial extends Component
     public function render()
     {
         $officials = Official::OrderBy('id', 'desc')->paginate(10);
+        
         return view('livewire.form-official', compact('officials'));
     }
 
@@ -39,14 +40,8 @@ class FormOfficial extends Component
 
         try {
 
-            $official = new Official();
-            $official->nombres = $this->nombres;
-            $official->paterno = $this->paterno;
-            $official->materno = $this->materno;
-            $official->save();
-
-            $user = new User();
-            $user->official_id = $official->id;
+    
+            $user = new User();            
             $user->email = $this->correo;
             $user->password = bcrypt("PNE123###");
             $user->codigo = Str::uuid()->toString();
@@ -54,13 +49,23 @@ class FormOfficial extends Component
             $user->save();
 
             $user->assignRole($this->rolleOfficial);
+
+            $official = new Official();
+            $official->user_id = $user->id;
+            $official->nombres = $this->nombres;
+            $official->paterno = $this->paterno;
+            $official->materno = $this->materno;
+            $official->save();
+
+            DB::commit();
+            session()->flash('message', 'Los datos se guardaron correctamente.');
+
         } catch (\Exception $e) {
             DB::rollback();
+            session()->flash('message', 'Error al Guardar los datos.');
         }
 
-        DB::commit();
-
-        session()->flash('message', 'Los datos se guardaron correctamente.');
+       
 
         $this->clearOfficial();
     }

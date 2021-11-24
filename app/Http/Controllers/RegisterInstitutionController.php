@@ -28,28 +28,35 @@ class RegisterInstitutionController extends Controller
     {
         $rules = [
             'razonSocial' => 'required',
-            'nombreComercial' => 'required',
+             // 'nombreComercial' => 'required',
             'society' => 'required',
-            'nit' => 'required',
+            'nit' => 'required|numeric',
             'email' => 'required|email',
             'password' => 'required',
             'captcha' => 'required|captcha'
         ];
 
-        $request->validate($rules);
+        $messages = [
+            'razonSocial.required' => 'El campo Razon Social es obligatorio!',
+            // 'nombreComercial.required' => 'El campo Nombre Compercial es obligatorio!',
+            'society.required' => 'El campo Tipo de Sociedad es obligatorio!',
+            'nit.required' => 'El campo NIT es obligatorio!',
+            'nit.numeric' => 'El campo NIT debe ser numérico!',
+            'email.required' => 'El campo Email es obligatorio!',            
+            'email.email' => 'Email no valido!',
+            'password.required' => 'El campo Contraseña es obligatorio!',
+            'captcha.required' => 'El campo Captcha es obligatorio!',            
+            'captcha.captcha' => 'Captcha no valido!',
+        ];
+
+        $request->validate($rules, $messages);
         // Log::info($request->all());
         DB::beginTransaction();
 
         try {
-            $institution = new Institution();
-            $institution->razon_social = $request->razonSocial;
-            $institution->nombre_comercial = $request->nombreComercial;
-            $institution->society_id = $request->society;
-            $institution->nit = $request->nit;
-            $institution->save();
+            
 
-            $user = new User();
-            $user->institution_id = $institution->id;
+            $user = new User();            
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
             $user->codigo = Str::uuid()->toString();
@@ -57,9 +64,19 @@ class RegisterInstitutionController extends Controller
             $user->save();
 
             $user->assignRole('empresa');
+
+
+            $institution = new Institution();
+            $institution->user_id = $user->id;
+            $institution->razon_social = $request->razonSocial;
+            // $institution->nombre_comercial = $request->nombreComercial;
+            $institution->society_id = $request->society;
+            $institution->nit = $request->nit;
+            $institution->save();
+
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->intended('/')->with("alert", "El correo ya esta en uso");
+            return redirect()->intended('/')->with("alert", "Se produjo un error, vuelve a intentarlo");
         }
 
         DB::commit();

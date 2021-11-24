@@ -15,69 +15,79 @@ class OfficialSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        $official = new Official();
-        $official->nombres = "admin";
-        $official->paterno = "admin";
-        $official->materno = "admin";
-        $official->save();
+    {      
 
-        $user = new User();
-        $user->official_id = $official->id;
+        $user = new User();        
         $user->email = "admin@sigv3.com";
         $user->codigo = Str::uuid()->toString();
         $user->activation = 1;
-        $user->password = bcrypt("515t3m45");
+        $user->password = bcrypt("515t3m45");        
         $user->save();
 
         $user->assignRole('admin');
 
         $official = new Official();
-        $official->nombres = "oficial";
-        $official->paterno = "oficial";
-        $official->materno = "oficial";
+        $official->nombres = "ADMIN";
+        $official->paterno = "ADMIN";
+        $official->materno = "ADMIN";
+        $official->user_id = $user->id;
         $official->save();
+        
 
-        $user = new User();
-        $user->official_id = $official->id;
+
+        $user = new User();        
         $user->email = "oficial@sigv3.com";
         $user->codigo = Str::uuid()->toString();
         $user->activation = 1;
-        $user->password = bcrypt("0f1c14l");
+        $user->password = bcrypt("0f1c14l");        
         $user->save();
 
         $user->assignRole('oficial');
 
         $official = new Official();
-        $official->nombres = "responsable";
-        $official->paterno = "responsable";
-        $official->materno = "responsable";
+        $official->nombres = "OFICIAL";
+        $official->paterno = "OFICIAL";
+        $official->materno = "OFICIAL";
+        $official->user_id = $user->id;
         $official->save();
 
-        $user = new User();
-        $user->official_id = $official->id;
+
+
+
+        $user = new User();        
         $user->email = "responsable@sigv3.com";
         $user->codigo = Str::uuid()->toString();
         $user->activation = 1;
-        $user->password = bcrypt("r35p054bl3");
+        $user->password = bcrypt("r35p054bl3");        
         $user->save();
 
         $user->assignRole('responsable');
 
         $official = new Official();
-        $official->nombres = "fiduciario";
-        $official->paterno = "fiduciario";
-        $official->materno = "fiduciario";
+        $official->nombres = "RESPONSABLE";
+        $official->paterno = "RESPONSABLE";
+        $official->materno = "RESPONSABLE";
+        $official->user_id = $user->id;
         $official->save();
 
-        $user = new User();
-        $user->official_id = $official->id;
+        
+        
+
+        $user = new User();        
         $user->email = "fiduciario@sigv3.com";
         $user->codigo = Str::uuid()->toString();
         $user->activation = 1;
-        $user->password = bcrypt("f1duc14r10");
+        $user->password = bcrypt("f1duc14r10");        
         $user->save();
 
         $user->assignRole('fiduciario');
+
+        $official = new Official();
+        $official->nombres = "FIDUCIARIO";
+        $official->paterno = "FIDUCIARIO";
+        $official->materno = "FIDUCIARIO";
+        $official->user_id = $user->id;
+        $official->save();
+
     }
 }

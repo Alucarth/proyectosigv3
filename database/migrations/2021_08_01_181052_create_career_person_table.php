@@ -19,14 +19,9 @@ class CreateCareerPersonTable extends Migration
             $table->unsignedBigInteger('career_id');
             $table->string('institution');
             $table->enum('grado_academico', [
-                'Bachillerato',
-                'Egresado',
-                'Licenciatura',
-                'Técnico',
-                'Diplomado',
-                'Maestría',
-                'Doctorado',
-                'Especialidad'
+                'TECNICO',
+                'LICENCIATURA',
+                'POSGRADO'
             ]);
             $table->date('egreso');
             $table->string('certificado');

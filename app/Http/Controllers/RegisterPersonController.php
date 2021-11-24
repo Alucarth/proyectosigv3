@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 class RegisterPersonController extends Controller
 {
@@ -52,9 +53,9 @@ class RegisterPersonController extends Controller
             $user->codigo = Str::uuid()->toString();
             $user->activation = 1;
             $user->save();
-
-
-            //Mail::to($request->email)->send(new Confirmation($user));
+            Log::info('se registro al usuario y la persona');
+            Mail::to($request->email)->send(new Confirmation($user));
+            Log::info('envio exitoso');
 
             $user->assignRole('persona');
         } catch (\Exception $e) {

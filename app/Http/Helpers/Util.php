@@ -11,6 +11,13 @@ class Util
     public static $CENTIMETRO = 3;
     public static $METRO = 4;
 
+
+    public static function SendMailWelcome($user)
+    {
+        
+    }
+
+
     public static function removeSpaces($text)
     {
         $re = '/\s+/';

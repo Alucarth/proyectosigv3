@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+use Util;
 
 class RegisterPersonController extends Controller
 {
@@ -57,7 +58,7 @@ class RegisterPersonController extends Controller
             $person->user_id = $user->id;
             $person->save();
 
-
+            Util::SendMailWelcome($user->email);
             //Mail::to($request->email)->send(new Confirmation($user));
 
             $user->assignRole('persona');

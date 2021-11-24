@@ -17,7 +17,7 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ])) {
-            $request->session()->regenerate();        
+            $request->session()->regenerate();                    
 
             if (auth()->user()->activation == 1) {               
 

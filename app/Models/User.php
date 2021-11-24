@@ -53,7 +53,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function institution()
     {
-        return $this->belongsTo(Institution::class);
+        return $this->hasOne(Institution::class);
     }
 
     public function agreements()

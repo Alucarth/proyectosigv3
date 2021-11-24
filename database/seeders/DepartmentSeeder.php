@@ -15,15 +15,15 @@ class DepartmentSeeder extends Seeder
     public function run()
     {
         //
-        $department = Department::create(['nombre' => 'Chuquisaca','sigla' => 'CH','codigo_INE' => '01']);
-        $department = Department::create(['nombre' => 'La Paz','sigla' => 'LP','codigo_INE' => '02']);
-        $department = Department::create(['nombre' => 'Cochabamba','sigla' => 'CB','codigo_INE' => '03']);
-        $department = Department::create(['nombre' => 'Oruro','sigla' => 'OR','codigo_INE' => '04']);
-        $department = Department::create(['nombre' => 'Potosí','sigla' => 'PT','codigo_INE' => '05']);
-        $department = Department::create(['nombre' => 'Tarija','sigla' => 'TJ','codigo_INE' => '06']);
-        $department = Department::create(['nombre' => 'Santa Cruz','sigla' => 'SC','codigo_INE' => '07']);
-        $department = Department::create(['nombre' => 'Beni','sigla' => 'BE','codigo_INE' => '08']);
-        $department = Department::create(['nombre' => 'Pando','sigla' => 'PD','codigo_INE' => '09']);
+        $department = Department::create(['nombre' => 'CHUQUISACA','sigla' => 'CH','codigo_INE' => '01']);
+        $department = Department::create(['nombre' => 'LA PAZ','sigla' => 'LP','codigo_INE' => '02']);
+        $department = Department::create(['nombre' => 'COCHABAMBA','sigla' => 'CB','codigo_INE' => '03']);
+        $department = Department::create(['nombre' => 'ORURO','sigla' => 'OR','codigo_INE' => '04']);
+        $department = Department::create(['nombre' => 'POTOSÍ','sigla' => 'PT','codigo_INE' => '05']);
+        $department = Department::create(['nombre' => 'TARIJA','sigla' => 'TJ','codigo_INE' => '06']);
+        $department = Department::create(['nombre' => 'SANTA CRUZ','sigla' => 'SC','codigo_INE' => '07']);
+        $department = Department::create(['nombre' => 'BENI','sigla' => 'BE','codigo_INE' => '08']);
+        $department = Department::create(['nombre' => 'PANDO','sigla' => 'PD','codigo_INE' => '09']);
 
     }
 }

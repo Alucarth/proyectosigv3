@@ -19,7 +19,10 @@ class CreateOfficialsTable extends Migration
             $table->string('paterno');
             $table->string('materno');
             $table->string('estado')->default("ACTIVO");
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

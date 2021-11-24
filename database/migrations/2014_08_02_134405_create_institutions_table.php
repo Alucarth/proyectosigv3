@@ -17,7 +17,7 @@ class CreateInstitutionsTable extends Migration
         Schema::create('institutions', function (Blueprint $table) {
             $table->id();
             $table->string('razon_social');
-            $table->string('nombre_comercial');
+            $table->string('nombre_comercial')->nullable();
             $table->unsignedBigInteger('society_id');
             $table->string('nit');
             $table->string('file_nit')->nullable();
@@ -31,9 +31,11 @@ class CreateInstitutionsTable extends Migration
             $table->string('telefono')->nullable();
             $table->boolean('validacion_funda_empresa')->default(0);            
             $table->string('estado')->default("REGISTRADO");
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
 
             $table->foreign('society_id')->references('id')->on('societies');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

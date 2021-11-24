@@ -29,7 +29,7 @@
             <div class="h-screen xl:h-auto flex py-5 xl:py-0 my-10 xl:my-0">
                 <div
                     class="my-auto mx-auto xl:ml-20 bg-white dark:bg-dark-1 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto">
-                    <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">Registro Empresas</h2>
+                    <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">Registrar Empresa</h2>
                     <!--<div class="intro-x mt-2 text-gray-500 dark:text-gray-500 xl:hidden text-center">Unos pocos clics más
                         para regístrar en su cuenta. Encuentra ofertas laborales para ti en un solo lugar
                     </div>-->
@@ -37,36 +37,47 @@
                     <form method="post" action="{{ route('register.institution') }}">
                         @csrf
                         <div class="intro-x mt-8">
-                            <input type="text" class="intro-x login__input form-control py-3 px-4 border-gray-300 block"
-                                placeholder="Razon Social" name="razonSocial" value="{{ old('razonSocial') }}">
-                                @error('razonSocial') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                             <input type="text"
+                                oninput="inputUpperCase(this)"
+                                class="intro-x login__input form-control py-3 px-4 border-gray-300 block mb-4"
+                                placeholder="NIT" name="nit" value="{{ old('nit') }}">
+                                @error('nit') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
+
+                            <input type="text" class="intro-x login__input form-control py-3 px-4 border-gray-300 block "
+                                oninput="inputUpperCase(this)"
+                                placeholder="Razon Social" 
+                                name="razonSocial" 
+                                value="{{ old('razonSocial') }}">
+                                @error('razonSocial') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
+                            <!-- <input type="text"
                                 class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4"
                                 placeholder="Nombre Comercial" name="nombreComercial"
                                 value="{{ old('nombreComercial') }}">
-                                @error('nombreComercial') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
+                                @error('nombreComercial') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror -->
 
                             <div class="intro-x login__input py-3 px-4 border-gray-300 block mt-4">
                                 <label class="form-label">Tipo de Sociedad</label>
                                 <select name="society" class="form-select">
                                     <option value="">Seleccione un opcion</option>
                                     @foreach ($societies as $society)
-                                        <option value="{{ $society->id }}">{{ $society->nombre }}</option>
+                                        @if ( old("society") == $society->id)                                            
+                                            <option value="{{ $society->id }}" selected>{{ $society->nombre }}</option>
+                                        @else
+                                            <option value="{{ $society->id }}">{{ $society->nombre }}</option>
+                                        @endif
+                                        
                                     @endforeach
                                 </select>
                                 @error('society') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                             </div>
-                            <input type="text"
-                                class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4"
-                                placeholder="NIT" name="nit" value="{{ old('nit') }}">
-                                @error('nit') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
+                            
                             <input type="text"
                                 class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4"
                                 placeholder="Email" name="email" value="{{ old('email') }}">
                                 @error('email') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                             <input type="password"
                                 class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4"
-                                placeholder="Password" name="password">
+                                placeholder="Contraseña" name="password">
                                 @error('password') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                             <div class="intro-x py-3 px-4 block mt-4 flex items-center">
                                 <span>{!! captcha_img() !!}</span>
@@ -88,4 +99,11 @@
             <!-- END: Register Form -->
         </div>
     </div>
+@endsection
+@section('script')
+<script type="text/javascript">
+function inputUpperCase(ele){    
+    ele.value = ele.value.toUpperCase()
+}
+</script>
 @endsection

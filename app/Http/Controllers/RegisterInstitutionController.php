@@ -14,7 +14,8 @@ class RegisterInstitutionController extends Controller
 {
     public function institution()
     {
-        $institution = Institution::find(auth()->user()->institution_id);
+        //$institution = Institution::find(auth()->user()->institution_id);
+        $institution = Institution::where('user_id', auth()->user()->id)->first();
         return view('pages.dataInstitution', compact("institution"));
     }
 
@@ -31,7 +32,7 @@ class RegisterInstitutionController extends Controller
              // 'nombreComercial' => 'required',
             'society' => 'required',
             'nit' => 'required|numeric',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required',
             'captcha' => 'required|captcha'
         ];
@@ -76,11 +77,11 @@ class RegisterInstitutionController extends Controller
 
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->intended('/')->with("alert", "Se produjo un error, vuelve a intentarlo");
+            return redirect()->intended('/registro-empresa')->with("alert", "Se produjo un error, vuelve a intentarlo");
         }
 
         DB::commit();
 
-        return redirect()->intended('/')->with("message", "Registrado correctamente");
+        return redirect()->intended('/')->with("message", "Registrado correctamente, Ahora puede iniciar Sesión.");
     }
 }

@@ -116,7 +116,8 @@
                                     <!-- END: Modal Body -->
                                     <!-- BEGIN: Modal Footer -->
                                     <div class="modal-footer text-right">
-                                        <button type="submit" class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">Iniciar</button>
+                                        <button id="btn-login" type="submit" class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">Iniciar</button>
+                                        <!-- <button  class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">Login</button> -->
                                             
                                             <!-- <button id="hideLogin" type="button" class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top" >Ir a inicio.</button> -->
                                         <button type="button" data-dismiss="modal" class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">Cancel</button>                                        
@@ -157,10 +158,15 @@ $(function(){
         //$('#iconLoad').addClass("hidden");                
     });
 
-    $(".alert").delay(3000).slideUp(200, function() {        
-        $(this).remove();
-    });
+    
        
+})
+
+cash(function () {
+    cash('#btn-login').on('click', function() {
+        cash('#btn-login').html('<i data-loading-icon="oval" data-color="white" class="w-5 h-5 mx-auto"></i>').svgLoader()
+        helper.delay(1500)
+    })
 })
 </script>
 @endsection

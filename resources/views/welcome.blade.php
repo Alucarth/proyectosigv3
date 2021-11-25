@@ -153,20 +153,13 @@ $(function(){
     });
     $('#hideLogin').click(function(){
         controlPanelLogin.hidePanelLogin(); 
-    });
-    $("#formlogin").on('submit', function(evt){        
-        //$('#iconLoad').addClass("hidden");                
-    });
-
-    
-       
+    });     
 })
 
 cash(function () {
-    cash('#btn-login').on('click', function() {
-        cash('#btn-login').html('<i data-loading-icon="oval" data-color="white" class="w-5 h-5 mx-auto"></i>').svgLoader()
-        helper.delay(1500)
-    })
+    cash("#formlogin").on('submit', function(evt){        
+        cash('#btn-login').html('<i data-loading-icon="oval" data-color="white" class="w-5 h-5 mx-auto"></i>').svgLoader()                       
+    })    
 })
 </script>
 @endsection

@@ -42,7 +42,7 @@ class Mailtest extends Command
     {
         // $user = User::find(1);
         $this->info("enviando correo de prueba");
-        Util::SendMailWelcome('ltorrezs2008@gmail.com');
+        Util::SendMailWelcome('1criscor@gmail.com');
         // $mail = new PHPMailer(true);
         // try {
         //     $mail->SMTPDebug = 0;  // Sacar esta línea para no mostrar salida debug

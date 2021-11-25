@@ -18,8 +18,8 @@ class CreateBranchesTable extends Migration
             $table->unsignedBigInteger('institution_id');
             $table->unsignedBigInteger('department_id');
             $table->enum('tipo',[
-                'Casa Matriz',
-                'Sucursal'
+                'CASA MATRIZ',
+                'SUCURSAL'
             ]);
             $table->string('direccion');
             $table->string('telefono');

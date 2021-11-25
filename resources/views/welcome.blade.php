@@ -153,6 +153,10 @@ $(function(){
     });
     $('#hideLogin').click(function(){
         controlPanelLogin.hidePanelLogin(); 
+    });
+    
+    $(".alert").delay(3000).slideUp(200, function() {        
+        $(this).remove();
     });     
 })
 

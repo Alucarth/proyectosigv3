@@ -67,7 +67,7 @@ class Util
             $mail->addAddress($usermail);     // Mail del destinatario
         
             $mail->isHTML(true);
-            $mail->Subject = 'Registro Plan Empleo';  // Asunto del mensaje
+            $mail->Subject = 'Registro Plan Nacional de Empleo';  // Asunto del mensaje
             $mail->Body    = '<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
 
             <head>

@@ -15,7 +15,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Http;
-
+use Util;
 class WizzardPerson extends Component
 {
 
@@ -135,7 +135,31 @@ class WizzardPerson extends Component
         $this->telefonoPersona = $this->person->telefono;
         //$this->archivod = $this->person->archivod;
     }
+    
+    public function updatedNacimiento()
+    {
+        $this->edad = Util::calculateYear($this->nacimiento);
+    }
 
+    public function deleteHijo($id)
+    {
+        $decendant = Decendant::find($id);
+        if($decendant)
+        {
+            $decendant->delete();
+        }
+    }
+    public function deleteDifficulty($id)
+    {
+        $difficulty = PersonProblem::find($id);
+        if($difficulty)
+        {
+            $difficulty->delete();
+        }
+        // foreach ($variable as $key => $value) {
+        //     # code...
+        // }
+    }
     public function saveHijo()
     {
         $this->validate([

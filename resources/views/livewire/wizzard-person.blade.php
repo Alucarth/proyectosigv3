@@ -1,5 +1,5 @@
 <div>
-    @include('layout.partials.errors')
+    {{-- @include('layout.partials.errors') --}}
     @include('layout.partials.flashMessage')
     @if ($step == 1)
         <div class="box py-10 sm:py-20 mt-5">
@@ -15,14 +15,14 @@
                     class="w-10 h-10 rounded-full btn bg-gray-200 dark:bg-dark-1 text-gray-600 mx-2">5</button>
             </div>
             <div class="px-5 mt-10">
-                <div class="font-medium text-center text-lg">Completa tus datos personales</div>
+                <div class="font-medium text-center text-lg">COMPLETA TUS DATOS PERSONALES</div>
             </div>
             <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5">
                 <div class="font-medium text-base">Datos complementarios</div>
                 <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
                     <div class="col-span-12 sm:col-span-3">
                         <label class="form-label">CI</label>
-                        <input wire:model="ci" type="text" class="form-control" placeholder="1234567">
+                        <input wire:model="ci" type="text" class="form-control" placeholder="">
                         @error('ci') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                     </div>
                     <div class="col-span-12 sm:col-span-3">
@@ -57,16 +57,20 @@
                         </div>
                         @error('genero') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                     </div>
-                    <div class="col-span-12 sm:col-span-3">
-                        <label class="form-label">Edad</label>
-                        <input wire:model="edad" type="text" class="form-control" placeholder="22">
-                        @error('edad') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
-                    </div>
+                    
+                    
                     <div class="col-span-12 sm:col-span-3">
                         <label class="form-label">Fecha de Nacimiento</label>
                         <input wire:model="nacimiento" class="form-control block mx-auto" type="date">
                         @error('nacimiento') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                     </div>
+               
+                    <div class="col-span-12 sm:col-span-3">
+                        <label class="form-label">Edad</label>
+                        <input wire:model="edad" type="text" class="form-control" placeholder="" disabled>
+                        @error('edad') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
+                    </div>
+                
                     <div class="col-span-12 sm:col-span-3">
                         <label class="form-label">Departamento</label>
                         <select wire:model="departamento" class="form-select">
@@ -79,22 +83,28 @@
                     </div>
                     <div class="col-span-12 sm:col-span-6">
                         <label class="form-label">Direccion</label>
-                        <input wire:model="direccion" type="text" class="form-control" placeholder="Av. central">
+                        <input wire:model="direccion" type="text" class="form-control" placeholder="">
                         @error('direccion') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                     </div>
                     <div class="col-span-12 sm:col-span-3">
                         <label class="form-label">Estado Civil</label>
                         <select wire:model='estadoCivil' class="form-select">
                             <option value="">Seleccione un opcion</option>
-                            <option>Soltero</option>
-                            <option>Casado</option>
-                            <option>Viudo</option>
-                            <option>Divorciado</option>
+                            <option>SOLTERO</option>
+                            <option>CASADO</option>
+                            <option>VIUDO</option>
+                            <option>DIVORCIADO</option>
                         </select>
                         @error('estadoCivil') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                     </div>
                     <div class="col-span-12 sm:col-span-3">
-                        <label>Es Madre/Padre/Ambos</label>
+                        <label class="form-label">Teléfono / Celular</label>
+                        <input wire:model="telefonoPersona" type="text" class="form-control" placeholder="">
+                        @error('telefonoPersona') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
+                    </div>
+                    @if($genero)
+                    <div class="col-span-12 sm:col-span-3">
+                        <label>Es {{$genero==='H'?'Padre?':'Madre?'}}</label>
                         <div class="flex flex-col sm:flex-row mt-2">
                             <div class="form-check mr-2">
                                 <input wire:model='hijos' class="form-check-input" type="radio" name="genero_Si"
@@ -109,14 +119,15 @@
                         </div>
                         @error('hijos') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                     </div>
-                    <div class="col-span-12 sm:col-span-3">
-                        <label class="form-label">Telefono</label>
-                        <input wire:model="telefonoPersona" type="text" class="form-control" placeholder="2212563">
-                        @error('telefonoPersona') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
-                    </div>
+                    @endif
+                   
                     <div class="col-span-12 sm:col-span-3">
                     </div>
                     @if ($hijos == 1)
+                        <div class="col-span-12 sm:col-span-12">
+                            <div class="font-medium text-base">Datos de Hijos</div>
+                        </div>
+                        
                         <div class="grid grid-cols-12 gap-4 items-center col-span-12 sm:col-span-12">
                             <div class="col-span-12 sm:col-span-3">
                                 <label class="form-label">Nombre del hijo(a)</label>
@@ -129,7 +140,7 @@
                                 @error('nacimientoHijo') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                             </div>
                             <div class="col-span-12 sm:col-span-3">
-                                <label class="form-label">Certificado</label>
+                                <label class="form-label">Certificado de Nacimiento</label>
                                 <input wire:model='archivoHijo' type="file" accept=".jpg, .bmp, .png, .pdf" class="form-control" placeholder="22">
                                 @error('archivoHijo') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                             </div>
@@ -144,17 +155,23 @@
                                             <th class="whitespace-nowrap">Nombre hijo(a)</th>
                                             <th class="whitespace-nowrap">Fecha de Nacimiento</th>
                                             <th class="whitespace-nowrap">Certificado</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($decendants as $decendant)
+                                        @foreach ($decendants as $index => $decendant)
                                             <tr>
-                                                <td class="border-b dark:border-dark-5">{{ $decendant->id }}</td>
+                                                <td class="border-b dark:border-dark-5">{{ $index+1 }}</td>
                                                 <td class="border-b dark:border-dark-5">{{ $decendant->nombre }}</td>
                                                 <td class="border-b dark:border-dark-5">{{ $decendant->nacimiento }}
                                                 </td>
                                                 <td class="border-b dark:border-dark-5">
                                                     <x-feathericon-check-circle class="w-4 h-4" />
+                                                </td>
+                                                <td>
+                                                    <button wire:click="deleteHijo({{$decendant->id}})" class="btn btn-danger btn-sm" >
+                                                         <i  class="fa fa-trash" ></i>
+                                                    </button>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -163,6 +180,9 @@
                             </div>
                         </div>
                     @endif
+                    <div class="col-span-12 sm:col-span-12">
+                        <div class="font-medium text-base">Dificultad Laboral</div>
+                    </div>
                     <div class="col-span-12 sm:col-span-4">
                         <label class="form-label">Dificultad para conseguir
                             trabajo</label>
@@ -190,22 +210,29 @@
                                     <th class="whitespace-nowrap">#</th>
                                     <th class="whitespace-nowrap">Dificultad</th>
                                     <th class="whitespace-nowrap">Detalle</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($difficulties as $difficulty)
+                                @foreach ($difficulties as $index => $difficulty)
                                     <tr>
-                                        <td class="border-b dark:border-dark-5">{{ $difficulty->id }}</td>
+                                        <td class="border-b dark:border-dark-5">{{ $index+1 }}</td>
                                         <td class="border-b dark:border-dark-5">{{ $difficulty->problem->nombre }}
                                         </td>
                                         <td class="border-b dark:border-dark-5">{{ $difficulty->detalle }}</td>
+                                        <td>
+                                            <button wire:click="deleteDifficulty({{$difficulty->id}})" class="btn btn-danger btn-sm" >
+                                                <i  class="fa fa-trash" ></i>
+                                           </button>
+                                            
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                     <div class="col-span-12 sm:col-span-6">
-                        <label>Presenta alguna Discapacidad</label>
+                        <label>Presenta alguna Discapacidad?</label>
                         <div class="flex flex-col sm:flex-row mt-2">
                             <div class="form-check mr-2">
                                 <input wire:model='discapacidad' class="form-check-input" type="radio"
@@ -237,7 +264,7 @@
                                 </select>
                             </div>
                             <div class="col-span-12 sm:col-span-3">
-                                <label for="input-wizard-3" class="form-label">Adjuntar</label>
+                                <label for="input-wizard-3" class="form-label">Certificado de Discapacidad</label>
                                 <input wire:model='archivod' type="file" class="form-control" placeholder="22">
                             </div>
                             <div class="col-span-12 sm:col-span-3 pt-6">
@@ -246,7 +273,7 @@
                         </form>
                     @endif
                     <div class="col-span-12 flex items-center justify-center sm:justify-end mt-5">
-                        <button wire:click="updatePerson" class="btn btn-primary w-24 ml-2">Next</button>
+                        <button wire:click="updatePerson" class="btn btn-primary w-24 ml-2">Siguiente</button>
                     </div>
                 </div>
             </div>

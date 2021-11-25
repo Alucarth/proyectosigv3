@@ -15,6 +15,26 @@ class Util
     public static $CENTIMETRO = 3;
     public static $METRO = 4;
 
+    public static function calculateYear($birthday)
+    {   
+        $age = strtotime($birthday);
+        
+        if($age === false){ 
+            return false; 
+        } 
+        
+        list($y1,$m1,$d1) = explode("-",date("Y-m-d",$age)); 
+        
+        $now = strtotime("now"); 
+        
+        list($y2,$m2,$d2) = explode("-",date("Y-m-d",$now)); 
+        
+        $age = $y2 - $y1; 
+        
+        if((int)($m2.$d2) < (int)($m1.$d1)) 
+            $age -= 1; 
+        return $age;
+    }
 
     public static function SendMailWelcome($usermail)
     {       
@@ -48,7 +68,7 @@ class Util
         
             $mail->isHTML(true);
             $mail->Subject = 'Registro Plan Empleo';  // Asunto del mensaje
-            $mail->Body    = '<h1>Plan Nacional de empleo</h1>
+            $mail->Body    = '<h1>Plan Nacional de Empleo</h1>
 
             <h3>Muchas Gracias por registrarse</h3>
             

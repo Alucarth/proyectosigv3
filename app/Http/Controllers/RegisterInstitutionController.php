@@ -8,6 +8,7 @@ use App\Models\Institution;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Util;
 // use Log;
 
 class RegisterInstitutionController extends Controller
@@ -74,6 +75,10 @@ class RegisterInstitutionController extends Controller
             $institution->society_id = $request->society;
             $institution->nit = $request->nit;
             $institution->save();
+
+            //Enviando Correo de Bienvenida
+            Util::SendMailWelcome($user->email);
+
 
         } catch (\Exception $e) {
             DB::rollback();

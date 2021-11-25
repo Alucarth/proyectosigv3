@@ -3,6 +3,10 @@
 // namespace App\Helpers;
 
 use Carbon\Carbon;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 
 class Util
 {
@@ -10,6 +14,77 @@ class Util
     public static $MILIMETRO = 2;
     public static $CENTIMETRO = 3;
     public static $METRO = 4;
+
+    public static function calculateYear($birthday)
+    {   
+        $age = strtotime($birthday);
+        
+        if($age === false){ 
+            return false; 
+        } 
+        
+        list($y1,$m1,$d1) = explode("-",date("Y-m-d",$age)); 
+        
+        $now = strtotime("now"); 
+        
+        list($y2,$m2,$d2) = explode("-",date("Y-m-d",$now)); 
+        
+        $age = $y2 - $y1; 
+        
+        if((int)($m2.$d2) < (int)($m1.$d1)) 
+            $age -= 1; 
+        return $age;
+    }
+
+    public static function SendMailWelcome($usermail)
+    {       
+        
+        try {
+            
+            $mail = new PHPMailer(true);
+            $mail->SMTPDebug = 0;  // Sacar esta línea para no mostrar salida debug
+            $mail->isSMTP();
+            $mail->Host = env('MAIL_HOST', 'mail.planificacion.gob.bo');  // Host de conexión SMTP
+            $mail->SMTPAuth = true;    
+            $mail->Username = env('MAIL_USERNAME','planificacion\registro.pge');                 // Usuario SMTP
+            $mail->Password = env('MAIL_PASSWORD','Pl%4n21***');                           // Password SMTP
+            $mail->SMTPSecure = env('MAIL_ENCRYPTION', 'tls');                            // Activar seguridad TLS
+            $mail->Port = env('MAIL_PORT', 587);
+            $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+            );
+            // Puerto SMTP
+
+            #$mail->SMTPOptions = ['ssl'=> ['allow_self_signed' => true]];  // Descomentar si el servidor SMTP tiene un certificado autofirmado
+            #$mail->SMTPSecure = false;             // Descomentar si se requiere desactivar cifrado (se suele usar en conjunto con la siguiente línea)
+            #$mail->SMTPAutoTLS = false;            // Descomentar si se requiere desactivar completamente TLS (sin cifrado)
+        
+            $mail->setFrom('registro.pge@planificacion.gob.bo');        // Mail del remitente
+            $mail->addAddress($usermail);     // Mail del destinatario
+        
+            $mail->isHTML(true);
+            $mail->Subject = 'Registro Plan Empleo';  // Asunto del mensaje
+            $mail->Body    = '<h1>Plan Nacional de Empleo</h1>
+
+            <h3>Muchas Gracias por registrarse</h3>
+            
+            <h3>Recuerde que debe completar su informacion iniciando sesion en el portal web</h3>
+            <a href="https://sig.plandeempleo.bo/">Ingresar</a>
+            ';    // Contenido del mensaje (acepta HTML)
+            $mail->AltBody = 'Este es el contenido del mensaje en texto plano';    // Contenido del mensaje alternativo (texto plano)
+        
+            $mail->send();
+            
+
+        } catch (Exception $e) {
+            //echo 'El mensaje no se ha podido enviar, error: ', $mail->ErrorInfo;
+        }
+    }
+
 
     public static function removeSpaces($text)
     {

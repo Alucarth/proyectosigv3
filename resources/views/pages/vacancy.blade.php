@@ -19,7 +19,7 @@
                                     Registro de Vacancias.
                                 </h2>
                             </div>
-                            @livewire('vacancy-institution', ['institution_id' => auth()->user()->institution_id])
+                            @livewire('vacancy-institution', ['institution_id' => auth()->user()->institution->id])
                         </div>
                     </div>
                 </div>

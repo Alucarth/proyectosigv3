@@ -42,8 +42,8 @@ Route::get('cambiar-password', [AuthController::class, "updatePassword"])->name(
 Route::view('dashboard', 'pages.dashboard')->name('page.dashboard')->middleware('auth');
 Route::get('datos-persona', [RegisterPersonController::class, "person"])->name('data.person')->middleware(['auth', 'role:persona']);
 Route::get('habilidades-persona', [AbilityPersonController::class, "index"])->name('abilities.person')->middleware(['auth', 'role:persona']);
-Route::get('datos-empresa', [RegisterInstitutionController::class, "institution"])->name('data.institution')->middleware(['auth', 'role:empresa']);
-Route::get('vacancias', [VacancyInstitutionController::class, "index"])->name('vacancy.institution')->middleware(['auth', 'role:empresa']);
+
+
 
 Route::get('listas-generales', [GeneralListController::class, "index"])->name('general.list')->middleware(['auth', 'role:oficial']);
 Route::get('convenios', [AgreementInstitutionController::class, "index"])->name('agreement.institution')->middleware(['auth', 'role:oficial']);
@@ -57,3 +57,10 @@ Route::get('adignacion-oficial', [AssignmentOfficialController::class, "index"])
 
 Route::get('solicitud', [PetitionInstitutionController::class, "index"])->name('petition.institution')->middleware(['auth', 'role:empresa']);
 Route::get('report_reposicion/{petition_id}', [ReportController::class, "reposicion"])->name('report.reposicion')->middleware(['auth', 'role:empresa']);
+
+
+Route::get('institution/dashboard', [RegisterInstitutionController::class, "dashboard"])->name('institution.dashboard');
+Route::get('vacancias', [VacancyInstitutionController::class, "index"])->name('vacancy.institution')->middleware(['auth', 'role:empresa']);
+Route::get('datos-empresa', [RegisterInstitutionController::class, "institution"])->name('data.institution')->middleware(['auth', 'role:empresa']);
+Route::get('datos-empresa-edit', [RegisterInstitutionController::class, "editEstadoIntitution"])->name('institution.editEstadoIntitution')->middleware(['auth', 'role:empresa']);
+Route::get('institution-estado-vacancias', [RegisterInstitutionController::class, "activeVacanciasIntitution"])->name('institution.activeVacanciasIntitution')->middleware(['auth', 'role:empresa']);

@@ -57,9 +57,9 @@
                                                         style="font-size: 3em; color: #E4E7DF;">
                                                         <i class="fas fa-file"></i>
                                                     </span></a>
-                                                <div wire:click="eliminarArchivoNit" title="Eliminar Archivo?"
+                                                <div wire:click="eliminarArchivoNit" style="display:{{$estadoAction}}" title="Eliminar Archivo?"
                                                     class="tooltip w-5 h-5 flex items-center justify-center absolute rounded-full text-white bg-theme-6 right-0 top-0 -mr-2 -mt-2">
-                                                    <i class="fas fa-times w-4 h-4"></i>
+                                                    <i class="fas fa-trash w-4 h-4"></i>
                                                 </div>
                                             </div>
                                             Archivo NIT Digital.
@@ -75,9 +75,8 @@
                                 class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small>
                         @enderror
                     </div>
-                    <div
-                        class="col-span-12 sm:col-span-12 flex flex-wrap lg:flex-nowrap items-center justify-center p-5">
-                        <button type="submit" class="btn btn-sm btn-primary">Guardar</button>
+                    <div class="col-span-12 sm:col-span-12 flex flex-wrap lg:flex-nowrap items-center justify-center p-5" >
+                        <button type="submit" class="btn btn-sm btn-primary" style="display:{{$estadoAction}}">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -141,7 +140,7 @@
                     </div>
                     <div
                         class="col-span-12 sm:col-span-12 flex flex-wrap lg:flex-nowrap items-center justify-center p-5">
-                        <button type="submit" class="btn btn-sm btn-primary">Guardar</button>
+                        <button type="submit" class="btn btn-sm btn-primary" style="display:{{$estadoAction}}">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -165,7 +164,7 @@
             </div>
 
             <div class="text-center lg:text-left p-5">
-                <button type="button" wire:click="$toggle('showDivSucursal')" class="btn btn-outline-primary ">
+                <button type="button" wire:click="$toggle('showDivSucursal')" style="display:{{$estadoAction}}" class="btn btn-outline-primary ">
                     <span style="font-size: 1em">
                         <i class="fas fa-plus"></i>
                     </span> Agregar Sucursal
@@ -273,7 +272,7 @@
             </div>
 
             <div class="text-center lg:text-left p-5">
-                <button type="button" wire:click="$toggle('showDivContacto')" class="btn btn-outline-primary ">
+                <button type="button" wire:click="$toggle('showDivContacto')" style="display:{{$estadoAction}}" class="btn btn-outline-primary ">
                     <span style="font-size: 1em">
                         <i class="fas fa-plus"></i>
                     </span> Agregar Contacto
@@ -358,10 +357,9 @@
         </div>
     </div>
 
-    <div class="col-span-12 sm:col-span-12 flex flex-wrap lg:flex-nowrap items-center justify-center p-5">
-        {{-- <a class="btn btn-outline-primary py-3 px-4 xl:w-80 mt-3 xl:mt-2 align-left"
-            href="{{ route('page.dashboard') }}">Concluir Registro</a> --}}
-        <a wire:click="alertSuccess" class="btn btn-outline-primary py-3 px-4 xl:w-80 mt-3 xl:mt-2 align-left"
-            href="#">Concluir Registro</a>
+    <div class="col-span-12 sm:col-span-12 flex flex-wrap lg:flex-nowrap items-center justify-center p-5">        
+        <a wire:click="alertConclucion" class="btn btn-primary py-3 px-4 xl:w-80 mt-3 xl:mt-2 align-left"
+            href="javascript:;" style="margin-right: 15px;display:{{$estadoAction}}">Concluir Registro</a> 
     </div>
+
 </div>

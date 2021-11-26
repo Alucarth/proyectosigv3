@@ -28,7 +28,8 @@ class AuthController extends Controller
                 }
                 $res = Institution::where('user_id', auth()->user()->id)->count();
                 if ($res > 0) {
-                    return redirect()->route('data.institution');
+                    // return redirect()->route('data.institution');
+                    return redirect()->route('institution.dashboard');
                 }
 
                 $res = Official::where('user_id', auth()->user()->id)->count();

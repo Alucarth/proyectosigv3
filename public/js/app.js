@@ -4492,7 +4492,25 @@ __webpack_require__.r(__webpack_exports__);
 console.log('iniciando modulo js '); // window.Chart = require('chart.js');
 
 window.iziToast = __webpack_require__(/*! izitoast */ "./node_modules/izitoast/dist/js/iziToast.js");
-var error_tag = document.getElementById('error_message'); // console.log(error_tag)
+var error_tag = document.getElementById('error_message'); // var previewModal = document.getElementById('modal-preview')
+// console.log(previewModal)
+// previewModal.addEventListener('stalled',function(event){
+//     console.log('disparando evento hdp')
+// })
+// preveiwModal.addEventListener('onchange', function (event) {
+//   // Button that triggered the modal
+//   console.log('disparando evento')
+//   console.log(preveiwModal)
+// //   var button = event.relatedTarget
+// //   // Extract info from data-bs-* attributes
+// //   var recipient = button.getAttribute('data-url')
+//   // If necessary, you could initiate an AJAX request here
+//   // and then do the updating in a callback.
+//   //
+//   // Update the modal's content.
+//   //console.log(recipient)
+// })
+// console.log(error_tag)
 // if(error_tag )
 // {
 //     var error_messages = JSON.parse(error_tag.getAttribute('data'))

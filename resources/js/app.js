@@ -5,6 +5,27 @@ console.log('iniciando modulo js ')
 window.iziToast = require('izitoast');
 
 var error_tag = document.getElementById('error_message')
+// var previewModal = document.getElementById('modal-preview')
+
+// console.log(previewModal)
+// previewModal.addEventListener('stalled',function(event){
+
+//     console.log('disparando evento hdp')
+// })
+    // preveiwModal.addEventListener('onchange', function (event) {
+    //   // Button that triggered the modal
+    //   console.log('disparando evento')
+    //   console.log(preveiwModal)
+    // //   var button = event.relatedTarget
+    // //   // Extract info from data-bs-* attributes
+    // //   var recipient = button.getAttribute('data-url')
+    //   // If necessary, you could initiate an AJAX request here
+    //   // and then do the updating in a callback.
+    //   //
+    //   // Update the modal's content.
+    //   //console.log(recipient)
+      
+    // })
 
 // console.log(error_tag)
 // if(error_tag )

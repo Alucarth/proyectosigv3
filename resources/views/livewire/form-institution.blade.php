@@ -1,14 +1,14 @@
-<div class="box py-2 px-8 sm:py-1">
+<div class="py-2 px-1 sm:py-1">
     <h2 class="text-lg uppercase text-gray-700 text-center font-medium">EMPRESA</h2>
     <h2 class="text-lg uppercase text-gray-700 text-center">{{ $institution->razon_social }}</h2>
     {{-- @include('layout.partials.errors') --}}
     {{-- @include('layout.partials.flashMessage') --}}
 
 
-    <div class=" col-span-12 md:col-span-6">
+    <div class="col-span-12 md:col-span-6">
         <div class="box mb-3">
             <div
-                class="flex flex-col lg:flex-row items-center  pl-5 pt-2 pb-2 border-b border-gray-200 dark:border-dark-5 bg-gray-200">
+                class="flex flex-col lg:flex-row items-center  pl-5 pt-2 pb-2 border-b border-gray-400 dark:border-dark-5">
                 <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
                     <span style="font-size: 3em; color: #FAC428;">
                         <i class="fas fa-edit"></i>
@@ -44,7 +44,7 @@
                         
                     </div>
 
-                    <div class="col-span-12 sm:col-span-3">
+                    <div class="col-span-12 sm:col-span-4">
                         <label class="form-label">Subir respaldo de NIT</label>
                         @if ($showFileNit)
                             <div class="mt-1">
@@ -53,11 +53,11 @@
                                         <div class="flex flex-wrap px-4">
                                             <div class="w-10 h-10 relative image-fit mb-5 mr-5 cursor-pointer zoom-in">
                                                 {{-- <img class="rounded-md" alt="Rubick Tailwind HTML Admin Template" src=""> --}}
-                                                <a href="/{{ $file_nit }}"><span
+                                                <a href="/storage/{{ $file_nit }}" target="_blank"><span
                                                         style="font-size: 3em; color: #E4E7DF;">
                                                         <i class="fas fa-file"></i>
                                                     </span></a>
-                                                <div title="Eliminar Archivo?"
+                                                <div wire:click="eliminarArchivoNit" title="Eliminar Archivo?"
                                                     class="tooltip w-5 h-5 flex items-center justify-center absolute rounded-full text-white bg-theme-6 right-0 top-0 -mr-2 -mt-2">
                                                     <i class="fas fa-times w-4 h-4"></i>
                                                 </div>
@@ -70,7 +70,7 @@
                         @else
                             <input wire:model='archivoNit' type="file" class="form-control">
                         @endif
-                        <input wire:model='file_nit' type="text">                        
+                    
                         @error('archivoNit') <small
                                 class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small>
                         @enderror
@@ -89,7 +89,7 @@
     <div class="col-span-12 md:col-span-6">
         <div class="box mb-5">
             <div
-                class="flex flex-col lg:flex-row items-center pl-5 pt-2 pb-2 border-b border-gray-200 dark:border-dark-5 bg-gray-200">
+                class="flex flex-col lg:flex-row items-center pl-5 pt-2 pb-2 border-b border-gray-400 dark:border-dark-5 ">
                 <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
                     <span style="font-size: 3em; color: #FAC428;">
                         <i class="fas fa-user"></i>
@@ -152,7 +152,7 @@
     <div class=" col-span-12 md:col-span-6">
         <div class="box mb-5">
             <div
-                class="flex flex-col lg:flex-row items-center pl-5 pt-2 pb-2 border-b border-gray-200 dark:border-dark-5 bg-gray-200">
+                class="flex flex-col lg:flex-row items-center pl-5 pt-2 pb-2 border-b border-gray-400 dark:border-dark-5 ">
                 <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
                     <span style="font-size: 3em; color: #FAC428;">
                         <i class="fas fa-home"></i>
@@ -260,7 +260,7 @@
     <div class=" col-span-12 md:col-span-6">
         <div class="box">
             <div
-                class="flex flex-col lg:flex-row items-center pl-5 pt-2 pb-2 border-b border-gray-200 dark:border-dark-5 bg-gray-200">
+                class="flex flex-col lg:flex-row items-center pl-5 pt-2 pb-2 border-b border-gray-400 dark:border-dark-5 ">
                 <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
                     <span style="font-size: 3em; color: #FAC428;">
                         <i class="fas fa-address-book"></i>
@@ -359,7 +359,9 @@
     </div>
 
     <div class="col-span-12 sm:col-span-12 flex flex-wrap lg:flex-nowrap items-center justify-center p-5">
-        <a class="btn btn-outline-primary py-3 px-4 xl:w-80 mt-3 xl:mt-2 align-left"
-            href="{{ route('page.dashboard') }}">Concluir Registro</a>
+        {{-- <a class="btn btn-outline-primary py-3 px-4 xl:w-80 mt-3 xl:mt-2 align-left"
+            href="{{ route('page.dashboard') }}">Concluir Registro</a> --}}
+        <a wire:click="alertSuccess" class="btn btn-outline-primary py-3 px-4 xl:w-80 mt-3 xl:mt-2 align-left"
+            href="#">Concluir Registro</a>
     </div>
 </div>

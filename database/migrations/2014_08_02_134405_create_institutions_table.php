@@ -30,7 +30,7 @@ class CreateInstitutionsTable extends Migration
             $table->string('email')->nullable();
             $table->string('telefono')->nullable();
             $table->boolean('validacion_funda_empresa')->default(0);            
-            $table->string('estado')->default("REGISTRADO");
+            $table->string('estado')->default("PENDIENTE");
             $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
 

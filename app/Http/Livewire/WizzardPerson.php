@@ -16,6 +16,7 @@ use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Http;
 use Util;
+use Carbon\Carbon;
 class WizzardPerson extends Component
 {
 
@@ -67,8 +68,10 @@ class WizzardPerson extends Component
     //variables de experiencia laboral
     public $institutionLaboral;
     public $cargoLaboral;
-    public $experienciaLaboral;
+    public $fecha_inicio;
+    public $fecha_fin;
     public $archivoLaboral;
+    public $total_years;
 
     //variables de referencia laboral
     public $institutionReferencia;
@@ -91,8 +94,16 @@ class WizzardPerson extends Component
         $careers = Career::all();
         $studies = CareerPerson::where('person_id', $this->person_id)->get();
         $experiences = Experience::where('person_id', $this->person_id)->get();
+        $totalyears = 0;
+        foreach ($experiences as $exp) {
+            # code...
+            $date1 = Carbon::createFromDate($exp->fecha_inicio);
+            $date2 = Carbon::createFromDate($exp->fecha_fin);
+            $totalyears +=  $date1->diffInYears($date2);
+    
+        }
         $contacts = Contact::where('person_id', $this->person_id)->where('institution', '!=', null)->get();
-        return view('livewire.wizzard-person', compact('departments', 'problems', 'decendants', 'difficulties', 'personContacts', 'careers', 'studies', 'experiences', 'contacts'));
+        return view('livewire.wizzard-person', compact('departments', 'problems', 'decendants', 'difficulties', 'personContacts', 'careers', 'studies', 'experiences', 'contacts', 'totalyears'));
     }
 
     //steps 
@@ -137,6 +148,7 @@ class WizzardPerson extends Component
         $this->telefonoPersona = $this->person->telefono;
         $this->urlfile='/';
         $this->dialog =false;
+        $this->total_years = 0;
         //$this->archivod = $this->person->archivod;
     }
     
@@ -396,6 +408,15 @@ class WizzardPerson extends Component
         $this->defaultContactoPersonal();
     }
 
+    public function deleteContacto($id)
+    {
+        $contacto = Contact::find($id);
+        if($contacto)
+        {
+            $contacto->delete();
+        }
+    }
+
     public function defaultContactoPersonal()
     {
         $this->nombreContacto = "";
@@ -455,6 +476,28 @@ class WizzardPerson extends Component
         $this->defaultFormacion();
     }
 
+    public function deleteFormacion($id)
+    {
+        $career = CareerPerson::find($id);
+        if($career)
+        {
+            $career->delete();
+        }
+    }
+
+    public function setArchivoFormacion($id)
+    {
+        $career = CareerPerson::find($id);
+        if($career)
+        {
+            
+            $this->urlfile = "/storage".substr($career->certificado, 6);
+            // $this->urlfile = $decendant->certificado;
+            $this->dialog =true;
+        }
+        
+    }
+
     public function defaultFormacion()
     {
         $this->career_id = "";
@@ -478,7 +521,8 @@ class WizzardPerson extends Component
         $this->validate([
             'institutionLaboral' => 'required',
             'cargoLaboral' => 'required',
-            'experienciaLaboral' => 'required|numeric',
+            'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date',
             'archivoLaboral' => 'required|mimes:jpg,bmp,png,pdf|max:5120'
         ]);
 
@@ -486,7 +530,8 @@ class WizzardPerson extends Component
         $experience->person_id = $this->person_id;
         $experience->institution = $this->institutionLaboral;
         $experience->cargo = $this->cargoLaboral;
-        $experience->experiencia = $this->experienciaLaboral;
+        $experience->fecha_inicio = $this->fecha_inicio;
+        $experience->fecha_fin = $this->fecha_fin;
         $experience->certificado = $this->archivoLaboral->store('public');
         $experience->save();
 
@@ -494,6 +539,29 @@ class WizzardPerson extends Component
 
         $this->clearExperiencia();
     }
+
+    public function deleteExperiencia($id)
+    {
+        $experiencia = Experience::find($id);
+        if($experiencia)
+        {
+            $experiencia->delete();
+        }
+    }
+
+    public function setArchivoExperiencia($id)
+    {
+        $experiencia = Experience::find($id);
+        if($experiencia)
+        {
+            
+            $this->urlfile = "/storage".substr($experiencia->certificado, 6);
+            // $this->urlfile = $decendant->certificado;
+            $this->dialog =true;
+        }
+        
+    }
+
 
     public function clearExperiencia()
     {
@@ -534,6 +602,15 @@ class WizzardPerson extends Component
         session()->flash('message', 'Los datos se guardaron correctamente.');
 
         $this->clearReferencia();
+    }
+
+    public function deleteContact($id)
+    {
+        $contact = Contact::find($id);
+        if($contact)
+        {
+            $contact->delete();
+        }
     }
 
     public function clearReferencia()

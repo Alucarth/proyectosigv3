@@ -18,7 +18,8 @@ class CreateExperiencesTable extends Migration
             $table->unsignedBigInteger('person_id');
             $table->string('institution');
             $table->string('cargo');
-            $table->integer('experiencia');
+            $table->date('fecha_inicio');
+            $table->date('fecha_fin');
             $table->string('certificado');
             $table->timestamps();
             

@@ -59,7 +59,7 @@ class CreatePeopleTable extends Migration
             $table->string('telefono')->nullable();
             $table->integer('step')->default(1);
             $table->boolean('validacion_segip')->default(0);
-            $table->string('estado')->default("REGISTRADO");
+            $table->string('estado')->default("PENDIENTE");
             $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
 

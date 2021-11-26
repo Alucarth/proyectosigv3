@@ -77,6 +77,7 @@ class WizzardPerson extends Component
     public $maternoReferencia;
     public $telefonoReferencia;
     public $urlfile;
+    public $dialog;
 
     public function render()
     {
@@ -134,7 +135,8 @@ class WizzardPerson extends Component
         $this->discapacidad = $this->person->discapacidad;
         $this->tipoDiscapacidad = $this->person->tipo_discapacidad;
         $this->telefonoPersona = $this->person->telefono;
-        $this->urlfile='j';
+        $this->urlfile='/';
+        $this->dialog =false;
         //$this->archivod = $this->person->archivod;
     }
     
@@ -168,9 +170,17 @@ class WizzardPerson extends Component
         $decendant = Decendant::find($id);
         if($decendant)
         {
-            $this->urlfile = $decendant->certificado;
+            
+            $this->urlfile = "/storage".substr($decendant->certificado, 6);
+            // $this->urlfile = $decendant->certificado;
+            $this->dialog =true;
         }
         
+    }
+
+    public function closeModal()
+    {
+        $this->dialog=false;
     }
 
     public function saveHijo()

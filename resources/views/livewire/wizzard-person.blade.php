@@ -166,11 +166,11 @@
                                                 <td class="border-b dark:border-dark-5">{{ $decendant->nacimiento }}
                                                 </td>
                                                 <td class="border-b dark:border-dark-5">
-                                                        <button wire:click="setArchivo({{$decendant->id}})"  class="btn btn-info btn-sm" > <i class="fa fa-eye"></i></button>
+                                                        <button type="button" wire:click="setArchivo({{$decendant->id}})"  class="btn btn-secondary" > <i class="fa fa-file-alt"></i></button>
                                                                                             
                                                 </td>
                                                 <td>
-                                                    <button wire:click="deleteHijo({{$decendant->id}})" class="btn btn-danger btn-sm" >
+                                                    <button type="button" wire:click="deleteHijo({{$decendant->id}})" class="btn btn-danger btn-sm" >
                                                          <i  class="fa fa-trash" ></i>
                                                     </button>
                                                 </td>
@@ -294,7 +294,7 @@
                     class="w-10 h-10 rounded-full btn bg-gray-200 dark:bg-dark-1 text-gray-600 mx-2">5</button>
             </div>
             <div class="px-5 mt-10">
-                <div class="font-medium text-center text-lg">Datos de Referencia Personal</div>
+                <div class="font-medium text-center text-lg">DATOS DE REFERENCIA PERSONAL</div>
             </div>
             <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5">
                 <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
@@ -326,23 +326,28 @@
                                     <th class="whitespace-nowrap">#</th>
                                     <th class="whitespace-nowrap">Nombre Completo</th>
                                     <th class="whitespace-nowrap">Teléfono / Celular</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($personContacts as $personContact)
+                                @foreach ($personContacts as $index => $personContact)
                                     <tr>
-                                        <td class="border-b dark:border-dark-5">{{ $personContact->id }}</td>
-                                        <td class="border-b dark:border-dark-5">{{ $personContact->nombre }}
-                                            {{ $personContact->paterno }} {{ $personContact->materno }}</td>
+                                        <td class="border-b dark:border-dark-5">{{ $index+1 }}</td>
+                                        <td class="border-b dark:border-dark-5">{{ $personContact->nombre }} {{ $personContact->paterno }} {{ $personContact->materno }}</td>
                                         <td class="border-b dark:border-dark-5">{{ $personContact->telefono }}</td>
+                                        <td>
+                                            <button type="button" wire:click="deleteContacto({{$personContact->id}})" class="btn btn-danger btn-sm" >
+                                                <i  class="fa fa-trash" ></i>
+                                           </button>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                     <div class="col-span-12 flex items-center justify-center sm:justify-end mt-5">
-                        <button type="button" wire:click="step1" class="btn btn-secondary w-24">Previous</button>
-                        <button type="button" wire:click="updateStep3" class="btn btn-primary w-24 ml-2">Next</button>
+                        <button type="button" wire:click="step1" class="btn btn-secondary w-24">Atras</button>
+                        <button type="button" wire:click="updateStep3" class="btn btn-primary w-24 ml-2">Siguiente</button>
                     </div>
                 </div>
             </div>
@@ -363,8 +368,8 @@
                         class="w-10 h-10 rounded-full btn bg-gray-200 dark:bg-dark-1 text-gray-600 mx-2">5</button>
                 </div>
                 <div class="px-5 mt-10">
-                    <div class="font-medium text-center text-lg">Formacion Profesional</div>
-                    <div class="font-medium text-center text-lg">Especifique su Formación</div>
+                    <div class="font-medium text-center text-lg">FORMACION PROFESIONAL</div>
+                    {{-- <div class="font-medium text-center text-lg">Especifique su Formación</div> --}}
                 </div>
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5">
                     <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
@@ -388,10 +393,9 @@
                             <label class="form-label">Grado Académico</label>
                             <select wire:model='gradoFormacion' class="form-select">
                                 <option value="">Seleccione un opcion</option>
-                                <option>Bachillerato</option>
-                                <option>Egresado</option>
-                                <option>Licenciatura</option>
-                                <option>Técnico</option>
+                                <option>TECNICO</option>
+                                <option>LICENCIATURA</option>
+                                <option>POSGRADO</option>
                             </select>
                             @error('gradoFormacion') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                         </div>
@@ -418,6 +422,7 @@
                                         <th class="whitespace-nowrap">Grado Académico</th>
                                         <th class="whitespace-nowrap">Fecha de Egreso</th>
                                         <th class="whitespace-nowrap">Titulo / Certificado Académico</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -432,7 +437,13 @@
                                             </td>
                                             <td class="border-b dark:border-dark-5">{{ $study->egreso }}</td>
                                             <td class="border-b dark:border-dark-5">
-                                                <x-feathericon-check-circle class="w-4 h-4" />
+                                                <button  type="button" wire:click="setArchivoFormacion({{$study->id}})"  class="btn btn-secondary " > <i class="fa fa-file-alt "></i></button>
+                                                
+                                            </td>
+                                            <td>
+                                                <button type="button" wire:click="deleteFormacion({{$study->id}})" class="btn btn-danger btn-sm" >
+                                                    <i  class="fa fa-trash" ></i>
+                                               </button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -440,9 +451,9 @@
                             </table>
                         </div>
                         <div class="col-span-12 flex items-center justify-center sm:justify-end mt-5">
-                            <button type="button" wire:click='step2' class="btn btn-secondary w-24">Previous</button>
+                            <button type="button" wire:click='step2' class="btn btn-secondary w-24">Atras</button>
                             <button type="button" wire:click='updateStep4'
-                                class="btn btn-primary w-24 ml-2">Next</button>
+                                class="btn btn-primary w-24 ml-2">Siguiente</button>
                         </div>
                     </div>
                 </div>
@@ -463,7 +474,7 @@
                     class="w-10 h-10 rounded-full btn bg-gray-200 dark:bg-dark-1 text-gray-600 mx-2">5</button>
             </div>
             <div class="px-5 mt-10">
-                <div class="font-medium text-center text-lg">Experiencia Laboral</div>
+                <div class="font-medium text-center text-lg">EXPERIENCIA LABORAL</div>
             </div>
             <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5">
                 <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
@@ -479,10 +490,23 @@
                             <input wire:model='cargoLaboral' type="text" class="form-control" placeholder="Analista">
                         </div>
                         <div class="col-span-12 sm:col-span-3">
-                            <label class="form-label">Años de Experiencia</label>
+                            {{-- <label class="form-label">Años de Experiencia</label>
                             <input wire:model='experienciaLaboral' type="text" class="form-control"
-                                placeholder="Numero entero ejemplo 6">
+                                placeholder="Numero entero ejemplo 6"> --}}
+                            <label class="form-label">Fecha de Inicio</label>
+                            <input wire:model="fecha_inicio" class="form-control block mx-auto" type="date">
+                             @error('fecha_inicio') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                         </div>
+                        
+                        <div class="col-span-12 sm:col-span-3">
+                            {{-- <label class="form-label">Años de Experiencia</label>
+                            <input wire:model='experienciaLaboral' type="text" class="form-control"
+                                placeholder="Numero entero ejemplo 6"> --}}
+                            <label class="form-label">Fecha Fin</label>
+                            <input wire:model="fecha_fin" class="form-control block mx-auto" type="date">
+                             @error('fecha_fin') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
+                        </div>
+
                         <div class="col-span-12 sm:col-span-3">
                             <label class="form-label">Certificado de trabajo</label>
                             <input wire:model='archivoLaboral' type="file" class="form-control" placeholder="22">
@@ -498,8 +522,10 @@
                                     <th class="whitespace-nowrap">#</th>
                                     <th class="whitespace-nowrap">Institución</th>
                                     <th class="whitespace-nowrap">Cargo</th>
-                                    <th class="whitespace-nowrap">Años de Experiencia</th>
+                                    <th class="whitespace-nowrap">Inicio</th>
+                                    <th class="whitespace-nowrap">Fin</th>
                                     <th class="whitespace-nowrap">certificado</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -509,18 +535,30 @@
                                         <td class="border-b dark:border-dark-5">
                                             {{ $experience->institution }}</td>
                                         <td class="border-b dark:border-dark-5">{{ $experience->cargo }}</td>
-                                        <td class="border-b dark:border-dark-5">{{ $experience->experiencia }}</td>
+                                        <td class="border-b dark:border-dark-5">{{ $experience->fecha_inicio }}</td>
+                                        <td class="border-b dark:border-dark-5">{{ $experience->fecha_fin }}</td>
                                         <td class="border-b dark:border-dark-5">
-                                            <x-feathericon-check-circle class="w-4 h-4" />
+                                            
+                                            <button  type="button" wire:click="setArchivoExperiencia({{$experience->id}})"  class="btn btn-secondary " > <i class="fa fa-file-alt "></i></button>
+                                        </td>
+                                        <td>
+                                            <button type="button"  wire:click="deleteExperiencia({{$experience->id}})" class="btn btn-danger btn-sm" >
+                                                <i  class="fa fa-trash" ></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach
+                                <tr>
+                                    <td colspan="5">
+                                        <strong>Total Años: {{$totalyears}}</strong>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="col-span-12 flex items-center justify-center sm:justify-end mt-5">
-                        <button wire:click='step3' class="btn btn-secondary w-24">Previous</button>
-                        <button wire:click="updateStep5" class="btn btn-primary w-24 ml-2">Next</button>
+                        <button wire:click='step3' class="btn btn-secondary w-24">Atras</button>
+                        <button wire:click="updateStep5" class="btn btn-primary w-24 ml-2">Siguiente</button>
                     </div>
                 </div>
             </div>
@@ -541,7 +579,7 @@
                     <button type="button" class="intro-y w-10 h-10 rounded-full btn btn-primary mx-2">5</button>
                 </div>
                 <div class="px-5 mt-10">
-                    <div class="font-medium text-center text-lg">Datos de Referencia Laboral</div>
+                    <div class="font-medium text-center text-lg">DATOS DE REFERENCIA LABORAL</div>
                 </div>
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5">
                     <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
@@ -583,6 +621,7 @@
                                         <th class="whitespace-nowrap">Apellido Paterno</th>
                                         <th class="whitespace-nowrap">Apellido Materno</th>
                                         <th class="whitespace-nowrap">Teléfono / Celular</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -595,13 +634,18 @@
                                             <td class="border-b dark:border-dark-5">{{ $contact->paterno }}</td>
                                             <td class="border-b dark:border-dark-5">{{ $contact->materno }}</td>
                                             <td class="border-b dark:border-dark-5">{{ $contact->telefono }}</td>
+                                            <td>
+                                                <button type="button" wire:click="deleteContact({{$contact->id}})" class="btn btn-danger btn-sm" >
+                                                    <i  class="fa fa-trash" ></i>
+                                                </button>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
                         <div class="col-span-12 flex items-center justify-center sm:justify-end mt-5">
-                            <button type="button" wire:click="step4" class="btn btn-secondary w-24">Previous</button>
+                            <button type="button" wire:click="step4" class="btn btn-secondary w-24">Atras</button>
                             <a href="{{ route('page.dashboard') }}" class="btn btn-primary w-24 ml-2">Finalizar</a>
                         </div>
                     </div>
@@ -615,12 +659,12 @@
 <div id="preview-modal" class="modal overflow-y-auto {{$dialog?'show':'hide'}}" data-backdrop="static" tabindex="-1" aria-hidden="false" style="padding-left: 0px; margin-top: 0px; margin-left: 0px; z-index: 10000;">
     <div class="modal-dialog modal-lg">
         
-            <div class="modal-content"> 
+            <div class="modal-content"  style="height: 500px;"> 
                 <div class=" text-right"> <button type="button" wire:click="closeModal()" class="btn btn-default  "> <i class="fa fa-times"></i> </button> </div>
                 {{-- <button  type="button" class=" w-8 h-8"  wire::click="closeModal()"> <i  class="fa fa-times"></i> </button> --}}
                 <div class="modal-body p-0">
                     {{-- {{$urlfile}} --}}
-                    <iframe src="{{$urlfile}}" frameborder="0" class="w-full h-auto"  >
+                    <iframe src="{{$urlfile}}" frameborder="0" class="w-full" style="height: 500px;" >
                     </iframe>
                 </div>
             </div>

@@ -10,6 +10,7 @@
         <script src="{{ asset('js/app.js') }}"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
         <!-- END: JS Assets-->
 
         @yield('script')

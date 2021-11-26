@@ -109,13 +109,11 @@
     $(".alert").delay(3000).slideUp(200, function() {        
         $(this).remove();
     });
-
     cash(function () {
         cash('#btn-register').on('click', function() {
             cash('#btn-register').html('<i data-loading-icon="oval" data-color="white" class="w-5 h-5 mx-auto"></i>').svgLoader()
             helper.delay(1500)
         })
     })
-</script>
 </script>
 @endsection

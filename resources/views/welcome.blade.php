@@ -106,7 +106,7 @@
                                             <div class="input-form">
                                                 <input id="password" type="password"
                                                     class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4"
-                                                    placeholder="Password" name="password" required>
+                                                    placeholder="Contraseña" name="password" required>
                                                 <div id="error-password" class="login__input-error w-5/6 text-theme-6 mt-2"></div>
                                             </div>
 
@@ -153,6 +153,10 @@ $(function(){
     });
     $('#hideLogin').click(function(){
         controlPanelLogin.hidePanelLogin(); 
+    });
+    
+    $(".alert").delay(3000).slideUp(200, function() {        
+        $(this).remove();
     });     
 })
 

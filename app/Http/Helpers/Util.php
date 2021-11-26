@@ -67,14 +67,67 @@ class Util
             $mail->addAddress($usermail);     // Mail del destinatario
         
             $mail->isHTML(true);
-            $mail->Subject = 'Registro Plan Empleo';  // Asunto del mensaje
-            $mail->Body    = '<h1>Plan Nacional de Empleo</h1>
+            $mail->Subject = 'Registro Plan Nacional de Empleo';  // Asunto del mensaje
+            $mail->Body    = '<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
 
-            <h3>Muchas Gracias por registrarse</h3>
+            <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width,initial-scale=1">
+              <meta name="x-apple-disable-message-reformatting">
+              <title></title>
             
-            <h3>Recuerde que debe completar su informacion iniciando sesion en el portal web</h3>
-            <a href="https://sig.plandeempleo.bo/">Ingresar</a>
-            ';    // Contenido del mensaje (acepta HTML)
+              <style>
+                table,
+                td,
+                div,
+                h1,
+                p {
+                  font-family: Arial, sans-serif;
+                }
+              </style>
+            </head>
+            
+            <body style="margin:0;padding:0;">
+              <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;background:#ffffff;">
+                <tr>
+                  <td align="left" style="padding:0;">
+                    <table role="presentation" style="width:602px;border-collapse:collapse;border:0px solid #cccccc;border-spacing:0;text-align:left;">
+                      <tr>
+                        <td style="padding:15px 30px 20px 30px;">
+                          <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;">
+                            <tr>
+                              <td style="padding:0 0 36px 0;color:#153643;">
+                                <h1 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;">Bienvenido(a),</h1>
+                                <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Gracias por mostrar interés en registrarte en la base de datos para futuras oportunidades laborales del Plan Nacional de Empleo.
+            
+                                  Para continuar con tu registro, debe completar su informacion iniciando sesion en el portal web: </p>
+                                <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><a href="https://sig.plandeempleo.bo/" style="color:#ee4c50;text-decoration:underline;">Iniciar sesión</a></p>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding:5px">
+                          <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;font-size:9px;font-family:Arial,sans-serif;">
+                            <tr>
+                              <td style="padding:0;width:100%;" align="left">
+                                <a href="https://plandeempleo.bo/" style="color:#ffffff;text-decoration:underline;"><img src="https://plandeempleo.bo/wp-content/uploads/2021/11/logo_corto-300x174.png" alt="" width="100" style="height:auto;display:block" /></a>
+                                <p style="margin:0;font-size:14px;line-height:16px;font-family:Arial,sans-serif;color:#000000;">
+                                  &reg; Ministerio de Planificacion del Desarrollo 2021<br />
+            
+                                </p>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </body>            
+            </html>';    // Contenido del mensaje (acepta HTML)
             $mail->AltBody = 'Este es el contenido del mensaje en texto plano';    // Contenido del mensaje alternativo (texto plano)
         
             $mail->send();

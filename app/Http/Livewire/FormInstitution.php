@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Livewire;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Branch;
 use App\Models\Coordinator;
@@ -21,6 +22,7 @@ class FormInstitution extends Component
     public $archivoNit;
     public $rubro;
     public $actividad;
+    public $file_nit;
     //representante
     public $nombreRepresentante;
     public $paternoRepresentante;
@@ -39,11 +41,19 @@ class FormInstitution extends Component
     public $telefonoEnlace;
     public $correoEnlace;
 
+    //eventos
+    public $showDivSucursal = false;
+    public $showDivContacto = false;
+    public $showFileNit = false;
+
     public function mount()
-    {
+    {        
         $this->rubro = $this->institution->rubro;
         $this->actividad = $this->institution->actividad;
+        $this->file_nit = $this->institution->file_nit;
         
+        $this->showFileNit = $this->file_nit == null ? false : true;
+
         $this->nombreRepresentante = $this->institution->nombre;
         $this->paternoRepresentante = $this->institution->paterno;
         $this->maternoRepresentante = $this->institution->materno;
@@ -52,27 +62,65 @@ class FormInstitution extends Component
     }
 
     public function render()
-    {
+    {   
         $departments = Department::all();
-        $branchs = Branch::where('institution_id', $this->institution_id)->paginate(5);
-        $coordinators = Coordinator::where('institution_id', $this->institution_id)->paginate(5);
+        $branchs = Branch::where('institution_id', $this->institution_id)->paginate(10);
+        $coordinators = Coordinator::where('institution_id', $this->institution_id)->paginate(10);
+
+
+        // $this->rubro = strtoupper(strtolower($this->rubro));
+        // $this->actividad = strtoupper($this->actividad);
+        // $this->nombreRepresentante = strtoupper($this->nombreRepresentante);
+        // $this->paternoRepresentante = strtoupper($this->paternoRepresentante);
+        // $this->maternoRepresentante = strtoupper($this->maternoRepresentante);
+        // $this->emailRepresentante = strtoupper($this->emailRepresentante);
+        // $this->telefonoRepresentante = strtoupper($this->telefonoRepresentante);
+        // $this->departamento= strtoupper($this->departamento);
+        // $this->direccion= strtoupper($this->direccion);
+        // $this->telefono= strtoupper($this->telefono);
+
         return view('livewire.form-institution', compact('departments', 'branchs', 'coordinators'));
     }
 
     public function updateInstitution(){
+        
         $this->validate([
+            'file_nit'=>'min:5',
             'rubro' => 'required',
             'actividad' => 'required',
-            'archivoNit' => 'required|mimes:jpg,bmp,png,pdf|max:5120'
+            'archivoNit' => 'required_if:file_nit,==,null|mimes:jpg,bmp,png,pdf|max:5120'
+        ],[
+            'rubro.required' => 'El campo Gran Actividad es obligatorio!',
+            'actividad.required' => 'El campo Actividad Principal es obligatorio!',
+            'archivoNit.required_if' => 'El archivo digital de su NIT es obligatorio!',            
         ]);
+        
 
-        $institution = Institution::find($this->institution_id);
-        $institution->rubro = $this->rubro;
-        $institution->actividad = $this->actividad;
-        $institution->file_nit = $this->archivoNit->store('public');
-        $institution->save();
+        try {
+            $institution = Institution::find($this->institution_id);
+            $institution->rubro = $this->rubro;
+            $institution->actividad = $this->actividad;
+            $institution->file_nit = $this->archivoNit->store('public');
+            $institution->save();
 
-        session()->flash('message', 'Los datos se guardaron correctamente.');
+            $this->showFileNit = true;
+            $this->file_nit = $institution->file_nit;
+            
+            $this->dispatchBrowserEvent('alert', [
+                'type' => 'success',  
+                'message' => 'Los datos se guardaron correctamente.!'
+            ]);
+
+        } catch (\Exception $e) {
+
+            $this->dispatchBrowserEvent('alert', [
+                'type' => 'error',  
+                'message' => 'Error al guardar los datos, intente nuevamente.'
+            ]);
+        }
+
+        // session()->flash('message', 'Los datos se guardaron correctamente.');
+       
     }
 
     public function updateLegalRepresentative(){
@@ -83,16 +131,25 @@ class FormInstitution extends Component
             'telefonoRepresentante' => 'required|numeric',
             'emailRepresentante' => 'required|email'
         ]);
+        try {
+            $institution = Institution::find($this->institution_id);
+            $institution->nombre = $this->nombreRepresentante;
+            $institution->paterno = $this->paternoRepresentante;
+            $institution->materno = $this->maternoRepresentante;
+            $institution->telefono = $this->telefonoRepresentante;
+            $institution->email = $this->emailRepresentante;
+            $institution->save();
+            $this->dispatchBrowserEvent('alert', 
+                ['type' => 'success',  'message' => 'Los datos se guardaron correctamente.!']);
+        } catch (\Exception $e) {
 
-        $institution = Institution::find($this->institution_id);
-        $institution->nombre = $this->nombreRepresentante;
-        $institution->paterno = $this->paternoRepresentante;
-        $institution->materno = $this->maternoRepresentante;
-        $institution->telefono = $this->telefonoRepresentante;
-        $institution->email = $this->emailRepresentante;
-        $institution->save();
-
-        session()->flash('message', 'Los datos se guardaron correctamente.');
+            $this->dispatchBrowserEvent('alert', [
+                'type' => 'error',  
+                'message' => 'Error al guardar los datos, intente nuevamente.'
+            ]);
+        }
+        // session()->flash('message', 'Los datos se guardaron correctamente.');
+        
     }
 
     public function addBranch(){
@@ -103,16 +160,27 @@ class FormInstitution extends Component
             'telefono' => 'required|numeric'
         ]);
 
-        $branch = new Branch();
-        $branch->institution_id = $this->institution_id;
-        $branch->department_id = $this->departamento;
-        $branch->direccion = $this->direccion;
-        $branch->telefono = $this->telefono;
-        $branch->tipo = $this->tipo;
-        $branch->estado = "ACTIVO";
-        $branch->save();
+        try {
+            $branch = new Branch();
+            $branch->institution_id = $this->institution_id;
+            $branch->department_id = $this->departamento;
+            $branch->direccion = $this->direccion;
+            $branch->telefono = $this->telefono;
+            $branch->tipo = $this->tipo;
+            $branch->estado = "ACTIVO";
+            $branch->save();
+            $this->dispatchBrowserEvent('alert', 
+                ['type' => 'success',  'message' => 'Los datos se guardaron correctamente.!']);
 
-        session()->flash('message', 'Los datos se guardaron correctamente.');
+        } catch (\Exception $e) {
+            $this->dispatchBrowserEvent('alert', [
+                'type' => 'error',  
+                'message' => 'Error al guardar los datos, intente nuevamente.'
+            ]);
+        }
+        // session()->flash('message', 'Los datos se guardaron correctamente.');
+        
+        
 
         $this->defaultBranch();
     }
@@ -122,6 +190,18 @@ class FormInstitution extends Component
         $this->departamento = "";
         $this->direccion = "";
         $this->telefono = "";
+        $this->showDivSucursal = false;
+    }
+
+    public function deleteBranch($id)
+    {
+        $branch = Branch::find($id);
+        if($branch){
+            $branch->delete();
+            // session()->flash('message', 'Se elimino el registro correctamente.');
+            $this->dispatchBrowserEvent('alert', 
+                ['type' => 'success',  'message' => 'Se elimino el registro correctamente.!']);
+        }
     }
 
     public function addCoordinator()
@@ -134,17 +214,27 @@ class FormInstitution extends Component
             'correoEnlace' => 'required|email'
         ]);
 
-        $coordinator = new Coordinator();
-        $coordinator->institution_id = $this->institution_id;
-        $coordinator->nombres = $this->nombresEnlace;
-        $coordinator->paterno = $this->paternoEnlace;
-        $coordinator->materno = $this->maternoEnlace;
-        $coordinator->telefono = $this->telefonoEnlace;        
-        $coordinator->email = $this->correoEnlace;
-        $coordinator->estado = "ACTIVO";
-        $coordinator->save();
+        try {
+            $coordinator = new Coordinator();
+            $coordinator->institution_id = $this->institution_id;
+            $coordinator->nombres = $this->nombresEnlace;
+            $coordinator->paterno = $this->paternoEnlace;
+            $coordinator->materno = $this->maternoEnlace;
+            $coordinator->telefono = $this->telefonoEnlace;        
+            $coordinator->email = $this->correoEnlace;
+            $coordinator->estado = "ACTIVO";
+            $coordinator->save();
+            $this->dispatchBrowserEvent('alert', 
+                ['type' => 'success',  'message' => 'Los datos se guardaron correctamente.!']);
 
-        session()->flash('message', 'Los datos se guardaron correctamente.');
+        } catch (\Exception $e) {
+            $this->dispatchBrowserEvent('alert', [
+                'type' => 'error',  
+                'message' => 'Error al guardar los datos, intente nuevamente.'
+            ]);
+        }
+        // session()->flash('message', 'Los datos se guardaron correctamente.');
+        
 
         $this->defaultCoordinator();
     }
@@ -156,5 +246,17 @@ class FormInstitution extends Component
         $this->maternoEnlace = "";
         $this->telefonoEnlace = "";
         $this->correoEnlace = "";
+        $this->showDivContacto = false;
     }
+    public function deleteCoordinator($id)
+    {
+        $coordinator = Coordinator::find($id);
+        if($coordinator){
+            $coordinator->delete();
+            // session()->flash('message', 'Se elimino el registro correctamente.');
+            $this->dispatchBrowserEvent('alert', 
+                ['type' => 'success',  'message' => 'Se elimino el registro correctamente!']);
+        }
+    }
+
 }

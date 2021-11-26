@@ -166,13 +166,8 @@
                                                 <td class="border-b dark:border-dark-5">{{ $decendant->nacimiento }}
                                                 </td>
                                                 <td class="border-b dark:border-dark-5">
-                                                        <button wire:click="setArchivo({{$decendant->id}})" id="modalfile-show-modal"> cambiar</button>
-                                                        <a href="#"  class="btn btn-info btn-sm"   data-toggle="modal" data-target="#modalfile"   wire:click="setArchivo({{$decendant->id}})" >
-                                                            <i class="fa fa-eye"></i>
-                                                        </a>
-                                                        <div class="text-center"> <a id="programmatically-show-modal" href="javascript:;" class="btn btn-primary mr-1 mb-2">Show Modal</a> </div> <!-- END: Show Modal Toggle -->
-
-                                                                                                        
+                                                        <button wire:click="setArchivo({{$decendant->id}})"  class="btn btn-info btn-sm" > <i class="fa fa-eye"></i></button>
+                                                                                            
                                                 </td>
                                                 <td>
                                                     <button wire:click="deleteHijo({{$decendant->id}})" class="btn btn-danger btn-sm" >
@@ -615,30 +610,24 @@
         </form>
     @endif
 
-    <!-- BEGIN: Modal Content  check event listener--> 
-    <div id="modalfile" class="modal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content"> <a data-dismiss="modal" href="javascript:;"> <i data-feather="x" class="w-8 h-8 text-gray-500"></i> </a>
+<!-- BEGIN: Modal Content  check event listener--> 
+
+<div id="preview-modal" class="modal overflow-y-auto {{$dialog?'show':'hide'}}" data-backdrop="static" tabindex="-1" aria-hidden="false" style="padding-left: 0px; margin-top: 0px; margin-left: 0px; z-index: 10000;">
+    <div class="modal-dialog modal-lg">
+        
+            <div class="modal-content"> 
+                <div class=" text-right"> <button type="button" wire:click="closeModal()" class="btn btn-default  "> <i class="fa fa-times"></i> </button> </div>
+                {{-- <button  type="button" class=" w-8 h-8"  wire::click="closeModal()"> <i  class="fa fa-times"></i> </button> --}}
                 <div class="modal-body p-0">
-                    <div class="p-5 text-center"> <i data-feather="check-circle" class="w-16 h-16 text-theme-9 mx-auto mt-3"></i>
-                        <div class="text-3xl mt-5">asdasd</div>
-                        <div class="text-gray-600 mt-2">Modal with close butto {{$urlfile}} n</div>
-                    </div>
-                    <div class="px-5 pb-8 text-center"> <button type="button" data-dismiss="modal" class="btn btn-primary w-24">Ok</button> </div>
+                    {{-- {{$urlfile}} --}}
+                    <iframe src="{{$urlfile}}" frameborder="0" class="w-full h-auto"  >
+                    </iframe>
                 </div>
             </div>
-        </div>
-    </div> 
-<!-- END: Modal Content -->
- <!-- BEGIN: Modal Content -->
- <div id="programmatically-modal" class="modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body p-10 text-center">
-                <!-- BEGIN: Hide Modal Toggle --> <a id="programmatically-hide-modal" href="javascript:;" class="btn btn-primary mr-1">Hide Modal</a> <!-- END: Hide Modal Toggle -->
-                <!-- BEGIN: Toggle Modal Toggle --> <a id="programmatically-toggle-modal" href="javascript:;" class="btn btn-primary mr-1">Toggle Modal</a> <!-- END: Toggle Modal Toggle -->
-            </div>
-        </div>
+       
     </div>
-</div> <!-- END: Modal Content -->
+</div>
+
+<!-- END: Modal Content -->
+ 
 </div>

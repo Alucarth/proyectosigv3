@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Agreement;
 use App\Models\Assignment;
 use App\Models\Institution;
+use App\Models\Official;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
@@ -27,7 +28,7 @@ class AgreementInstitution extends Component
     public function mount()
     {
         $this->usuario = auth()->user()->id;
-        $this->official_id = auth()->user()->official_id;
+        $this->official_id = Official::where('user_id',auth()->user_id)->id;
     }
 
     public function render()

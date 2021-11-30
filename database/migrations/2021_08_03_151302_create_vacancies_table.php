@@ -19,7 +19,7 @@ class CreateVacanciesTable extends Migration
             $table->unsignedBigInteger('branch_id');
             $table->string('nombre');
             $table->enum('grado_academico', [
-                'TECNICO',
+                'TÉCNICO',
                 'LICENCIATURA',
                 'POSGRADO'
             ]);

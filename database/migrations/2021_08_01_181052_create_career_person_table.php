@@ -19,7 +19,7 @@ class CreateCareerPersonTable extends Migration
             $table->unsignedBigInteger('career_id');
             $table->string('institution');
             $table->enum('grado_academico', [
-                'TECNICO',
+                'TÉCNICO',
                 'LICENCIATURA',
                 'POSGRADO'
             ]);

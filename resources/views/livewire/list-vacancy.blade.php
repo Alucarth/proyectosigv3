@@ -232,7 +232,7 @@
                     </thead>
                     <tbody>
                         @foreach ($listacorta as $lista)
-                            @if ($lista->estado == 'ACTIVO')
+                            @if ($lista->estado == 'PENDIENTE') {{--  @if ($lista->estado == 'ACTIVO')  --}}
                                 <tr>
                                     <td class="border-b dark:border-dark-5">{{ $lista->id }}</td>
                                     <td class="border-b dark:border-dark-5">

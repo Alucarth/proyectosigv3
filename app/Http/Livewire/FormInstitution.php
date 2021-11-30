@@ -287,6 +287,22 @@ class FormInstitution extends Component
 
     public function alertConclucion()
     {
+        if(empty( Branch::where('institution_id', $this->institution_id)->count()) ){
+            $this->dispatchBrowserEvent('alert', [
+                'type' => 'warning',  
+                'message' => 'Complete toda la información solicitada.'
+            ]);
+            return false;
+         }
+
+         if(empty( Coordinator::where('institution_id', $this->institution_id)->count()) ){
+            $this->dispatchBrowserEvent('alert', [
+                'type' => 'warning',  
+                'message' => 'Complete toda la información solicitada.'
+            ]);
+            return false;
+         }
+
        $this->dispatchBrowserEvent('swal:confirmEntidad', [
             'type' => 'warning',  
             'message' => 'Concluir registro?', 

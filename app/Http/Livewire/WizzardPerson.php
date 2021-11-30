@@ -81,6 +81,8 @@ class WizzardPerson extends Component
     public $telefonoReferencia;
     public $urlfile;
     public $dialog;
+    public $dialog_hijo;
+    public $dialog_dificultad;
 
     public function render()
     {
@@ -148,6 +150,8 @@ class WizzardPerson extends Component
         $this->telefonoPersona = $this->person->telefono;
         $this->urlfile='/';
         $this->dialog =false;
+        $this->dialog_hijo = false;
+        $this->dialog_dificultad = false;
         $this->total_years = 0;
         //$this->archivod = $this->person->archivod;
     }
@@ -197,6 +201,7 @@ class WizzardPerson extends Component
 
     public function saveHijo()
     {
+        $this->dialog_hijo = false;
         $this->validate([
             'nombreHijo' => 'required',
             'nacimientoHijo' => 'required|date',
@@ -204,16 +209,26 @@ class WizzardPerson extends Component
         ]);
         $decendant = new Decendant();
         $decendant->person_id = $this->person_id;
-        $decendant->nombre = strtoupper($this->nombreHijo);
+        $decendant->nombre = mb_strtoupper($this->nombreHijo);
         $decendant->nacimiento = $this->nacimientoHijo;
         $decendant->certificado = $this->archivoHijo->store('public');
         $decendant->save();
+
+
 
         session()->flash('message', 'Los datos se guardaron correctamente.');
 
         $this->defaultHijo();
     }
 
+    public function showHijo()
+    {
+        $this->dialog_hijo = true;
+    }
+    public function closeHijo()
+    {
+        $this->dialog_hijo = false;
+    }
     public function defaultHijo()
     {
         $this->nombreHijo = "";
@@ -223,6 +238,7 @@ class WizzardPerson extends Component
 
     public function saveDifficulty()
     {
+        $this->dialog_dificultad=false;
         $this->validate([
             'problema' => 'required',
             'detalle' => 'required'
@@ -230,12 +246,21 @@ class WizzardPerson extends Component
         $difficulty = new PersonProblem();
         $difficulty->person_id = $this->person_id;
         $difficulty->problem_id = $this->problema;
-        $difficulty->detalle = strtoupper( $this->detalle);
+        $difficulty->detalle = mb_strtoupper( $this->detalle);
         $difficulty->save();
 
         session()->flash('message', 'Los datos se guardaron correctamente.');
 
         $this->defaultDifficulty();
+    }
+    public function showDificultad()
+    {
+        $this->dialog_dificultad = true;
+    }
+
+    public function closeDificultad()
+    {
+        $this->dialog_dificultad = false;
     }
 
     public function defaultDifficulty()
@@ -315,7 +340,7 @@ class WizzardPerson extends Component
         $person->edad = $this->edad;
         $person->nacimiento = $this->nacimiento;
         $person->department_id = $this->departamento;
-        $person->direccion = strtoupper($this->direccion);
+        $person->direccion = mb_strtoupper($this->direccion);
         $person->hijos = $this->hijos;
         $person->estado_civil = $this->estadoCivil;
         $person->telefono = $this->telefonoPersona;
@@ -396,9 +421,9 @@ class WizzardPerson extends Component
         } else {
             $contact = new Contact();
             $contact->person_id = $this->person_id;
-            $contact->nombre = strtoupper($this->nombreContacto);
-            $contact->paterno = strtoupper($this->paternoContacto);
-            $contact->materno = strtoupper($this->maternoContacto);
+            $contact->nombre = mb_strtoupper($this->nombreContacto);
+            $contact->paterno = mb_strtoupper($this->paternoContacto);
+            $contact->materno = mb_strtoupper($this->maternoContacto);
             $contact->telefono = $this->telefonoContacto;
             $contact->save();
 
@@ -465,7 +490,7 @@ class WizzardPerson extends Component
         $study = new CareerPerson();
         $study->person_id = $this->person_id;
         $study->career_id = $this->carrera;
-        $study->institution =strtoupper( $this->institutionFormacion);
+        $study->institution =mb_strtoupper( $this->institutionFormacion);
         $study->grado_academico = $this->gradoFormacion;
         $study->egreso = $this->egresoFormacion;
         $study->certificado = $this->archivoFormacion->store('public');
@@ -528,8 +553,8 @@ class WizzardPerson extends Component
 
         $experience = new Experience();
         $experience->person_id = $this->person_id;
-        $experience->institution = strtoupper( $this->institutionLaboral);
-        $experience->cargo = strtoupper( $this->cargoLaboral);
+        $experience->institution = mb_strtoupper( $this->institutionLaboral);
+        $experience->cargo = mb_strtoupper( $this->cargoLaboral);
         $experience->fecha_inicio = $this->fecha_inicio;
         $experience->fecha_fin = $this->fecha_fin;
         $experience->certificado = $this->archivoLaboral->store('public');
@@ -592,10 +617,10 @@ class WizzardPerson extends Component
 
         $contact = new Contact();
         $contact->person_id = $this->person_id;
-        $contact->institution = strtoupper( $this->institutionReferencia);
-        $contact->nombre = strtoupper( $this->nombreReferencia);
-        $contact->paterno = strtoupper( $this->paternoReferencia);
-        $contact->materno = strtoupper( $this->maternoReferencia);
+        $contact->institution = mb_strtoupper( $this->institutionReferencia);
+        $contact->nombre = mb_strtoupper( $this->nombreReferencia);
+        $contact->paterno = mb_strtoupper( $this->paternoReferencia);
+        $contact->materno = mb_strtoupper( $this->maternoReferencia);
         $contact->telefono = $this->telefonoReferencia;
         $contact->save();
 

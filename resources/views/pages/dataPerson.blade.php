@@ -12,16 +12,16 @@
             @include('layout.components.top-bar')
             <div class="grid grid-cols-12 gap-6">
                 <div class="col-span-12 xxl:col-span-12">
-                    <div class="grid grid-cols-12 gap-6">
-                        <div class="col-span-12 mt-8">
-                            <div class="intro-y flex items-center h-10">
+                    {{-- <div class="grid grid-cols-12 gap-6"> --}}
+                        {{-- <div class="col-span-12 mt-8"> --}}
+                            {{-- <div class="intro-y flex items-center h-10">
                                 <h2 class="text-lg font-medium truncate mr-5">
                                     Registro de Datos.
                                 </h2>
-                            </div>
+                            </div> --}}
                             @livewire('wizzard-person', ['step' => $person->step, 'person_id' => $person->id, 'person' => $person])
-                        </div>
-                    </div>
+                        {{-- </div> --}}
+                    {{-- </div> --}}
                 </div>
             </div>
         </div>

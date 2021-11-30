@@ -1,14 +1,14 @@
-<div class="box py-2 px-8 sm:py-1">
+<div class="py-2 px-1 sm:py-1">
     <h2 class="text-lg uppercase text-gray-700 text-center font-medium">EMPRESA</h2>
     <h2 class="text-lg uppercase text-gray-700 text-center">{{ $institution->razon_social }}</h2>
     {{-- @include('layout.partials.errors') --}}
     {{-- @include('layout.partials.flashMessage') --}}
 
 
-    <div class=" col-span-12 md:col-span-6">
+    <div class="col-span-12 md:col-span-6">
         <div class="box mb-3">
             <div
-                class="flex flex-col lg:flex-row items-center  pl-5 pt-2 pb-2 border-b border-gray-200 dark:border-dark-5 bg-gray-200">
+                class="flex flex-col lg:flex-row items-center  pl-5 pt-2 pb-2 border-b border-gray-400 dark:border-dark-5">
                 <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
                     <span style="font-size: 3em; color: #FAC428;">
                         <i class="fas fa-edit"></i>
@@ -44,8 +44,8 @@
                         
                     </div>
 
-                    <div class="col-span-12 sm:col-span-3">
-                        <label class="form-label">Subir respaldo de NIT</label>
+                    <div class="col-span-12 sm:col-span-4">
+                        <label class="form-label">Respaldo digital de NIT</label>
                         @if ($showFileNit)
                             <div class="mt-1">
                                 <div class="mt-1">
@@ -53,13 +53,13 @@
                                         <div class="flex flex-wrap px-4">
                                             <div class="w-10 h-10 relative image-fit mb-5 mr-5 cursor-pointer zoom-in">
                                                 {{-- <img class="rounded-md" alt="Rubick Tailwind HTML Admin Template" src=""> --}}
-                                                <a href="/{{ $file_nit }}"><span
+                                                <a href="/storage/{{ $file_nit }}" target="_blank"><span
                                                         style="font-size: 3em; color: #E4E7DF;">
                                                         <i class="fas fa-file"></i>
                                                     </span></a>
-                                                <div title="Eliminar Archivo?"
-                                                    class="tooltip w-5 h-5 flex items-center justify-center absolute rounded-full text-white bg-theme-6 right-0 top-0 -mr-2 -mt-2">
-                                                    <i class="fas fa-times w-4 h-4"></i>
+                                                <div wire:click="eliminarArchivoNit" style="display:{{$estadoAction}}" title="Eliminar Archivo?"
+                                                    class="tooltip w-5 h-5 flex items-center justify-center absolute rounded-full text-white bg-theme-6 right-0 top-0 -mr-2 -mt-3">
+                                                    <i class="fas fa-trash w-4 h-4 ml-1 mt-0.5"></i>
                                                 </div>
                                             </div>
                                             Archivo NIT Digital.
@@ -70,14 +70,13 @@
                         @else
                             <input wire:model='archivoNit' type="file" class="form-control">
                         @endif
-                        <input wire:model='file_nit' type="text">                        
+                    
                         @error('archivoNit') <small
                                 class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small>
                         @enderror
                     </div>
-                    <div
-                        class="col-span-12 sm:col-span-12 flex flex-wrap lg:flex-nowrap items-center justify-center p-5">
-                        <button type="submit" class="btn btn-sm btn-primary">Guardar</button>
+                    <div class="col-span-12 sm:col-span-12 flex flex-wrap lg:flex-nowrap items-center justify-center p-5" >
+                        <button type="submit" class="btn btn-sm btn-primary" style="display:{{$estadoAction}}">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -89,7 +88,7 @@
     <div class="col-span-12 md:col-span-6">
         <div class="box mb-5">
             <div
-                class="flex flex-col lg:flex-row items-center pl-5 pt-2 pb-2 border-b border-gray-200 dark:border-dark-5 bg-gray-200">
+                class="flex flex-col lg:flex-row items-center pl-5 pt-2 pb-2 border-b border-gray-400 dark:border-dark-5 ">
                 <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
                     <span style="font-size: 3em; color: #FAC428;">
                         <i class="fas fa-user"></i>
@@ -141,7 +140,7 @@
                     </div>
                     <div
                         class="col-span-12 sm:col-span-12 flex flex-wrap lg:flex-nowrap items-center justify-center p-5">
-                        <button type="submit" class="btn btn-sm btn-primary">Guardar</button>
+                        <button type="submit" class="btn btn-sm btn-primary" style="display:{{$estadoAction}}">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -152,7 +151,7 @@
     <div class=" col-span-12 md:col-span-6">
         <div class="box mb-5">
             <div
-                class="flex flex-col lg:flex-row items-center pl-5 pt-2 pb-2 border-b border-gray-200 dark:border-dark-5 bg-gray-200">
+                class="flex flex-col lg:flex-row items-center pl-5 pt-2 pb-2 border-b border-gray-400 dark:border-dark-5 ">
                 <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
                     <span style="font-size: 3em; color: #FAC428;">
                         <i class="fas fa-home"></i>
@@ -165,7 +164,7 @@
             </div>
 
             <div class="text-center lg:text-left p-5">
-                <button type="button" wire:click="$toggle('showDivSucursal')" class="btn btn-outline-primary ">
+                <button type="button" wire:click="$toggle('showDivSucursal')" style="display:{{$estadoAction}}" class="btn btn-outline-primary ">
                     <span style="font-size: 1em">
                         <i class="fas fa-plus"></i>
                     </span> Agregar Sucursal
@@ -241,7 +240,7 @@
                                     <td class="border-b dark:border-dark-5">{{ $branch->telefono }}</td>
                                     <td>
                                         <button wire:click="deleteBranch({{ $branch->id }})"
-                                            class="btn btn-danger btn-sm">
+                                            class="btn btn-danger btn-sm" style="display:{{$estadoAction}}">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </td>
@@ -260,7 +259,7 @@
     <div class=" col-span-12 md:col-span-6">
         <div class="box">
             <div
-                class="flex flex-col lg:flex-row items-center pl-5 pt-2 pb-2 border-b border-gray-200 dark:border-dark-5 bg-gray-200">
+                class="flex flex-col lg:flex-row items-center pl-5 pt-2 pb-2 border-b border-gray-400 dark:border-dark-5 ">
                 <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
                     <span style="font-size: 3em; color: #FAC428;">
                         <i class="fas fa-address-book"></i>
@@ -273,7 +272,7 @@
             </div>
 
             <div class="text-center lg:text-left p-5">
-                <button type="button" wire:click="$toggle('showDivContacto')" class="btn btn-outline-primary ">
+                <button type="button" wire:click="$toggle('showDivContacto')" style="display:{{$estadoAction}}" class="btn btn-outline-primary ">
                     <span style="font-size: 1em">
                         <i class="fas fa-plus"></i>
                     </span> Agregar Contacto
@@ -344,7 +343,7 @@
                                     <td class="border-b dark:border-dark-5">{{ $coordinator->email }}</td>
                                     <td>
                                         <button wire:click="deleteCoordinator({{ $coordinator->id }})"
-                                            class="btn btn-danger btn-sm">
+                                            class="btn btn-danger btn-sm" style="display:{{$estadoAction}}">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </td>
@@ -358,8 +357,35 @@
         </div>
     </div>
 
-    <div class="col-span-12 sm:col-span-12 flex flex-wrap lg:flex-nowrap items-center justify-center p-5">
-        <a class="btn btn-outline-primary py-3 px-4 xl:w-80 mt-3 xl:mt-2 align-left"
-            href="{{ route('page.dashboard') }}">Concluir Registro</a>
+    <div class="col-span-12 sm:col-span-12 flex flex-wrap lg:flex-nowrap items-center justify-center p-5">        
+        <a wire:click="alertConclucion" class="btn btn-primary py-3 px-4 xl:w-80 mt-3 xl:mt-2 align-left"
+            href="javascript:;" style="margin-right: 15px;display:{{$estadoAction}}">Concluir Registro</a> 
     </div>
+
 </div>
+<style>
+    .custom-file-input::-webkit-file-upload-button {
+      visibility: hidden;
+    }
+    .custom-file-input::before {
+      content: 'Select some files';
+      display: inline-block;
+      background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+      border: 1px solid #999;
+      border-radius: 3px;
+      padding: 5px 8px;
+      outline: none;
+      white-space: nowrap;
+      -webkit-user-select: none;
+      cursor: pointer;
+      text-shadow: 1px 1px #fff;
+      font-weight: 700;
+      font-size: 10pt;
+    }
+    .custom-file-input:hover::before {
+      border-color: black;
+    }
+    .custom-file-input:active::before {
+      background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+    }
+    </style>

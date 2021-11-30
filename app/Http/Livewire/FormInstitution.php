@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 use App\Models\Branch;
 use App\Models\Coordinator;
@@ -15,6 +16,8 @@ class FormInstitution extends Component
 {
     use WithFileUploads;    
     use WithPagination;
+
+    protected $listeners = ['concluirRegistro', 'concluirRegistroVacancias'];    
 
     public $institution;
     public $institution_id;
@@ -45,6 +48,7 @@ class FormInstitution extends Component
     public $showDivSucursal = false;
     public $showDivContacto = false;
     public $showFileNit = false;
+    public $estadoAction = false;
 
     public function mount()
     {        
@@ -59,6 +63,8 @@ class FormInstitution extends Component
         $this->maternoRepresentante = $this->institution->materno;
         $this->emailRepresentante = $this->institution->email;
         $this->telefonoRepresentante = $this->institution->telefono;
+
+        $this->estadoAction = $this->institution->estado == 'PENDIENTE' ? 'block' : 'none';
     }
 
     public function render()
@@ -67,32 +73,28 @@ class FormInstitution extends Component
         $branchs = Branch::where('institution_id', $this->institution_id)->paginate(10);
         $coordinators = Coordinator::where('institution_id', $this->institution_id)->paginate(10);
 
-
-        // $this->rubro = strtoupper(strtolower($this->rubro));
-        // $this->actividad = strtoupper($this->actividad);
-        // $this->nombreRepresentante = strtoupper($this->nombreRepresentante);
-        // $this->paternoRepresentante = strtoupper($this->paternoRepresentante);
-        // $this->maternoRepresentante = strtoupper($this->maternoRepresentante);
-        // $this->emailRepresentante = strtoupper($this->emailRepresentante);
-        // $this->telefonoRepresentante = strtoupper($this->telefonoRepresentante);
-        // $this->departamento= strtoupper($this->departamento);
-        // $this->direccion= strtoupper($this->direccion);
-        // $this->telefono= strtoupper($this->telefono);
-
         return view('livewire.form-institution', compact('departments', 'branchs', 'coordinators'));
     }
 
     public function updateInstitution(){
+
+        if($this->file_nit==null){
+            $rules = [
+                'rubro' => 'required',
+                'actividad' => 'required',
+                'archivoNit' => 'required|mimes:jpg,bmp,png,pdf|max:5120'
+            ];
+        }else{
+            $rules = [
+                'rubro' => 'required',
+                'actividad' => 'required',                
+            ];
+        }
         
-        $this->validate([
-            'file_nit'=>'min:5',
-            'rubro' => 'required',
-            'actividad' => 'required',
-            'archivoNit' => 'required_if:file_nit,==,null|mimes:jpg,bmp,png,pdf|max:5120'
-        ],[
+        $this->validate($rules,[
             'rubro.required' => 'El campo Gran Actividad es obligatorio!',
             'actividad.required' => 'El campo Actividad Principal es obligatorio!',
-            'archivoNit.required_if' => 'El archivo digital de su NIT es obligatorio!',            
+            'archivoNit.required' => 'El archivo digital de su NIT es obligatorio!',            
         ]);
         
 
@@ -100,7 +102,10 @@ class FormInstitution extends Component
             $institution = Institution::find($this->institution_id);
             $institution->rubro = $this->rubro;
             $institution->actividad = $this->actividad;
-            $institution->file_nit = $this->archivoNit->store('public');
+
+            if($this->archivoNit!=null)
+            $institution->file_nit = str_replace("public/", "", $this->archivoNit->store('public'));
+
             $institution->save();
 
             $this->showFileNit = true;
@@ -257,6 +262,80 @@ class FormInstitution extends Component
             $this->dispatchBrowserEvent('alert', 
                 ['type' => 'success',  'message' => 'Se elimino el registro correctamente!']);
         }
+    }
+
+    public function eliminarArchivoNit(){
+
+        
+
+        $institution = Institution::find($this->institution_id);     
+        
+        $file = 'storage/' . $institution->file_nit;
+        File::delete($file);
+
+        $institution->file_nit = null;
+        $institution->save();                        
+
+        $this->showFileNit = false;
+        $this->archivoNit = null;
+        $this->file_nit = null;
+        
+        
+        $this->dispatchBrowserEvent('alert', 
+                ['type' => 'success',  'message' => 'Se elimino el archivo correctamente!']);
+    }
+
+    public function alertConclucion()
+    {
+        if(empty( Branch::where('institution_id', $this->institution_id)->count()) ){
+            $this->dispatchBrowserEvent('alert', [
+                'type' => 'warning',  
+                'message' => 'Complete toda la información solicitada.'
+            ]);
+            return false;
+         }
+
+         if(empty( Coordinator::where('institution_id', $this->institution_id)->count()) ){
+            $this->dispatchBrowserEvent('alert', [
+                'type' => 'warning',  
+                'message' => 'Complete toda la información solicitada.'
+            ]);
+            return false;
+         }
+
+       $this->dispatchBrowserEvent('swal:confirmEntidad', [
+            'type' => 'warning',  
+            'message' => 'Concluir registro?', 
+            'text' => 'Antes de concluir, debe estar seguro que registro toda la información solicitada.'
+        ]);
+        
+    }
+
+
+    public function alertConclucionVacancias()
+    {
+       $this->dispatchBrowserEvent('swal:confirmEntidadvacancias', [
+            'type' => 'warning',  
+            'message' => 'Concluir registro y activar registro de Vacancias?', 
+            'text' => '1. Verifique que ingreso la información solicitada 2. El sistema activara el registro de Vacancias en esta cuenta.'
+        ]);
+        
+    }
+
+    public function concluirRegistro()
+    {   
+        $institution = Institution::find($this->institution_id);   
+        $institution->estado = "REGISTRADO";
+        $institution->save();
+        return redirect()->to('/institution/dashboard');
+    }
+
+    public function concluirRegistroVacancias()
+    {   
+        $institution = Institution::find($this->institution_id);   
+        $institution->estado = "ACTIVO";
+        $institution->save();
+        return redirect()->to('/institution/dashboard');
     }
 
 }

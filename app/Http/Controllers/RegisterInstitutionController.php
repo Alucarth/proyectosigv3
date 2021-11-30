@@ -20,10 +20,35 @@ class RegisterInstitutionController extends Controller
         return view('pages.dataInstitution', compact("institution"));
     }
 
+    public function editEstadoIntitution()
+    {
+        //$institution = Institution::find(auth()->user()->institution_id);
+        $institution = Institution::where('user_id', auth()->user()->id)->first();
+        $institution->estado = "PENDIENTE";
+        $institution->save();
+        return view('pages.dataInstitution', compact("institution"));
+    }
+
+    public function activeVacanciasIntitution()
+    {
+        //$institution = Institution::find(auth()->user()->institution_id);
+        $institution = Institution::where('user_id', auth()->user()->id)->first();
+        $institution->estado = "ACTIVO";
+        $institution->save();
+        return redirect()->route('vacancy.institution');
+    }
+
+
     public function register()
     {
         $societies = Society::all();
         return view('pages.registerInstitution', compact('societies'));
+    }
+
+    public function dashboard()
+    {
+        $institution = Institution::where('user_id', auth()->user()->id)->first();
+        return view('pages.institutionDashboard', compact("institution"));
     }
 
     public function store(Request $request)

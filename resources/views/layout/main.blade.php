@@ -10,6 +10,7 @@
         <script src="{{ asset('js/app.js') }}"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
         <!-- END: JS Assets-->
 
@@ -23,5 +24,63 @@
                 "progressBar": true,
             }
         });
+
+        window.addEventListener('swal:modal', event => { 
+            swal({
+            title: event.detail.message,
+            text: event.detail.text,
+            icon: event.detail.type,
+            });
+        });
+        
+        window.addEventListener('swal:confirmEntidad', event => { 
+            swal({
+            title: event.detail.message,
+            text: event.detail.text,
+            icon: event.detail.type,
+            buttons: true,
+            dangerMode: true,
+            buttons: ["Cancelar", "Si, continuar"],
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                window.livewire.emit('concluirRegistro');
+            }
+            });
+        });
+
+        window.addEventListener('swal:confirmEntidadvacancias', event => { 
+            swal({
+            title: event.detail.message,
+            text: event.detail.text,
+            icon: event.detail.type,
+            buttons: true,
+            dangerMode: true,
+            buttons: ["Cancelar", "Si, continuar"],
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                window.livewire.emit('concluirRegistroVacancias');
+            }
+            });
+        });
+
+        window.addEventListener('swal:confirmInactiveVacancy', event => { 
+            swal({
+            title: event.detail.message,
+            text: event.detail.text,
+            icon: event.detail.type,
+            buttons: true,
+            dangerMode: true,
+            buttons: ["Cancelar", "Si, continuar"],
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                window.livewire.emit('inactiveVacancy');
+            }
+            });
+        });
+
+
     </script>
 @endsection

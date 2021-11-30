@@ -28,7 +28,7 @@ class AgreementInstitution extends Component
     public function mount()
     {
         $this->usuario = auth()->user()->id;
-        $this->official_id = Official::where('user_id',auth()->user_id)->id;
+        $this->official_id = Official::where('user_id',auth()->user()->id)->first()->id;
     }
 
     public function render()

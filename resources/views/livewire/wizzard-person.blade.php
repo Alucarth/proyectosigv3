@@ -393,7 +393,7 @@
                             <label class="form-label">Grado Académico</label>
                             <select wire:model='gradoFormacion' class="form-select">
                                 <option value="">Seleccione un opcion</option>
-                                <option>TECNICO</option>
+                                <option>TÉCNICO</option>
                                 <option>LICENCIATURA</option>
                                 <option>POSGRADO</option>
                             </select>

@@ -84,6 +84,12 @@
     @endrole
     @role('empresa')
     <li>
+        <a href="{{ route('institution.dashboard') }}" class="side-menu">
+            <div class="side-menu__icon"> <i data-feather="home"></i> </div>
+            <div class="side-menu__title"> Inicio </div>
+        </a>
+    </li>
+    <li>
         <a href="{{ route('data.institution') }}" class="side-menu">
             <div class="side-menu__icon"> <i data-feather="edit"></i> </div>
             <div class="side-menu__title"> Registro </div>
@@ -92,16 +98,16 @@
     @if (auth()->user()->institution->estado == 'ACTIVO')
         <li>
             <a href="{{ route('vacancy.institution') }}" class="side-menu">
-                <div class="side-menu__icon"> <i data-feather="book"></i> </div>
+                <div class="side-menu__icon"> <i data-feather="package"></i> </div>
                 <div class="side-menu__title"> Vacancias </div>
             </a>
         </li>
-        <li>
+        {{-- <li>
             <a href="{{ route('petition.institution') }}" class="side-menu">
                 <div class="side-menu__icon"> <i data-feather="book"></i> </div>
                 <div class="side-menu__title"> Reposiciones </div>
             </a>
-        </li>
+        </li> --}}
     @endif
     @endrole
     @role('responsable')

@@ -10,6 +10,7 @@ use Livewire\Component;
 
 class VacancyInstitution extends Component
 {
+    protected $listeners = ['inactiveVacancy']; 
     public $institution_id;
     public $sucursal;
     public $nombreVacacia;
@@ -20,13 +21,21 @@ class VacancyInstitution extends Component
     public $cantidad;
 
     public $vacancy_id;
+
+    public $showDivVacancias  = false;
+    public $estadoAction = false;
+
+    public function mount()
+    {        
+        
+    }
     
     public function render()
     {   
         $institution = Institution::find($this->institution_id);
         $branches = Branch::where('institution_id', $this->institution_id)->get();
         $careers = Career::all();
-        $vacancies = Vacancy::where('institution_id', $this->institution_id)->get();
+        $vacancies = Vacancy::where('institution_id', $this->institution_id)->where('estado','!=', 'INACTIVO' )->get();
         return view('livewire.vacancy-institution', compact('institution', 'branches', 'careers', 'vacancies'));
     }
 
@@ -39,8 +48,18 @@ class VacancyInstitution extends Component
             'carrera' => 'required',
             'descripcion' => 'required',
             'salario' => 'required|numeric',
-            'cantidad' => 'required|integer'
-        ]);
+            'cantidad' => 'required|integer|max:100'
+        ],
+        [
+            'sucursal.required' => 'El campo Casa matriz/Sucursal es obligatorio!',
+            'nombreVacacia.required' => 'El campo Denominación del Cargo es obligatorio!',
+            'gradoAcademico.required' => 'El campo Grado Académico es obligatorio!',            
+            'carrera.required' => 'El campo Área de Formación es obligatorio!',
+            'descripcion.required' => 'El campo Descripción del Trabajo es obligatorio!',
+            'salario.required' => 'El campo Salario mensual es obligatorio!',
+            'cantidad.required' => 'El campo Cantidad de Personal es obligatorio!',
+        ]    
+        );
 
         $vacancy = new Vacancy();
         $vacancy->institution_id = $this->institution_id;
@@ -51,7 +70,7 @@ class VacancyInstitution extends Component
         $vacancy->descripcion = $this->descripcion;
         $vacancy->salario = $this->salario;
         $vacancy->cantidad = $this->cantidad;
-        $vacancy->estado = "ACTIVO";
+        $vacancy->estado = "PENDIENTE";//OLD ACTIVO
         $vacancy->save();
 
         session()->flash('message', 'Los datos se guardaron correctamente.');
@@ -68,14 +87,32 @@ class VacancyInstitution extends Component
         $this->descripcion = "";
         $this->salario = "";
         $this->cantidad = "";
+        $this->showDivVacancias = false;
     }
 
-    public function inactiveVacancy($vacancy_id)
+    public function alertInactiveVacancy($vacancy_id)
     {
-        $vacancy = Vacancy::find($vacancy_id);
+        $this->vacancy_id = $vacancy_id;
+        $this->dispatchBrowserEvent('swal:confirmInactiveVacancy', [
+            'type' => 'warning',  
+            'message' => 'Dar de baja la Vacancia?', 
+            'text' => 'La Vancia se dara de baja de la lista.'
+        ]);
+    }
+
+
+    public function inactiveVacancy()
+    {
+        $vacancy = Vacancy::find($this->vacancy_id);
         $vacancy->estado = "INACTIVO";
         $vacancy->save();
 
-        session()->flash('message', 'Se dio de baja correctamente.');
+        //$this->render();
+
+        // session()->flash('message', 'Se dio de baja correctamente.');
+        $this->dispatchBrowserEvent('alert', [
+            'type' => 'success',  
+            'message' => 'Se dio de Baja el registro correctamente.!'
+        ]);
     }
 }

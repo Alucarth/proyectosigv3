@@ -93,16 +93,16 @@
     @if (auth()->user()->institution->estado == 'ACTIVO')
         <li>
             <a href="{{ route('vacancy.institution') }}" class="menu">
-                <div class="menu__icon"> <i data-feather="book"></i> </div>
+                <div class="menu__icon"> <i data-feather="package"></i> </div>
                 <div class="menu__title"> Vacancias </div>
             </a>
         </li>
-        <li>
+        {{-- <li>
             <a href="{{ route('petition.institution') }}" class="menu">
                 <div class="menu__icon"> <i data-feather="book"></i> </div>
                 <div class="menu__title"> Reposiciones </div>
             </a>
-        </li>
+        </li> --}}
     @endif
     @endrole
     @role('responsable')

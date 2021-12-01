@@ -9,14 +9,13 @@
         <div class="box mb-3">
             <div
                 class="flex flex-col lg:flex-row items-center  pl-5 pt-2 pb-2 border-b border-gray-400 dark:border-dark-5">
-                <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
-                    <span style="font-size: 3em; color: #FAC428;">
+                <div class="w-6 h-8 lg:w-5 lg:h-5 image-fit lg:mr-1">
+                    <span style="font-size: 2em; color: #C5CAE8;">
                         <i class="fas fa-edit"></i>
                     </span>
                 </div>
                 <div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
-                    <div class="font-medium text-base">Datos Generales</div>
-                    <div class="text-gray-600">Complete la información solicitada</div>
+                    <div class="font-medium text-base">Datos Generales</div>                    
                 </div>
             </div>
 
@@ -89,14 +88,13 @@
         <div class="box mb-5">
             <div
                 class="flex flex-col lg:flex-row items-center pl-5 pt-2 pb-2 border-b border-gray-400 dark:border-dark-5 ">
-                <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
-                    <span style="font-size: 3em; color: #FAC428;">
+                <div class="w-6 h-8 lg:w-5 lg:h-5 image-fit lg:mr-1">
+                    <span style="font-size: 2em; color: #C5CAE8;">
                         <i class="fas fa-user"></i>
                     </span>
                 </div>
                 <div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
-                    <div class="font-medium text-base">Representante Legal</div>
-                    <div class="text-gray-600">Complete la información solicitada</div>
+                    <div class="font-medium text-base">Representante Legal</div>                    
                 </div>
             </div>
 
@@ -152,23 +150,25 @@
         <div class="box mb-5">
             <div
                 class="flex flex-col lg:flex-row items-center pl-5 pt-2 pb-2 border-b border-gray-400 dark:border-dark-5 ">
-                <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
-                    <span style="font-size: 3em; color: #FAC428;">
+                <div class="w-6 h-8 lg:w-5 lg:h-5 image-fit lg:mr-1">
+                    <span style="font-size: 2em; color: #C5CAE8;">
                         <i class="fas fa-home"></i>
                     </span>
                 </div>
                 <div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
-                    <div class="font-medium text-base">Registro de Casa Matriz y Sucursales</div>
-                    <div class="text-gray-600">Complete la información solicitada</div>
+                    <div class="font-medium text-base">Registro de Casa Matriz y Sucursales</div>                    
+                </div>
+                <div class="lg:ml-10 text-right lg:text-right mt-3 lg:mt-0 pr-5">
+                    <button type="button" wire:click="$toggle('showDivSucursal')" style="display:{{$estadoAction}}" class="btn btn-outline-primary ">
+                        <span style="font-size: 1em">
+                            <i class="fas fa-plus"></i>
+                        </span> Agregar
+                    </button>                  
                 </div>
             </div>
 
             <div class="text-center lg:text-left p-5">
-                <button type="button" wire:click="$toggle('showDivSucursal')" style="display:{{$estadoAction}}" class="btn btn-outline-primary ">
-                    <span style="font-size: 1em">
-                        <i class="fas fa-plus"></i>
-                    </span> Agregar Sucursal
-                </button>
+                
                 @if ($showDivSucursal)
                     <div class="pt-5">
                         <form wire:submit.prevent='addBranch' class="grid grid-cols-12 gap-2 items-center">
@@ -260,23 +260,25 @@
         <div class="box">
             <div
                 class="flex flex-col lg:flex-row items-center pl-5 pt-2 pb-2 border-b border-gray-400 dark:border-dark-5 ">
-                <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
-                    <span style="font-size: 3em; color: #FAC428;">
+                <div class="w-6 h-8 lg:w-5 lg:h-5 image-fit lg:mr-1">
+                    <span style="font-size: 2em; color: #C5CAE8;">
                         <i class="fas fa-address-book"></i>
                     </span>
                 </div>
                 <div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
-                    <div class="font-medium text-base">Registro de Contactos</div>
-                    <div class="text-gray-600">Complete la información solicitada</div>
+                    <div class="font-medium text-base">Registro de Contactos</div>                    
+                </div>
+                <div class="lg:ml-10 text-right lg:text-right mt-3 lg:mt-0 pr-5">
+                    <button type="button" wire:click="$toggle('showDivContacto')" style="display:{{$estadoAction}}" class="btn btn-outline-primary ">
+                        <span style="font-size: 1em">
+                            <i class="fas fa-plus"></i>
+                        </span> Agregar
+                    </button>               
                 </div>
             </div>
 
             <div class="text-center lg:text-left p-5">
-                <button type="button" wire:click="$toggle('showDivContacto')" style="display:{{$estadoAction}}" class="btn btn-outline-primary ">
-                    <span style="font-size: 1em">
-                        <i class="fas fa-plus"></i>
-                    </span> Agregar Contacto
-                </button>
+                
                 @if ($showDivContacto)
                     <div class="pt-5">
                         <form wire:submit.prevent='addCoordinator' class="grid grid-cols-12 gap-2 items-center">
@@ -363,29 +365,3 @@
     </div>
 
 </div>
-<style>
-    .custom-file-input::-webkit-file-upload-button {
-      visibility: hidden;
-    }
-    .custom-file-input::before {
-      content: 'Select some files';
-      display: inline-block;
-      background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
-      border: 1px solid #999;
-      border-radius: 3px;
-      padding: 5px 8px;
-      outline: none;
-      white-space: nowrap;
-      -webkit-user-select: none;
-      cursor: pointer;
-      text-shadow: 1px 1px #fff;
-      font-weight: 700;
-      font-size: 10pt;
-    }
-    .custom-file-input:hover::before {
-      border-color: black;
-    }
-    .custom-file-input:active::before {
-      background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
-    }
-    </style>

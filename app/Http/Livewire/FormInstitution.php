@@ -49,6 +49,7 @@ class FormInstitution extends Component
     public $showDivContacto = false;
     public $showFileNit = false;
     public $estadoAction = false;
+    public $dialog_branch;
 
     public function mount()
     {        
@@ -57,6 +58,7 @@ class FormInstitution extends Component
         $this->file_nit = $this->institution->file_nit;
         
         $this->showFileNit = $this->file_nit == null ? false : true;
+        $this->dialog_branch =false;
 
         $this->nombreRepresentante = $this->institution->nombre;
         $this->paternoRepresentante = $this->institution->paterno;
@@ -336,6 +338,11 @@ class FormInstitution extends Component
         $institution->estado = "ACTIVO";
         $institution->save();
         return redirect()->to('/institution/dashboard');
+    }
+
+    public function showBrach()
+    {        
+        $this->dialog_branch = true;
     }
 
 }

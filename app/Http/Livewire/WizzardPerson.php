@@ -79,10 +79,12 @@ class WizzardPerson extends Component
     public $paternoReferencia;
     public $maternoReferencia;
     public $telefonoReferencia;
+    //variables auxiliares
     public $urlfile;
     public $dialog;
     public $dialog_hijo;
     public $dialog_dificultad;
+    public $dialog_contacto;
 
     public function render()
     {
@@ -152,6 +154,7 @@ class WizzardPerson extends Component
         $this->dialog =false;
         $this->dialog_hijo = false;
         $this->dialog_dificultad = false;
+        $this->dialog_contacto = false;
         $this->total_years = 0;
         //$this->archivod = $this->person->archivod;
     }
@@ -351,6 +354,7 @@ class WizzardPerson extends Component
 
         $this->step2();
 
+        
         // $response = Http::post('https://sig.planificacion.gob.bo:8080/pge/v1/soapapiservicioexterno/consultadatopersonacertificacion', [
         //     'numeroDocumento' => $this->ci
         // ])->throw()->json();
@@ -408,6 +412,7 @@ class WizzardPerson extends Component
 
     public function contactoPersonal()
     {
+        $this->dialog_contacto = false;
         $this->validate([
             'nombreContacto' => 'required',
             'paternoContacto' => 'required',
@@ -432,6 +437,17 @@ class WizzardPerson extends Component
 
         $this->defaultContactoPersonal();
     }
+
+    public function showContacto()
+    {
+        $this->dialog_contacto = true;
+    }
+
+    public function closeContacto()
+    {
+        $this->dialog_contacto = false;
+    }
+
 
     public function deleteContacto($id)
     {
@@ -629,6 +645,7 @@ class WizzardPerson extends Component
         $this->clearReferencia();
     }
 
+   
     public function deleteContact($id)
     {
         $contact = Contact::find($id);

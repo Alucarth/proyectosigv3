@@ -729,7 +729,7 @@
                     <div class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200 dark:border-dark-5">
                         <h2 class="font-medium text-base mr-auto">
                             <span style="font-size: 2em; color: #C5CAE9;">
-                                <i class="fas fa-briefcase"></i>
+                                <i class="fas fa-building"></i>
                             </span>
                             Información de Referencia Laboral
                         </h2>

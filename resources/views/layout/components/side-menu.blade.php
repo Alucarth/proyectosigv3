@@ -71,13 +71,13 @@
     @role('persona')
     <li>
         <a href="{{ route('data.person') }}" class="side-menu">
-            <div class="side-menu__icon"> <i data-feather="inbox"></i> </div>
+            <div class="side-menu__icon"> <i data-feather="file-text"></i> </div>
             <div class="side-menu__title"> Registro </div>
         </a>
     </li>
     <li>
         <a href="{{ route('abilities.person') }}" class="side-menu">
-            <div class="side-menu__icon"> <i data-feather="inbox"></i> </div>
+            <div class="side-menu__icon"> <i data-feather="shield"></i> </div>
             <div class="side-menu__title"> Habilidades </div>
         </a>
     </li>

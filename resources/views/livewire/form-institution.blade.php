@@ -25,7 +25,20 @@
 
 
                     <div class="col-span-12 sm:col-span-6">
-                        
+                            <div class="col-span-12 sm:col-span-12 pb-3">
+                                <label class="form-label">Número de Identificación Tributaria(NIT):</label>
+                                <input wire:model='nit' type="text" class="form-control" placeholder="">
+                                @error('nit') <small
+                                        class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="col-span-12 sm:col-span-12 pb-3">
+                                <label class="form-label">Razón Social:</label>
+                                <input wire:model='razon_social' type="text" class="form-control" placeholder="" readonly>
+                                @error('razon_social') <small
+                                        class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small>
+                                @enderror
+                            </div>
                             <div class="col-span-12 sm:col-span-12 pb-3">
                                 <label class="form-label">Gran Actividad:</label>
                                 <input wire:model='rubro' type="text" class="form-control" placeholder="">
@@ -41,18 +54,22 @@
                                 @enderror
                             </div>
                         
-                    </div>
+                    </div>                   
 
                     <div class="col-span-12 sm:col-span-4">
                         <label class="form-label">Respaldo digital de NIT</label>
                         @if ($showFileNit)
                             <div class="mt-1">
                                 <div class="mt-1">
-                                    <div class="border-2 border-dashed dark:border-dark-5 rounded-md pt-4">
+                                    <div class="border-2 border-dashed dark:border-dark-5 rounded-md pt-4">                                        
                                         <div class="flex flex-wrap px-4">
+                                            
+
+
                                             <div class="w-10 h-10 relative image-fit mb-5 mr-5 cursor-pointer zoom-in">
                                                 {{-- <img class="rounded-md" alt="Rubick Tailwind HTML Admin Template" src=""> --}}
-                                                <a href="/storage/{{ $file_nit }}" target="_blank"><span
+                                                {{-- <a href="/{{ $file_nit }}" target="_blank"><span --}}
+                                                <a href="javascript:;" wire:click="setArchivo()"><span
                                                         style="font-size: 3em; color: #E4E7DF;">
                                                         <i class="fas fa-file"></i>
                                                     </span></a>
@@ -364,4 +381,21 @@
             href="javascript:;" style="margin-right: 15px;display:{{$estadoAction}}">Concluir Registro</a> 
     </div>
 
+
+    <div id="institution-modal" class="modal overflow-y-auto {{$dialog?'show':'hide'}}" data-backdrop="static" tabindex="-1" aria-hidden="false" style="padding-left: 0px; margin-top: 0px; margin-left: 0px; z-index: 10000;">
+        <div class="modal-dialog modal-lg">
+                
+                <div class="modal-content"  style="height:500px;">     
+                    <div class=" text-right"> <button type="button"  class="btn btn-default" wire:click="closeModal()"> <i class="fa fa-times"></i> </button> </div>
+                    {{-- <button  type="button" class=" w-8 h-8"  wire::click="closeModal()"> <i  class="fa fa-times"></i> </button> --}}
+                    <div class="modal-body p-0">
+                        {{-- {{$urlfile}} --}}
+                        <iframe src="{{$urlfileView}}" frameborder="0" class="" style="height:500px;width: 100%;" >
+                        </iframe>
+                    </div>
+                </div>
+           
+        </div>
+    </div>
 </div>
+

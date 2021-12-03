@@ -57,7 +57,7 @@ class RegisterInstitutionController extends Controller
             'razonSocial' => 'required',
              // 'nombreComercial' => 'required',
             'society' => 'required',
-            'nit' => 'required|numeric',
+            'nit' => 'required|numeric|unique:institutions',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
             'captcha' => 'required|captcha'

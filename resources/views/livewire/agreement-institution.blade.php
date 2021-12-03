@@ -1,13 +1,33 @@
 <div>
     @if ($ventana == 1)
-        <div class="box py-8 px-6 mt-2">
-            <h1 class="text-xl text-gray-900">Lista de Convenios Pendientes</h1>
-            <div class="overflow-x-auto mt-6">
+        <div class="box py-8 px-6 mt-5">
+            <h1 class="text-xl text-gray-900">Lista de Convenios</h1>
+            <div class="overflow-x-auto mt-6" style="padding: 5px;">
+                <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center pl-2 pb-3">
+                    <button class="btn btn-secondary w-24 mr-1 mb-2">Convenios</button>
+                    <div class="dropdown" style="margin-top: -8px;">
+                        <button wire:click="getListaConvenios('firmados')" class="dropdown-toggle btn px-2  " aria-expanded="false">
+                            <span class="w-5 h-5 flex items-center justify-center">
+                                <i class="fa fa-list-alt fa-2x"></i>
+                            </span>
+                        </button>
+                        <div class="dropdown-menu w-40">
+                            <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                                <a href="javascript:;" wire:click="getListaConvenios('pendientes')" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
+                                    <i class="fa fa-exclamation w-4 h-4 mr-2"></i> Pendientes
+                                </a>
+                                <a href="javascript:;" wire:click="getListaConvenios('firmados')" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
+                                    <i class="fa fas fa-check w-4 h-4 mr-2"></i> Firmados
+                                </a>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <table class="table">
                     <thead>
                         <tr class="bg-gray-700 dark:bg-dark-1 text-white">
                             <th class="whitespace-nowrap uppercase">#</th>
-                            <th class="whitespace-nowrap uppercase">Nombre Comercial</th>
+                            {{-- <th class="whitespace-nowrap uppercase">Nombre Comercial</th> --}}
                             <th class="whitespace-nowrap uppercase">Razon Social</th>
                             <th class="whitespace-nowrap uppercase">Estado </th>
                             <th class="whitespace-nowrap uppercase">Acciones</th>
@@ -18,12 +38,12 @@
                             @if ($assignament->institution->estado == 'REGISTRADO')
                                 <tr>
                                     <td class="border-b dark:border-dark-5">{{ $assignament->id }}</td>
-                                    <td class="border-b dark:border-dark-5">
-                                        {{ $assignament->institution->nombre_comercial }}</td>
+                                    {{-- <td class="border-b dark:border-dark-5">
+                                        {{ $assignament->institution->nombre_comercial }}</td> --}}
                                     <td class="border-b dark:border-dark-5">
                                         {{ $assignament->institution->razon_social }}
                                     </td>
-                                    <td class="border-b dark:border-dark-5">{{ $assignament->estado }}</td>
+                                    <td class="border-b dark:border-dark-5">{{ $assignament->institution->estado }}</td>
                                     <td class="border-b dark:border-dark-5">
                                         <div class="mt-2">
                                             <div class="form-check">

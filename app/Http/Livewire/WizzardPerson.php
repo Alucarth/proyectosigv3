@@ -79,16 +79,10 @@ class WizzardPerson extends Component
     public $paternoReferencia;
     public $maternoReferencia;
     public $telefonoReferencia;
-    //variables auxiliares
     public $urlfile;
     public $dialog;
     public $dialog_hijo;
     public $dialog_dificultad;
-    public $dialog_contacto;
-    public $dialog_formacion;
-    public $dialog_experiencia;
-    public $dialog_referencia;
-    public $filecounter;
 
     public function render()
     {
@@ -158,12 +152,7 @@ class WizzardPerson extends Component
         $this->dialog =false;
         $this->dialog_hijo = false;
         $this->dialog_dificultad = false;
-        $this->dialog_contacto = false;
-        $this->dialog_formacion = false;
-        $this->dialog_experiencia = false;
-        $this->dialog_referencia = false;
         $this->total_years = 0;
-        $this->filecounter = 0;
         //$this->archivod = $this->person->archivod;
     }
     
@@ -362,7 +351,6 @@ class WizzardPerson extends Component
 
         $this->step2();
 
-        
         // $response = Http::post('https://sig.planificacion.gob.bo:8080/pge/v1/soapapiservicioexterno/consultadatopersonacertificacion', [
         //     'numeroDocumento' => $this->ci
         // ])->throw()->json();
@@ -420,7 +408,6 @@ class WizzardPerson extends Component
 
     public function contactoPersonal()
     {
-        $this->dialog_contacto = false;
         $this->validate([
             'nombreContacto' => 'required',
             'paternoContacto' => 'required',
@@ -445,17 +432,6 @@ class WizzardPerson extends Component
 
         $this->defaultContactoPersonal();
     }
-
-    public function showContacto()
-    {
-        $this->dialog_contacto = true;
-    }
-
-    public function closeContacto()
-    {
-        $this->dialog_contacto = false;
-    }
-
 
     public function deleteContacto($id)
     {
@@ -503,7 +479,6 @@ class WizzardPerson extends Component
 
     public function formacion()
     {
-        $this->dialog_formacion = false;
         $this->validate([
             'carrera' => 'required',
             'institutionFormacion' => 'required',
@@ -524,15 +499,6 @@ class WizzardPerson extends Component
         session()->flash('message', 'Los datos se guardaron correctamente.');
 
         $this->defaultFormacion();
-    }
-
-    public function showFormacion()
-    {
-        $this->dialog_formacion = true;
-    }
-    public function closeFormacion()
-    {
-        $this->dialog_formacion = false;
     }
 
     public function deleteFormacion($id)
@@ -564,7 +530,6 @@ class WizzardPerson extends Component
         $this->gradoFormacion = "";
         $this->egresoFormacion = "";
         $this->archivoFormacion = "";
-        $this->filecounter++;
     }
 
     public function updateStep4()
@@ -578,8 +543,6 @@ class WizzardPerson extends Component
 
     public function experiencia()
     {
-        $this->dialog_experiencia = false;
-        
         $this->validate([
             'institutionLaboral' => 'required',
             'cargoLaboral' => 'required',
@@ -587,7 +550,7 @@ class WizzardPerson extends Component
             'fecha_fin' => 'required|date',
             'archivoLaboral' => 'required|mimes:jpg,bmp,png,pdf|max:5120'
         ]);
-       
+
         $experience = new Experience();
         $experience->person_id = $this->person_id;
         $experience->institution = mb_strtoupper( $this->institutionLaboral);
@@ -600,17 +563,6 @@ class WizzardPerson extends Component
         session()->flash('message', 'Los datos se guardaron correctamente.');
 
         $this->clearExperiencia();
-    }
-
-    public function showExperiencia()
-    {
-        // $this->clearExperiencia();
-        $this->dialog_experiencia = true;
-    }
-
-    public function closeExperiencia()
-    {
-        $this->dialog_experiencia = false;
     }
 
     public function deleteExperiencia($id)
@@ -640,10 +592,8 @@ class WizzardPerson extends Component
     {
         $this->institutionLaboral = "";
         $this->cargoLaboral = "";
-        $this->fecha_inicio = "";
-        $this->fecha_fin = "";
-        $this->archivoLaboral = null;
-        $this->filecounter++;
+        $this->experienciaLaboral = "";
+        $this->archivoLaboral = "";
     }
 
     public function updateStep5()
@@ -657,7 +607,6 @@ class WizzardPerson extends Component
 
     public function referencia()
     {
-        $this->dialog_referencia =false;
         $this->validate([
             'institutionReferencia' => 'required',
             'nombreReferencia' => 'required',
@@ -680,16 +629,6 @@ class WizzardPerson extends Component
         $this->clearReferencia();
     }
 
-    public function showReferencia()
-    {
-        $this->dialog_referencia = true;
-    }
-
-    public function closeReferencia()
-    {
-        $this->dialog_referencia = false;
-    }
-   
     public function deleteContact($id)
     {
         $contact = Contact::find($id);

@@ -11,6 +11,7 @@ use App\Models\Institution;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Util;
 
 class FormInstitution extends Component
 {
@@ -24,6 +25,8 @@ class FormInstitution extends Component
     //complementar datos
     public $archivoNit;
     public $rubro;
+    public $nit;
+    public $razon_social;
     public $actividad;
     public $file_nit;
     //representante
@@ -49,16 +52,22 @@ class FormInstitution extends Component
     public $showDivContacto = false;
     public $showFileNit = false;
     public $estadoAction = false;
-    public $dialog_branch;
+    public $dialogBranch;
+
+    //Extras
+    public $urlfileView;
+    public $dialog;    
 
     public function mount()
     {        
         $this->rubro = $this->institution->rubro;
         $this->actividad = $this->institution->actividad;
+        $this->nit = $this->institution->nit;
+        $this->razon_social = $this->institution->razon_social;
         $this->file_nit = $this->institution->file_nit;
         
         $this->showFileNit = $this->file_nit == null ? false : true;
-        $this->dialog_branch =false;
+        $this->dialogBranch =false;
 
         $this->nombreRepresentante = $this->institution->nombre;
         $this->paternoRepresentante = $this->institution->paterno;
@@ -67,6 +76,9 @@ class FormInstitution extends Component
         $this->telefonoRepresentante = $this->institution->telefono;
 
         $this->estadoAction = $this->institution->estado == 'PENDIENTE' ? 'block' : 'none';
+
+        $this->urlfileView='/';
+        $this->dialog = false;        
     }
 
     public function render()
@@ -78,18 +90,20 @@ class FormInstitution extends Component
         return view('livewire.form-institution', compact('departments', 'branchs', 'coordinators'));
     }
 
-    public function updateInstitution(){
+    public function updateInstitution(){        
 
         if($this->file_nit==null){
             $rules = [
                 'rubro' => 'required',
+                'nit' => 'required|unique:institutions,nit,'.$this->institution_id,                
                 'actividad' => 'required',
                 'archivoNit' => 'required|mimes:jpg,bmp,png,pdf|max:5120'
             ];
         }else{
             $rules = [
                 'rubro' => 'required',
-                'actividad' => 'required',                
+                'actividad' => 'required',
+                'nit' => 'required|unique:institutions,nit,'.$this->institution_id,                   
             ];
         }
         
@@ -100,13 +114,18 @@ class FormInstitution extends Component
         ]);
         
 
+        $nitRazonSocial =  Util::apiGetNitRazonSocial($this->nit);                
         try {
             $institution = Institution::find($this->institution_id);
-            $institution->rubro = $this->rubro;
-            $institution->actividad = $this->actividad;
+            $institution->rubro = mb_strtoupper($this->rubro);
+            $institution->actividad = mb_strtoupper($this->actividad);
+            $nitRazonSocial = ($nitRazonSocial!=null OR $nitRazonSocial!=false)?$nitRazonSocial:'FALSE';
+            $institution->razon_social = mb_strtoupper($nitRazonSocial);
+            $this->razon_social = $nitRazonSocial;
+            $institution->nit = $this->nit;
 
             if($this->archivoNit!=null)
-            $institution->file_nit = str_replace("public/", "", $this->archivoNit->store('public'));
+            $institution->file_nit = str_replace("public/", "storage/", $this->archivoNit->store('public'));
 
             $institution->save();
 
@@ -118,8 +137,7 @@ class FormInstitution extends Component
                 'message' => 'Los datos se guardaron correctamente.!'
             ]);
 
-        } catch (\Exception $e) {
-
+        } catch (\Exception $e) {                  
             $this->dispatchBrowserEvent('alert', [
                 'type' => 'error',  
                 'message' => 'Error al guardar los datos, intente nuevamente.'
@@ -140,10 +158,10 @@ class FormInstitution extends Component
         ]);
         try {
             $institution = Institution::find($this->institution_id);
-            $institution->nombre = $this->nombreRepresentante;
-            $institution->paterno = $this->paternoRepresentante;
-            $institution->materno = $this->maternoRepresentante;
-            $institution->telefono = $this->telefonoRepresentante;
+            $institution->nombre = mb_strtoupper($this->nombreRepresentante);
+            $institution->paterno = mb_strtoupper($this->paternoRepresentante);
+            $institution->materno = mb_strtoupper($this->maternoRepresentante);
+            $institution->telefono = mb_strtoupper($this->telefonoRepresentante);
             $institution->email = $this->emailRepresentante;
             $institution->save();
             $this->dispatchBrowserEvent('alert', 
@@ -171,7 +189,7 @@ class FormInstitution extends Component
             $branch = new Branch();
             $branch->institution_id = $this->institution_id;
             $branch->department_id = $this->departamento;
-            $branch->direccion = $this->direccion;
+            $branch->direccion = mb_strtoupper($this->direccion);
             $branch->telefono = $this->telefono;
             $branch->tipo = $this->tipo;
             $branch->estado = "ACTIVO";
@@ -224,9 +242,9 @@ class FormInstitution extends Component
         try {
             $coordinator = new Coordinator();
             $coordinator->institution_id = $this->institution_id;
-            $coordinator->nombres = $this->nombresEnlace;
-            $coordinator->paterno = $this->paternoEnlace;
-            $coordinator->materno = $this->maternoEnlace;
+            $coordinator->nombres = mb_strtoupper($this->nombresEnlace);
+            $coordinator->paterno = mb_strtoupper($this->paternoEnlace);
+            $coordinator->materno = mb_strtoupper($this->maternoEnlace);
             $coordinator->telefono = $this->telefonoEnlace;        
             $coordinator->email = $this->correoEnlace;
             $coordinator->estado = "ACTIVO";
@@ -288,7 +306,25 @@ class FormInstitution extends Component
     }
 
     public function alertConclucion()
-    {
+    {        
+        //Validamos el Nit
+        $institution = Institution::find($this->institution_id);
+        $nitValidate =  Util::apiGetNit($institution->nit);
+        try{
+            if($nitValidate==false){
+                $this->dispatchBrowserEvent('alert', [
+                    'type' => 'error',  
+                    'message' => 'El NIT ingresado es invalido.'
+                ]);
+                return false;
+            }
+        }catch (\Exception $e) {
+            $this->dispatchBrowserEvent('alert', [
+                'type' => 'error',  
+                'message' => 'No pudimos validar el Nit Registrato. Intente nuevamente.'
+            ]);
+        }
+
         if(empty( Branch::where('institution_id', $this->institution_id)->count()) ){
             $this->dispatchBrowserEvent('alert', [
                 'type' => 'warning',  
@@ -308,7 +344,7 @@ class FormInstitution extends Component
        $this->dispatchBrowserEvent('swal:confirmEntidad', [
             'type' => 'warning',  
             'message' => 'Concluir registro?', 
-            'text' => 'Antes de concluir, debe estar seguro que registro toda la información solicitada.'
+            'text' => 'Antes de concluir, debe estar seguro que registró toda la información solicitada.'
         ]);
         
     }
@@ -340,9 +376,31 @@ class FormInstitution extends Component
         return redirect()->to('/institution/dashboard');
     }
 
-    public function showBrach()
+    public function showDialogBrach()
     {        
-        $this->dialog_branch = true;
+        $this->dialogBranch = true;
+    }
+    public function closeDialogBrach()
+    {
+        $this->dialogBranch=false;
+    }
+
+
+    public function setArchivo()
+    {
+        //$institution = Institution::find($id);
+        if($this->file_nit !="")
+        {                       
+            $this->urlfileView = $this->file_nit;
+            // $this->urlfile = $decendant->certificado;
+            $this->dialog =true;
+        }
+        
+    }
+
+    public function closeModal()
+    {
+        $this->dialog=false;
     }
 
 }

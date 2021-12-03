@@ -24,6 +24,7 @@ class AgreementInstitution extends Component
     public $official_id;
     public $institution_id;
     public $detalle;
+    public $assignments;
 
     public function mount()
     {
@@ -38,6 +39,24 @@ class AgreementInstitution extends Component
             $this->ventana = 2;
         }
         return view('livewire.agreement-institution', compact('assignments'));
+    }
+
+
+    public function getListaConvenios($tipo)
+    {   
+        if($tipo == 'pendientes'){
+            //$this->$assignments = Assignment::where('official_id', $this->official_id)->where('estado', "sss")->get();
+            //return view('livewire.agreement-institution', compact('assignments'));
+        }elseif($tipo == 'firmados'){
+            // $this->$assignments = Assignment::join('institutions', 'institutions.id', '=', 'assignments.id')
+            // ->where('official_id', $this->official_id)
+            // ->where('institutions.estado', "ACTIVO")
+            // ->get(['assignments.*', 'institutions.nit','institutions.razon_social','institutions.estado as estado_institution']);
+            //return view('livewire.agreement-institution', compact('assignments'));
+        }
+
+      
+        
     }
 
     public function createAgreement()

@@ -3,21 +3,26 @@
 namespace App\Http\Livewire;
 
 use App\Models\Ability;
+use App\Models\Person;
 use Livewire\Component;
-
+use Illuminate\Support\Facades\Auth;
 class AbilityPerson extends Component
 {
-    public $person_id;
+    
     public $habilidad;
+    public $person;
+    public $person_id;
 
     public function mount()
     {
-        $this->person_id = auth()->user()->person->id;
+        $this->person = Person::where('user_id','=',Auth::user()->id)->first();
+    
     }
 
     public function render()
     {
-        $abilities = Ability::where('person_id', $this->person_id)->get();
+        // $abilities = [];
+        $abilities = Ability::where('person_id', $this->person->id)->get();
         return view('livewire.ability-person', compact('abilities'));
     }
 
@@ -28,12 +33,21 @@ class AbilityPerson extends Component
         ]);
 
         $ability =  new Ability();
-        $ability->person_id = $this->person_id;
+        $ability->person_id = $this->person->id;
         $ability->descripcion = $this->habilidad;
         $ability->estado = "ACTIVO";
         $ability->save();
 
         $this->clearAbility();
+    }
+
+    public function deleteHabilidad($id)
+    {
+        $ability = Ability::find($id);
+        if($ability)
+        {
+            $ability->delete();
+        }
     }
 
     public function clearAbility()

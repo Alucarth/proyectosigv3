@@ -17,7 +17,7 @@
             <div class="px-5 mt-10">
                 <div class="font-medium text-center text-lg">COMPLETA TUS DATOS PERSONALES</div>
             </div>
-
+            {{$person}}
             <div class="intro-y box col-span-12 lg:col-span-6">
                 <div class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200 dark:border-dark-5">
                     <h2 class="font-medium text-base mr-auto">
@@ -612,7 +612,7 @@
                 </div>
                 
                 <div class="col-span-12 flex items-center justify-center sm:justify-end mt-5">
-                    <button type="button" wire:click='step2' class="btn btn-secondary w-24">Atras</button>
+                    <button type="button" wire:click='step2' class="btn btn-dark w-24">Atras</button>
                     <button type="button" wire:click='updateStep4'
                         class="btn btn-primary w-24 ml-2">Siguiente</button>
                 </div>

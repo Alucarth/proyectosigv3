@@ -34,7 +34,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($assignments as $assignament)
+                        @foreach ($assignments as $assignament)     
                             @if ($assignament->institution->estado == 'REGISTRADO')
                                 <tr>
                                     <td class="border-b dark:border-dark-5">{{ $assignament->id }}</td>

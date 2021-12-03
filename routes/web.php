@@ -53,7 +53,8 @@ Route::get('reposiciones', [ReplacementInstitutionController::class, "index"])->
 Route::get('registro-oficial', [RegisterOfficialController::class, "index"])->name('form.official')->middleware(['auth', 'role:admin']);
 Route::get('reporte-persona', [PersonController::class, "index"])->name('report.person')->middleware(['auth', 'role:admin']);
 
-Route::get('adignacion-oficial', [AssignmentOfficialController::class, "index"])->name('assignment.official')->middleware(['auth', 'role:responsable']);
+// Route::get('adignacion-oficial', [AssignmentOfficialController::class, "index"])->name('assignment.official')->middleware(['auth', 'role:responsable']);
+Route::get('asignacion-oficial', [AssignmentOfficialController::class, "index"])->name('assignment.official')->middleware(['auth', 'role:responsable']);
 
 Route::get('solicitud', [PetitionInstitutionController::class, "index"])->name('petition.institution')->middleware(['auth', 'role:empresa']);
 Route::get('report_reposicion/{petition_id}', [ReportController::class, "reposicion"])->name('report.reposicion')->middleware(['auth', 'role:empresa']);

@@ -15,19 +15,21 @@ class AssignmentOfficial extends Component
     public $ventana = 1;
     public $official_id;
     public $institution_id;
+    public $oficial;
 
     public function mount()
     {
+        $this->oficial = null;
     }
 
     public function render()
     {
         $assignments = Assignment::query();
         $assignments = $assignments->where('estado', 'ACTIVO');
-        if ($this->official_id != null) {
-            $this->ventana = 2;
-            $assignments = $assignments->where('official_id', $this->official_id);
-        }
+        // if ($this->official_id != null) {
+        //     $this->ventana = 2;
+        //     $assignments = $assignments->where('official_id', $this->official_id);
+        // }
         $assignments = $assignments->get();
         $officials = Official::all();
         $institutions = Institution::where('estado', "REGISTRADO")->get();
@@ -47,6 +49,11 @@ class AssignmentOfficial extends Component
         $assignment->save();
 
         $this->defaultAssignment();
+    }
+
+    public function setOficial($id)
+    {
+        $this->oficial = Official::find($id);
     }
 
     public function defaultAssignment()

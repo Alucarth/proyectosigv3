@@ -116,7 +116,7 @@
                                     <!-- END: Modal Body -->
                                     <!-- BEGIN: Modal Footer -->
                                     <div class="modal-footer text-right">
-                                        <button id="btn-login" type="submit" class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">Iniciar</button>
+                                        <button id="btn-login" type="button" class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">Iniciar</button>
                                         <!-- <button  class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">Login</button> -->
                                             
                                             <!-- <button id="hideLogin" type="button" class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top" >Ir a inicio.</button> -->
@@ -161,9 +161,12 @@ $(function(){
 })
 
 cash(function () {
-    cash("#formlogin").on('submit', function(evt){        
-        cash('#btn-login').html('<i data-loading-icon="oval" data-color="white" class="w-5 h-5 mx-auto"></i>').svgLoader()                       
-    })    
+    cash('#btn-login').on('click', function() {
+            $('#btn-login').prop('disabled', true);
+            $("#formlogin").submit();   
+            cash('#btn-login').html('<i data-loading-icon="oval" data-color="white" class="w-5 h-5 mx-auto"></i>').svgLoader()            
+            //helper.delay(1500)
+        })   
 })
 </script>
 @endsection

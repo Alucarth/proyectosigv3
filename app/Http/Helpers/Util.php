@@ -552,4 +552,38 @@ class Util
         }
         return $numu;
     }
+
+    //api Consultas NIT
+    public static function apiGetNit($nit) {
+        if(trim($nit)!=""){
+            try{
+                $response = Http::get('http://pbdw.impuestos.gob.bo:8080/gob.sin.padron.servicio.web/consulta/verificarContribuyente', [
+                    'nit' => $nit
+                ])->throw(function ($response, $e) {
+                    return false;
+                })->json();                
+                if($response["ok"]==true AND $response["estado"]=="ACTIVO"){
+                    return true;
+                }
+            }catch (\Exception $e) {
+                return false;
+            } 
+        }
+        return false;
+    }
+    public static function apiGetNitRazonSocial($nit) {
+        if(trim($nit)!=""){
+            try{
+                $response = Http::get('http://pbdw.impuestos.gob.bo:8080/gob.sin.padron.servicio.web/consulta/verificarContribuyente', [
+                    'nit' => $nit
+                ])->throw(function ($response, $e) {
+                    return false;
+                })->json();
+                return $response["razonSocial"];            
+            }catch (\Exception $e) {
+                return false;
+            } 
+        }
+        return false;
+    }
 }

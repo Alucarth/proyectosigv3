@@ -19,7 +19,7 @@ class CreateInstitutionsTable extends Migration
             $table->string('razon_social');
             $table->string('nombre_comercial')->nullable();
             $table->unsignedBigInteger('society_id');
-            $table->string('nit');
+            $table->string('nit')->unique();
             $table->string('file_nit')->nullable();
             $table->boolean('roe')->default(0);
             $table->string('rubro')->nullable();

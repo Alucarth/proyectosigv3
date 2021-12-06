@@ -30,7 +30,7 @@
                         @enderror
                     </div>
                     <div class="col-span-12 sm:col-span-3">
-                        <label class="form-label">Denominación del cargo</label>
+                        <label class="form-label">Nombre de la vacancia</label>
                         <input wire:model='nombreVacacia' type="text" class="form-control" placeholder="">
                         @error('nombreVacacia')<small
                                 class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small>
@@ -62,21 +62,21 @@
                         @enderror
                     </div>
                     <div class="col-span-12 sm:col-span-3">
-                        <label class="form-label">Descripcion del trabajo</label>
+                        <label class="form-label">Descripcion del trabajo a realizar en esta vacancia</label>
                         <input wire:model='descripcion' type="text" class="form-control" placeholder="">
                         @error('descripcion')<small
                                 class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small>
                         @enderror
                     </div>
                     <div class="col-span-12 sm:col-span-3">
-                        <label class="form-label">Salario Mensual</label>
-                        <input wire:model='salario' type="text" class="form-control" placeholder="">
+                        <label class="form-label">Salario Mensual en Bs.</label>
+                        <input wire:model='salario' type="number" class="form-control" placeholder="">
                         @error('salario')<small
                                 class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small>
                         @enderror
                     </div>
                     <div class="col-span-12 sm:col-span-3">
-                        <label class="form-label">Cantidad de Personal</label>
+                        <label class="form-label">Cantidad de Personal requerido</label>
                         <input wire:model='cantidad' type="number" class="form-control" placeholder="">
                         @error('cantidad')<small
                                 class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small>

@@ -82,5 +82,22 @@
         });
 
 
+        window.addEventListener('swal:confirmEliminarConvenio', event => { 
+            swal({
+            title: event.detail.message,
+            text: event.detail.text,
+            icon: event.detail.type,
+            buttons: true,
+            dangerMode: true,
+            buttons: ["Cancelar", "Si, continuar"],
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                window.livewire.emit('eliminarConvenio');
+            }
+            });
+        });
+
+
     </script>
 @endsection

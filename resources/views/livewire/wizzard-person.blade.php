@@ -17,7 +17,6 @@
             <div class="px-5 mt-10">
                 <div class="font-medium text-center text-lg">COMPLETA TUS DATOS PERSONALES</div>
             </div>
-            {{$person}}
             <div class="intro-y box col-span-12 lg:col-span-6">
                 <div class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200 dark:border-dark-5">
                     <h2 class="font-medium text-base mr-auto">
@@ -351,7 +350,7 @@
                         Registro de Hijo(a) 
                        
                     </h2>
-                    <button type="button" class="btn btn-primary btn-sm"  wire:click="showHijo()">  <i class="fa fa-plus "></i>  Adicionar </button>
+                    <button type="button" class="btn btn-primary btn-sm"  wire:click="showHijo()">  <i class="fa fa-plus w-4 h-4 mr-2 "></i>  Adicionar </button>
                     {{-- <button class="btn btn-outline-secondary hidden sm:flex"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file w-4 h-4 mr-2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg> Download Excel </button> --}}
                 </div>
                 <div class="p-5">
@@ -402,7 +401,7 @@
                         </span>
                         Dificultad Laboral
                     </h2>
-                    <button type="button" class="btn btn-primary btn-sm"  wire:click="showDificultad()">  <i class="fa fa-plus "></i>  Adicionar </button>
+                    <button type="button" class="btn btn-primary btn-sm"  wire:click="showDificultad()">  <i class="fa fa-plus   w-4 h-4 mr-2"></i>  Adicionar </button>
                     
                 </div>
                 <div class="p-5">
@@ -468,7 +467,7 @@
         </div>
     @endif
     @if ($step == 2)
-        <div class="box py-10 sm:py-20 mt-5">
+        <div class=" py-10 sm:py-20 mt-5">
             <div class="flex justify-center">
                 <button type="button"
                     class="w-10 h-10 rounded-full btn bg-gray-200 dark:bg-dark-1 text-gray-600 mx-2">1</button>
@@ -483,30 +482,22 @@
             <div class="px-5 mt-10">
                 <div class="font-medium text-center text-lg">DATOS DE REFERENCIA PERSONAL</div>
             </div>
-            <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5">
-                <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
 
-                    <div class="font-medium text-justify text-lg col-span-12 sm:col-span-12">Persona de Contacto</div>
-                    <div class="col-span-12 sm:col-span-3">
-                        <label class="form-label">Nombres</label>
-                        <input wire:model='nombreContacto' type="text" class="form-control" placeholder="Jorge">
-                    </div>
-                    <div class="col-span-12 sm:col-span-3">
-                        <label class="form-label">Apellido Paterno</label>
-                        <input wire:model='paternoContacto' type="text" class="form-control" placeholder="Perez">
-                    </div>
-                    <div class="col-span-12 sm:col-span-3">
-                        <label class="form-label">Apellido Materno</label>
-                        <input wire:model='maternoContacto' type="text" class="form-control" placeholder="Perez">
-                    </div>
-                    <div class="col-span-12 sm:col-span-3">
-                        <label class="form-label">Teléfono / Celular</label>
-                        <input wire:model='telefonoContacto' type="text" class="form-control" placeholder="73087144">
-                    </div>
-                    <div class="col-span-12 sm:col-span-3 pt-6">
-                        <button wire:click='contactoPersonal' class="btn btn-secondary">Añadir</button>
-                    </div>
-                    <div class="col-span-12 overflow-x-auto pt-4">
+            <div class="intro-y box col-span-12 lg:col-span-6">
+                <div class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200 dark:border-dark-5">
+                    <h2 class="font-medium text-base mr-auto">
+                        <span style="font-size: 2em; color: #C5CAE9;">
+                            <i class="fas fa-address-book"></i>
+                        </span>
+                        Persona de Contacto
+                    </h2>
+                    <button type="button" class="btn btn-primary btn-sm"  wire:click="showContacto()">  <i class="fa fa-plus   w-4 h-4 mr-2"></i>  Adicionar </button>
+                    
+                </div>
+                <div class="p-5">
+                    <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+                        
+
                         <table class="table col-span-12 sm:col-span-12">
                             <thead>
                                 <tr class="bg-gray-700 dark:bg-dark-1 text-white">
@@ -531,18 +522,22 @@
                                 @endforeach
                             </tbody>
                         </table>
-                    </div>
-                    <div class="col-span-12 flex items-center justify-center sm:justify-end mt-5">
-                        <button type="button" wire:click="step1" class="btn btn-secondary w-24">Atras</button>
-                        <button type="button" wire:click="updateStep3" class="btn btn-primary w-24 ml-2">Siguiente</button>
+        
                     </div>
                 </div>
             </div>
+
+            <div class="col-span-12 flex items-center justify-center sm:justify-end mt-5">
+                <button type="button" wire:click="step1" class="btn btn-dark w-24">Atras</button>
+                <button type="button" wire:click="updateStep3" class="btn btn-primary w-24 ml-2">Siguiente</button>
+            </div>
+
+           
         </div>
     @endif
     @if ($step == 3)
-        <form wire:submit.prevent="formacion" enctype="multipart/form-data">
-            <div class="box py-10 sm:py-20 mt-5">
+        
+            <div class=" py-10 sm:py-20 mt-5">
                 <div class="flex justify-center">
                     <button type="button"
                         class="w-10 h-10 rounded-full btn bg-gray-200 dark:bg-dark-1 text-gray-600 mx-2">1</button>
@@ -558,48 +553,22 @@
                     <div class="font-medium text-center text-lg">FORMACION PROFESIONAL</div>
                     {{-- <div class="font-medium text-center text-lg">Especifique su Formación</div> --}}
                 </div>
-                <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5">
-                    <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
-                        <div class="col-span-12 sm:col-span-3">
-                            <label class="form-label">Institución</label>
-                            <input wire:model='institutionFormacion' type="text" class="form-control"
-                                placeholder="Univalle">
-                            @error('institutionFormacion') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
-                        </div>
-                        <div class="col-span-12 sm:col-span-3">
-                            <label class="form-label">Carrera</label>
-                            <select wire:model="carrera" class="form-select">
-                                <option value="">Seleccione un opcion</option>
-                                @foreach ($careers as $career)
-                                    <option value="{{ $career->id }}">{{ $career->nombre }}</option>
-                                @endforeach
-                            </select>
-                            @error('carrera') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
-                        </div>
-                        <div class="col-span-12 sm:col-span-3">
-                            <label class="form-label">Grado Académico</label>
-                            <select wire:model='gradoFormacion' class="form-select">
-                                <option value="">Seleccione un opcion</option>
-                                <option>TÉCNICO</option>
-                                <option>LICENCIATURA</option>
-                                <option>POSGRADO</option>
-                            </select>
-                            @error('gradoFormacion') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
-                        </div>
-                        <div class="col-span-12 sm:col-span-3">
-                            <label class="form-label">Fecha de Titulación / Egreso</label>
-                            <input wire:model='egresoFormacion' class="form-control block mx-auto" type="date">
-                            @error('egresoFormacion') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
-                        </div>
-                        <div class="col-span-12 sm:col-span-3">
-                            <label class="form-label">Titulo / Certificado Académico</label>
-                            <input wire:model='archivoFormacion' type="file" class="form-control">
-                            @error('archivoFormacion') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
-                        </div>
-                        <div class="col-span-12 sm:col-span-3 pt-6">
-                            <button type="submit" class="btn btn-secondary">Añadir</button>
-                        </div>
-                        <div class="col-span-12 overflow-x-auto pt-4">
+
+                <div class="intro-y box col-span-12 lg:col-span-6">
+                    <div class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200 dark:border-dark-5">
+                        <h2 class="font-medium text-base mr-auto">
+                            <span style="font-size: 2em; color: #C5CAE9;">
+                                <i class="fas fa-user-graduate"></i>
+                            </span>
+                            Información de Formación Profesional
+                        </h2>
+                        <button type="button" class="btn btn-primary btn-sm"  wire:click="showFormacion()">  <i class="fa fa-plus   w-4 h-4 mr-2"></i>  Adicionar </button>
+                        
+                    </div>
+                    <div class="p-5">
+                        <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+                            
+    
                             <table class="table col-span-12 sm:col-span-12">
                                 <thead>
                                     <tr class="bg-gray-700 dark:bg-dark-1 text-white">
@@ -636,11 +605,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>
-                        <div class="col-span-12 flex items-center justify-center sm:justify-end mt-5">
-                            <button type="button" wire:click='step2' class="btn btn-secondary w-24">Atras</button>
-                            <button type="button" wire:click='updateStep4'
-                                class="btn btn-primary w-24 ml-2">Siguiente</button>
+            
                         </div>
                     </div>
                 </div>
@@ -653,10 +618,10 @@
 
                
             </div>
-        </form>
+       
     @endif
     @if ($step == 4)
-        <div class="box py-10 sm:py-20 mt-5">
+        <div class=" py-10 sm:py-20 mt-5">
             <div class="flex justify-center">
                 <button type="button"
                     class="w-10 h-10 rounded-full btn bg-gray-200 dark:bg-dark-1 text-gray-600 mx-2">1</button>
@@ -671,46 +636,22 @@
             <div class="px-5 mt-10">
                 <div class="font-medium text-center text-lg">EXPERIENCIA LABORAL</div>
             </div>
-            <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5">
-                <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
-                    <form class="col-span-12 grid grid-cols-12 gap-2 sm:col-span-12 flex items-center"
-                        wire:submit.prevent="experiencia" enctype="multipart/form-data">
-                        <div class="col-span-12 sm:col-span-3">
-                            <label class="form-label">Institución</label>
-                            <input wire:model='institutionLaboral' type="text" class="form-control"
-                                placeholder="EPSAS">
-                        </div>
-                        <div class="col-span-12 sm:col-span-3">
-                            <label class="form-label">Cargo</label>
-                            <input wire:model='cargoLaboral' type="text" class="form-control" placeholder="Analista">
-                        </div>
-                        <div class="col-span-12 sm:col-span-3">
-                            {{-- <label class="form-label">Años de Experiencia</label>
-                            <input wire:model='experienciaLaboral' type="text" class="form-control"
-                                placeholder="Numero entero ejemplo 6"> --}}
-                            <label class="form-label">Fecha de Inicio</label>
-                            <input wire:model="fecha_inicio" class="form-control block mx-auto" type="date">
-                             @error('fecha_inicio') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
-                        </div>
-                        
-                        <div class="col-span-12 sm:col-span-3">
-                            {{-- <label class="form-label">Años de Experiencia</label>
-                            <input wire:model='experienciaLaboral' type="text" class="form-control"
-                                placeholder="Numero entero ejemplo 6"> --}}
-                            <label class="form-label">Fecha Fin</label>
-                            <input wire:model="fecha_fin" class="form-control block mx-auto" type="date">
-                             @error('fecha_fin') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
-                        </div>
 
-                        <div class="col-span-12 sm:col-span-3">
-                            <label class="form-label">Certificado de trabajo</label>
-                            <input wire:model='archivoLaboral' type="file" class="form-control" placeholder="22">
-                        </div>
-                        <div class="col-span-12 sm:col-span-3 pt-6">
-                            <button type="submit" class="btn btn-secondary">Añadir</button>
-                        </div>
-                    </form>
-                    <div class="col-span-12 overflow-x-auto pt-4">
+            <div class="intro-y box col-span-12 lg:col-span-6">
+                <div class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200 dark:border-dark-5">
+                    <h2 class="font-medium text-base mr-auto">
+                        <span style="font-size: 2em; color: #C5CAE9;">
+                            <i class="fas fa-briefcase"></i>
+                        </span>
+                        Información de Experiencia Laboral
+                    </h2>
+                    <button type="button" class="btn btn-primary btn-sm"  wire:click="showExperiencia()">  <i class="fa fa-plus   w-4 h-4 mr-2"></i>  Adicionar </button>
+                    
+                </div>
+                <div class="p-5">
+                    <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+                        
+
                         <table class="table col-span-12 sm:col-span-12">
                             <thead>
                                 <tr class="bg-gray-700 dark:bg-dark-1 text-white">
@@ -724,9 +665,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($experiences as $experience)
+                                @foreach ($experiences as $index => $experience)
                                     <tr>
-                                        <td class="border-b dark:border-dark-5">{{ $experience->id }}</td>
+                                        <td class="border-b dark:border-dark-5">{{ $index+1 }}</td>
                                         <td class="border-b dark:border-dark-5">
                                             {{ $experience->institution }}</td>
                                         <td class="border-b dark:border-dark-5">{{ $experience->cargo }}</td>
@@ -750,20 +691,24 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-                    <div class="col-span-12 flex items-center justify-center sm:justify-end mt-5">
-                        <button wire:click='step3' class="btn btn-secondary w-24">Atras</button>
-                        <button wire:click="updateStep5" class="btn btn-primary w-24 ml-2">Siguiente</button>
+        
                     </div>
                 </div>
             </div>
+
+            <div class="col-span-12 flex items-center justify-center sm:justify-end mt-5">
+                <button wire:click='step3' class="btn btn-dark w-24">Atras</button>
+                <button wire:click="updateStep5" class="btn btn-primary w-24 ml-2">Siguiente</button>
+            </div>
+
+            
         </div>
       
 
     @endif
     @if ($step == 5)
-        <form wire:submit.prevent="submit">
-            <div class="box py-10 sm:py-20 mt-5">
+        
+            <div class=" py-10 sm:py-20 mt-5">
                 <div class="flex justify-center">
                     <button type="button"
                         class="w-10 h-10 rounded-full btn bg-gray-200 dark:bg-dark-1 text-gray-600 mx-2">1</button>
@@ -778,37 +723,22 @@
                 <div class="px-5 mt-10">
                     <div class="font-medium text-center text-lg">DATOS DE REFERENCIA LABORAL</div>
                 </div>
-                <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5">
-                    <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
-                        <div class="col-span-12 sm:col-span-3">
-                            <label class="form-label">Institución</label>
-                            <input wire:model='institutionReferencia' type="text" class="form-control"
-                                placeholder="EPSAS">
-                        </div>
-                        <div class="col-span-12 sm:col-span-3">
-                            <label class="form-label">Nombres</label>
-                            <input wire:model='nombreReferencia' type="text" class="form-control"
-                                placeholder="Jorge">
-                        </div>
-                        <div class="col-span-12 sm:col-span-3">
-                            <label class="form-label">Apellido Paterno</label>
-                            <input wire:model='paternoReferencia' type="text" class="form-control"
-                                placeholder="Vargas">
-                        </div>
-                        <div class="col-span-12 sm:col-span-3">
-                            <label class="form-label">Apellido Materno</label>
-                            <input wire:model='maternoReferencia' type="text" class="form-control"
-                                placeholder="Pozo">
-                        </div>
-                        <div class="col-span-12 sm:col-span-3">
-                            <label class="form-label">Teléfono / Celular</label>
-                            <input wire:model='telefonoReferencia' type="text" class="form-control"
-                                placeholder="2214589">
-                        </div>
-                        <div class="col-span-12 sm:col-span-1 pt-6">
-                            <a wire:click='referencia' class="btn btn-secondary">Añadir</a>
-                        </div>
-                        <div class="col-span-12 overflow-x-auto pt-4">
+
+                <div class="intro-y box col-span-12 lg:col-span-6">
+                    <div class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200 dark:border-dark-5">
+                        <h2 class="font-medium text-base mr-auto">
+                            <span style="font-size: 2em; color: #C5CAE9;">
+                                <i class="fas fa-building"></i>
+                            </span>
+                            Información de Referencia Laboral
+                        </h2>
+                        <button type="button" class="btn btn-primary btn-sm"  wire:click="showReferencia()">  <i class="fa fa-plus   w-4 h-4 mr-2"></i>  Adicionar </button>
+                        
+                    </div>
+                    <div class="p-5">
+                        <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+                            
+    
                             <table class="table col-span-12 sm:col-span-12">
                                 <thead>
                                     <tr class="bg-gray-700 dark:bg-dark-1 text-white">
@@ -840,15 +770,18 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>
-                        <div class="col-span-12 flex items-center justify-center sm:justify-end mt-5">
-                            <button type="button" wire:click="step4" class="btn btn-secondary w-24">Atras</button>
-                            <a href="{{ route('page.dashboard') }}" class="btn btn-primary w-24 ml-2">Finalizar</a>
+            
                         </div>
                     </div>
                 </div>
+                <div class="col-span-12 flex items-center justify-center sm:justify-end mt-5">
+                    <button type="button" wire:click="step4" class="btn btn-dark w-24">Atras</button>
+                    <a href="{{ route('page.dashboard') }}" class="btn btn-primary w-24 ml-2">Finalizar</a>
+                </div>
+
+             
             </div>
-        </form>
+       
     @endif
 
 <!-- BEGIN: Modal Content  check event listener--> 
@@ -964,5 +897,223 @@
 </div>
 
 <!-- END: Modal Content -->
+
+<!-- BEGIN: Modal Content  check event listener--> 
+
+<div id="contact-modal" class="modal overflow-y-auto {{$dialog_contacto?'show':'hide'}}" data-backdrop="static" tabindex="-1" aria-hidden="false" style="padding-left: 0px; margin-top: 0px; margin-left: 0px; z-index: 10000;">
+    <div class="modal-dialog modal-lg">
+        
+            <div class="modal-content"  > 
+                <div class="modal-header">
+                    <h2 class="font-medium text-base mr-auto">Nuevo Contacto</h2> 
+                    {{-- <button class="btn btn-outline-secondary hidden sm:flex"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs </button> --}}
+                    
+                </div> <!-- END: Modal Header -->
+                <div class="modal-body ">
+                    <div class="grid grid-cols-12 gap-4 items-center col-span-12 sm:col-span-12">
+                        <div class="col-span-12 sm:col-span-6">
+                            <label class="form-label">Nombres</label>
+                            <input wire:model='nombreContacto' type="text" class="form-control" placeholder="Jorge">
+                        </div>
+                        <div class="col-span-12 sm:col-span-6">
+                            <label class="form-label">Apellido Paterno</label>
+                            <input wire:model='paternoContacto' type="text" class="form-control" placeholder="Perez">
+                        </div>
+                        <div class="col-span-12 sm:col-span-6">
+                            <label class="form-label">Apellido Materno</label>
+                            <input wire:model='maternoContacto' type="text" class="form-control" placeholder="Perez">
+                        </div>
+                        <div class="col-span-12 sm:col-span-6">
+                            <label class="form-label">Teléfono / Celular</label>
+                            <input wire:model='telefonoContacto' type="text" class="form-control" placeholder="73087144">
+                        </div>
+                        {{-- <div class="col-span-12 sm:col-span-3 pt-6">
+                            <button wire:click='contactoPersonal' class="btn btn-secondary">Añadir</button>
+                        </div> --}}
+                        {{-- <div class="col-span-12 sm:col-span-3 pt-6">
+                            <button wire:click='saveHijo' class="btn btn-secondary">Guardar</button>
+                        </div> --}}
+                    </div>
+                </div>
+                <div class="modal-footer text-right"> <button type="button" wire:click="closeContacto" class="btn btn-outline-secondary w-20 mr-1">Cancelar</button> <button wire:click='contactoPersonal' type="button" class="btn btn-primary w-20">Guardar</button> </div> <!-- END: Modal Footer -->
+            </div>
+       
+    </div>
+</div>
+
+<!-- END: Modal Content -->
+
+<!-- BEGIN: Modal Content  check event listener--> 
+
+<div id="formacion-modal" class="modal overflow-y-auto {{$dialog_formacion?'show':'hide'}}" data-backdrop="static" tabindex="-1" aria-hidden="false" style="padding-left: 0px; margin-top: 0px; margin-left: 0px; z-index: 10000;">
+    <div class="modal-dialog modal-lg">
+        
+            <div class="modal-content"  > 
+                <form wire:submit.prevent="formacion" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h2 class="font-medium text-base mr-auto">Registro de Formacion Laboral</h2> 
+                    {{-- <button class="btn btn-outline-secondary hidden sm:flex"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs </button> --}}
+                    
+                </div> <!-- END: Modal Header -->
+                <div class="modal-body ">
+                    <div class="grid grid-cols-12 gap-4 items-center col-span-12 sm:col-span-12">
+                        <div class="col-span-12 sm:col-span-6">
+                            <label class="form-label">Institución</label>
+                            <input wire:model='institutionFormacion' type="text" class="form-control"
+                                placeholder="Univalle">
+                            @error('institutionFormacion') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
+                        </div>
+                        <div class="col-span-12 sm:col-span-6">
+                            <label class="form-label">Carrera</label>
+                            <select wire:model="carrera" class="form-select">
+                                <option value="">Seleccione un opcion</option>
+                                @foreach ($careers as $career)
+                                    <option value="{{ $career->id }}">{{ $career->nombre }}</option>
+                                @endforeach
+                            </select>
+                            @error('carrera') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
+                        </div>
+                        <div class="col-span-12 sm:col-span-6">
+                            <label class="form-label">Grado Académico</label>
+                            <select wire:model='gradoFormacion' class="form-select">
+                                <option value="">Seleccione un opcion</option>
+                                <option>TÉCNICO</option>
+                                <option>LICENCIATURA</option>
+                                <option>POSGRADO</option>
+                            </select>
+                            @error('gradoFormacion') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
+                        </div>
+                        <div class="col-span-12 sm:col-span-6">
+                            <label class="form-label">Fecha de Titulación / Egreso</label>
+                            <input wire:model='egresoFormacion' class="form-control block mx-auto" type="date">
+                            @error('egresoFormacion') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
+                        </div>
+                        <div class="col-span-12 sm:col-span-6">
+                            <label class="form-label">Titulo / Certificado Académico</label>
+                            <input wire:model='archivoFormacion' type="file" class="form-control" id="uploadformacion{{$filecounter}}">
+                            @error('archivoFormacion') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
+                        </div>
+                        {{-- <div class="col-span-12 sm:col-span-3 pt-6">
+                            <button type="submit" class="btn btn-secondary">Añadir</button>
+                        </div> --}}
+                    </div>
+                </div>
+                <div class="modal-footer text-right"> <button type="button" wire:click="closeFormacion" class="btn btn-outline-secondary w-20 mr-1">Cancelar</button> <button  type="submit" class="btn btn-primary w-20">Guardar</button> </div> <!-- END: Modal Footer -->
+                </form>
+            </div>
+       
+    </div>
+</div>
+
+<!-- END: Modal Content -->
+
+<!-- BEGIN: Modal Content  check event listener--> 
+
+<div id="experiencia-modal" class="modal overflow-y-auto {{$dialog_experiencia?'show':'hide'}}" data-backdrop="static" tabindex="-1" aria-hidden="false" style="padding-left: 0px; margin-top: 0px; margin-left: 0px; z-index: 10000;">
+    <div class="modal-dialog modal-lg">
+        
+            <div class="modal-content"  > 
+                <form wire:submit.prevent="experiencia" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h2 class="font-medium text-base mr-auto">Registro de Experiencia Laboral</h2> 
+                    {{-- <button class="btn btn-outline-secondary hidden sm:flex"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs </button> --}}
+                    
+                </div> <!-- END: Modal Header -->
+                <div class="modal-body ">
+                    <div class="grid grid-cols-12 gap-4 items-center col-span-12 sm:col-span-12">
+                        <div class="col-span-12 sm:col-span-6">
+                            <label class="form-label">Institución</label>
+                            <input wire:model='institutionLaboral' type="text" class="form-control"
+                                placeholder="EPSAS">
+                        </div>
+                        <div class="col-span-12 sm:col-span-6">
+                            <label class="form-label">Cargo</label>
+                            <input wire:model='cargoLaboral' type="text" class="form-control" placeholder="Analista">
+                        </div>
+                        <div class="col-span-12 sm:col-span-6">
+                            <label class="form-label">Fecha de Inicio</label>
+                            <input wire:model="fecha_inicio" class="form-control block mx-auto" type="date">
+                             @error('fecha_inicio') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
+                        </div>
+                        
+                        <div class="col-span-12 sm:col-span-6">
+                        
+                            <label class="form-label">Fecha Fin</label>
+                            <input wire:model="fecha_fin" class="form-control block mx-auto" type="date">
+                             @error('fecha_fin') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
+                        </div>
+
+                        <div class="col-span-12 sm:col-span-6">
+                            <label class="form-label">Certificado de trabajo</label>
+                            <input wire:model='archivoLaboral' type="file" class="form-control" placeholder="22" id="uploadExperiencia{{$filecounter}}">
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+                <div class="modal-footer text-right"> <button type="button" wire:click="closeExperiencia" class="btn btn-outline-secondary w-20 mr-1">Cancelar</button> <button  type="submit" class="btn btn-primary w-20">Guardar</button> </div> <!-- END: Modal Footer -->
+                </form>
+            </div>
+       
+    </div>
+</div>
+
+<!-- END: Modal Content -->
+
+<!-- BEGIN: Modal Content  check event listener--> 
+
+<div id="referencia-modal" class="modal overflow-y-auto {{$dialog_referencia?'show':'hide'}}" data-backdrop="static" tabindex="-1" aria-hidden="false" style="padding-left: 0px; margin-top: 0px; margin-left: 0px; z-index: 10000;">
+    <div class="modal-dialog modal-lg">
+        
+            <div class="modal-content"  > 
+                
+                <div class="modal-header">
+                    <h2 class="font-medium text-base mr-auto">Registro de Referencia Laboral</h2> 
+                    {{-- <button class="btn btn-outline-secondary hidden sm:flex"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs </button> --}}
+                    
+                </div> <!-- END: Modal Header -->
+                <div class="modal-body ">
+                    <div class="grid grid-cols-12 gap-4 items-center col-span-12 sm:col-span-12">
+                        <div class="col-span-12 sm:col-span-6">
+                            <label class="form-label">Institución</label>
+                            <input wire:model='institutionReferencia' type="text" class="form-control"
+                                placeholder="EPSAS">
+                        </div>
+                        <div class="col-span-12 sm:col-span-6">
+                            <label class="form-label">Nombres</label>
+                            <input wire:model='nombreReferencia' type="text" class="form-control"
+                                placeholder="Jorge">
+                        </div>
+                        <div class="col-span-12 sm:col-span-6">
+                            <label class="form-label">Apellido Paterno</label>
+                            <input wire:model='paternoReferencia' type="text" class="form-control"
+                                placeholder="Vargas">
+                        </div>
+                        <div class="col-span-12 sm:col-span-6">
+                            <label class="form-label">Apellido Materno</label>
+                            <input wire:model='maternoReferencia' type="text" class="form-control"
+                                placeholder="Pozo">
+                        </div>
+                        <div class="col-span-12 sm:col-span-6">
+                            <label class="form-label">Teléfono / Celular</label>
+                            <input wire:model='telefonoReferencia' type="text" class="form-control"
+                                placeholder="2214589">
+                        </div>
+                        {{-- <div class="col-span-12 sm:col-span-1 pt-6">
+                            <a wire:click='referencia' class="btn btn-secondary">Añadir</a>
+                        </div>
+                         --}}
+                        
+                    </div>
+                </div>
+                <div class="modal-footer text-right"> <button type="button" wire:click="closeReferencia" class="btn btn-outline-secondary w-20 mr-1">Cancelar</button> <button wire:click='referencia' class="btn btn-primary w-20">Guardar</button> </div> <!-- END: Modal Footer -->
+               
+            </div>
+       
+    </div>
+</div>
+
+<!-- END: Modal Content -->
+
 
 </div>

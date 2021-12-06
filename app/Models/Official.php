@@ -25,4 +25,9 @@ class Official extends Model
     {
         return $this->hasMany(Assignment::class);
     }
+
+    public function getFullname()
+    {
+        return $this->nombres.' '.$this->paterno. ' '.$this->materno;
+    }
 }

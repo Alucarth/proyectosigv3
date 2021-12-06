@@ -9,14 +9,13 @@
         <div class="box mb-3">
             <div
                 class="flex flex-col lg:flex-row items-center  pl-5 pt-2 pb-2 border-b border-gray-400 dark:border-dark-5">
-                <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
-                    <span style="font-size: 3em; color: #FAC428;">
+                <div class="w-6 h-8 lg:w-5 lg:h-5 image-fit lg:mr-1">
+                    <span style="font-size: 2em; color: #C5CAE8;">
                         <i class="fas fa-edit"></i>
                     </span>
                 </div>
                 <div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
-                    <div class="font-medium text-base">Datos Generales</div>
-                    <div class="text-gray-600">Complete la información solicitada</div>
+                    <div class="font-medium text-base">Datos Generales</div>                    
                 </div>
             </div>
 
@@ -26,7 +25,20 @@
 
 
                     <div class="col-span-12 sm:col-span-6">
-                        
+                            <div class="col-span-12 sm:col-span-12 pb-3">
+                                <label class="form-label">Número de Identificación Tributaria(NIT):</label>
+                                <input wire:model='nit' type="text" class="form-control" placeholder="">
+                                @error('nit') <small
+                                        class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="col-span-12 sm:col-span-12 pb-3">
+                                <label class="form-label">Razón Social:</label>
+                                <input wire:model='razon_social' type="text" class="form-control" placeholder="" readonly>
+                                @error('razon_social') <small
+                                        class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small>
+                                @enderror
+                            </div>
                             <div class="col-span-12 sm:col-span-12 pb-3">
                                 <label class="form-label">Gran Actividad:</label>
                                 <input wire:model='rubro' type="text" class="form-control" placeholder="">
@@ -42,18 +54,22 @@
                                 @enderror
                             </div>
                         
-                    </div>
+                    </div>                   
 
                     <div class="col-span-12 sm:col-span-4">
                         <label class="form-label">Respaldo digital de NIT</label>
                         @if ($showFileNit)
                             <div class="mt-1">
                                 <div class="mt-1">
-                                    <div class="border-2 border-dashed dark:border-dark-5 rounded-md pt-4">
+                                    <div class="border-2 border-dashed dark:border-dark-5 rounded-md pt-4">                                        
                                         <div class="flex flex-wrap px-4">
+                                            
+
+
                                             <div class="w-10 h-10 relative image-fit mb-5 mr-5 cursor-pointer zoom-in">
                                                 {{-- <img class="rounded-md" alt="Rubick Tailwind HTML Admin Template" src=""> --}}
-                                                <a href="/storage/{{ $file_nit }}" target="_blank"><span
+                                                {{-- <a href="/{{ $file_nit }}" target="_blank"><span --}}
+                                                <a href="javascript:;" wire:click="setArchivo()"><span
                                                         style="font-size: 3em; color: #E4E7DF;">
                                                         <i class="fas fa-file"></i>
                                                     </span></a>
@@ -89,14 +105,13 @@
         <div class="box mb-5">
             <div
                 class="flex flex-col lg:flex-row items-center pl-5 pt-2 pb-2 border-b border-gray-400 dark:border-dark-5 ">
-                <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
-                    <span style="font-size: 3em; color: #FAC428;">
+                <div class="w-6 h-8 lg:w-5 lg:h-5 image-fit lg:mr-1">
+                    <span style="font-size: 2em; color: #C5CAE8;">
                         <i class="fas fa-user"></i>
                     </span>
                 </div>
                 <div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
-                    <div class="font-medium text-base">Representante Legal</div>
-                    <div class="text-gray-600">Complete la información solicitada</div>
+                    <div class="font-medium text-base">Representante Legal</div>                    
                 </div>
             </div>
 
@@ -152,23 +167,25 @@
         <div class="box mb-5">
             <div
                 class="flex flex-col lg:flex-row items-center pl-5 pt-2 pb-2 border-b border-gray-400 dark:border-dark-5 ">
-                <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
-                    <span style="font-size: 3em; color: #FAC428;">
+                <div class="w-6 h-8 lg:w-5 lg:h-5 image-fit lg:mr-1">
+                    <span style="font-size: 2em; color: #C5CAE8;">
                         <i class="fas fa-home"></i>
                     </span>
                 </div>
                 <div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
-                    <div class="font-medium text-base">Registro de Casa Matriz y Sucursales</div>
-                    <div class="text-gray-600">Complete la información solicitada</div>
+                    <div class="font-medium text-base">Registro de Casa Matriz y Sucursales</div>                    
+                </div>
+                <div class="lg:ml-10 text-right lg:text-right mt-3 lg:mt-0 pr-5">
+                    <button type="button" wire:click="$toggle('showDivSucursal')" style="display:{{$estadoAction}}" class="btn btn-outline-primary ">
+                        <span style="font-size: 1em">
+                            <i class="fas fa-plus"></i>
+                        </span> Agregar
+                    </button>                  
                 </div>
             </div>
 
             <div class="text-center lg:text-left p-5">
-                <button type="button" wire:click="$toggle('showDivSucursal')" style="display:{{$estadoAction}}" class="btn btn-outline-primary ">
-                    <span style="font-size: 1em">
-                        <i class="fas fa-plus"></i>
-                    </span> Agregar Sucursal
-                </button>
+                
                 @if ($showDivSucursal)
                     <div class="pt-5">
                         <form wire:submit.prevent='addBranch' class="grid grid-cols-12 gap-2 items-center">
@@ -260,23 +277,25 @@
         <div class="box">
             <div
                 class="flex flex-col lg:flex-row items-center pl-5 pt-2 pb-2 border-b border-gray-400 dark:border-dark-5 ">
-                <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
-                    <span style="font-size: 3em; color: #FAC428;">
+                <div class="w-6 h-8 lg:w-5 lg:h-5 image-fit lg:mr-1">
+                    <span style="font-size: 2em; color: #C5CAE8;">
                         <i class="fas fa-address-book"></i>
                     </span>
                 </div>
                 <div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
-                    <div class="font-medium text-base">Registro de Contactos</div>
-                    <div class="text-gray-600">Complete la información solicitada</div>
+                    <div class="font-medium text-base">Registro de Contactos</div>                    
+                </div>
+                <div class="lg:ml-10 text-right lg:text-right mt-3 lg:mt-0 pr-5">
+                    <button type="button" wire:click="$toggle('showDivContacto')" style="display:{{$estadoAction}}" class="btn btn-outline-primary ">
+                        <span style="font-size: 1em">
+                            <i class="fas fa-plus"></i>
+                        </span> Agregar
+                    </button>               
                 </div>
             </div>
 
             <div class="text-center lg:text-left p-5">
-                <button type="button" wire:click="$toggle('showDivContacto')" style="display:{{$estadoAction}}" class="btn btn-outline-primary ">
-                    <span style="font-size: 1em">
-                        <i class="fas fa-plus"></i>
-                    </span> Agregar Contacto
-                </button>
+                
                 @if ($showDivContacto)
                     <div class="pt-5">
                         <form wire:submit.prevent='addCoordinator' class="grid grid-cols-12 gap-2 items-center">
@@ -362,30 +381,21 @@
             href="javascript:;" style="margin-right: 15px;display:{{$estadoAction}}">Concluir Registro</a> 
     </div>
 
+
+    <div id="institution-modal" class="modal overflow-y-auto {{$dialog?'show':'hide'}}" data-backdrop="static" tabindex="-1" aria-hidden="false" style="padding-left: 0px; margin-top: 0px; margin-left: 0px; z-index: 10000;">
+        <div class="modal-dialog modal-lg">
+                
+                <div class="modal-content"  style="height:500px;">     
+                    <div class=" text-right"> <button type="button"  class="btn btn-default" wire:click="closeModal()"> <i class="fa fa-times"></i> </button> </div>
+                    {{-- <button  type="button" class=" w-8 h-8"  wire::click="closeModal()"> <i  class="fa fa-times"></i> </button> --}}
+                    <div class="modal-body p-0">
+                        {{-- {{$urlfile}} --}}
+                        <iframe src="{{$urlfileView}}" frameborder="0" class="" style="height:500px;width: 100%;" >
+                        </iframe>
+                    </div>
+                </div>
+           
+        </div>
+    </div>
 </div>
-<style>
-    .custom-file-input::-webkit-file-upload-button {
-      visibility: hidden;
-    }
-    .custom-file-input::before {
-      content: 'Select some files';
-      display: inline-block;
-      background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
-      border: 1px solid #999;
-      border-radius: 3px;
-      padding: 5px 8px;
-      outline: none;
-      white-space: nowrap;
-      -webkit-user-select: none;
-      cursor: pointer;
-      text-shadow: 1px 1px #fff;
-      font-weight: 700;
-      font-size: 10pt;
-    }
-    .custom-file-input:hover::before {
-      border-color: black;
-    }
-    .custom-file-input:active::before {
-      background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
-    }
-    </style>
+

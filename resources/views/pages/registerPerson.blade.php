@@ -34,7 +34,7 @@
                         para registrar en su cuenta. Encuentra ofertas laborales para ti en un solo lugar
                     </div>-->
                     {{-- @include('layout.partials.errors') --}}
-                    <form method="post" action="{{ route('register.person') }}">
+                    <form id="form" method="post" action="{{ route('register.person') }}">
                         @csrf
                         <div class="intro-x mt-8">
                             <input type="text" class="intro-x login__input form-control py-3 px-4 border-gray-300 block"
@@ -65,7 +65,7 @@
                                 @error('captcha') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                         </div>
                         <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
-                            <button type="submit"
+                            <button id="btn-register" type="button"
                                 class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">Registrar</button>
 
                             <button id="hideLogin" type="button" class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top" onclick="window.location='/';" >Ir a inicio.</button>
@@ -76,4 +76,19 @@
             <!-- END: Register Form -->
         </div>
     </div>
+@endsection
+@section('script')
+<script type="text/javascript">
+    $(".alert").delay(3000).slideUp(200, function() {        
+        $(this).remove();
+    });    
+    cash(function () {
+        cash('#btn-register').on('click', function() {
+            $('#btn-register').prop('disabled', true);
+            $("#form").submit();   
+            cash('#btn-register').html('<i data-loading-icon="oval" data-color="white" class="w-5 h-5 mx-auto"></i>').svgLoader()            
+            //helper.delay(1500)
+        })
+    })
+</script>
 @endsection

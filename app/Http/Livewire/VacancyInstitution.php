@@ -47,7 +47,7 @@ class VacancyInstitution extends Component
             'gradoAcademico' => 'required',
             'carrera' => 'required',
             'descripcion' => 'required',
-            'salario' => 'required|numeric',
+            'salario' => 'required|numeric|min:2500',
             'cantidad' => 'required|integer|max:100'
         ],
         [
@@ -57,6 +57,7 @@ class VacancyInstitution extends Component
             'carrera.required' => 'El campo Área de Formación es obligatorio!',
             'descripcion.required' => 'El campo Descripción del Trabajo es obligatorio!',
             'salario.required' => 'El campo Salario mensual es obligatorio!',
+            'salario.min' => 'El valor de salario debe ser mayor a Bs.2500.',
             'cantidad.required' => 'El campo Cantidad de Personal es obligatorio!',
         ]    
         );
@@ -64,10 +65,10 @@ class VacancyInstitution extends Component
         $vacancy = new Vacancy();
         $vacancy->institution_id = $this->institution_id;
         $vacancy->branch_id = $this->sucursal;
-        $vacancy->nombre = $this->nombreVacacia;
+        $vacancy->nombre = mb_strtoupper($this->nombreVacacia);
         $vacancy->grado_academico = $this->gradoAcademico;
         $vacancy->career_id = $this->carrera;
-        $vacancy->descripcion = $this->descripcion;
+        $vacancy->descripcion = mb_strtoupper($this->descripcion);
         $vacancy->salario = $this->salario;
         $vacancy->cantidad = $this->cantidad;
         $vacancy->estado = "PENDIENTE";//OLD ACTIVO

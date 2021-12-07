@@ -3,7 +3,7 @@
         <div class="box py-8 px-6 mt-5">
             <h1 class="text-xl text-gray-900">Lista de Convenios</h1>
             <div class="overflow-x-auto mt-6" style="padding: 5px;">
-                <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center pl-2 pb-3">
+                {{-- <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center pl-2 pb-3">
                     <button class="btn btn-secondary w-24 mr-1 mb-2">{{$tipoConsulta}}</button>
                     <div class="dropdown" style="margin-top: -8px;margin-left: -5px;">
                         <button class="dropdown-toggle btn px-2  " aria-expanded="false">
@@ -25,7 +25,28 @@
                             </div>
                         </div>
                     </div>
+                </div> --}}
+                <div class="preview ">
+                    <div class="flex">
+                        <div class="dropdown" data-placement="bottom-start">
+                            <button class="dropdown-toggle btn btn-outline-primary" aria-expanded="false">{{$tipoConsulta}} <i data-feather="chevron-down" class="w-4 h-4 ml-2"></i></button>
+                            <div class="dropdown-menu w-48">
+                                <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                                    <a wire:click="getListaConvenios('CONVENIOS')" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
+                                        <i class="fa fa-list-alt w-4 h-4 mr-2"></i> Todos
+                                    </a>
+                                    <a  wire:click="getListaConvenios('PENDIENTES')" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
+                                        <i class="fa fa-exclamation w-4 h-4 mr-2"></i> Pendientes
+                                    </a>
+                                    <a wire:click="getListaConvenios('FIRMADOS')" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
+                                        <i class="fa fas fa-file w-4 h-4 mr-2"></i> Firmados
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
                 <table class="table">
                     <thead>
                         <tr class="bg-gray-700 dark:bg-dark-1 text-white">

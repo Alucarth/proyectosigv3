@@ -46,7 +46,7 @@
     @role('oficial')
     <li>
         <a href="{{ route('agreement.institution') }}" class="menu">
-            <div class="menu__icon"> <i data-feather="activity"></i> </div>
+            <div class="menu__icon"> <i class="fa fa-handshake fa-2x"></i>  </div>
             <div class="menu__title"> Convenios </div>
         </a>
     </li>

@@ -9,13 +9,13 @@
         @role('admin')
         <li>
             <a href="{{ route('form.official') }}" class="side-menu">
-                <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                <div class="side-menu__title"> Oficial </div>
+                <div class="side-menu__icon"> <i class="fas fa-user-shield fa-2x"></i> </div>
+                <div class="side-menu__title"> Oficiales </div>
             </a>
         </li>
         <li>
             <a href="javascript:;" class="side-menu">
-                <div class="side-menu__icon"> <i data-feather="box"></i> </div>
+                <div class="side-menu__icon"> <i class="fas fa-file-alt fa-2x"></i> </div>
                 <div class="side-menu__title"> Reportes <i data-feather="chevron-down" class="side-menu__sub-icon "></i>
                 </div>
             </a>
@@ -23,22 +23,17 @@
                 <li>
                     <a href=" {{ route('report.person') }}"
                 class="side-menu">
-                <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                <div class="side-menu__title"> Persona </div>
+                <div class="side-menu__icon"> <i class="fas fa-user-friends "></i> </div>
+                <div class="side-menu__title"> Personas </div>
                 </a>
         </li>
         <li>
             <a href="simple-menu-dark-dashboard-overview-1.html" class="side-menu">
-                <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                <div class="side-menu__title"> Simple Menu </div>
+                <div class="side-menu__icon"> <i class="fas fa-laptop-house "></i> </div>
+                <div class="side-menu__title"> Empresas </div>
             </a>
         </li>
-        <li>
-            <a href="top-menu-dark-dashboard-overview-1.html" class="side-menu">
-                <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                <div class="side-menu__title"> Top Menu </div>
-            </a>
-        </li>
+       
     </ul>
     </li>
     @endrole

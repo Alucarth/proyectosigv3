@@ -11,7 +11,7 @@
                     </span>
                     Oficiales Operativos
                 </h2>
-                <button type="button" class="btn btn-primary btn-sm"  wire:click="showDificultad()">  <i class="fa fa-plus w-4 h-4 mr-2"></i>  Adicionar </button>
+                <button type="button" class="btn btn-primary btn-sm"  wire:click="showOficial()">  <i class="fa fa-plus w-4 h-4 mr-2"></i>  Adicionar </button>
                 
             </div>
             <div class="p-5">
@@ -36,9 +36,11 @@
                                 <td class="border-b dark:border-dark-5 uppercase">{{ $official->user->getRoleNames()[0] }}</td>
                                 <td class="border-b dark:border-dark-5">
                                     @if ($official->user->activation == 1)
-                                        ACTIVO
+                                    <span class="px-1 py-1 rounded bg-theme-9 text-xs text-white mr-1">ACTIVO</span> 
+                                       
                                     @else
-                                        INACTIVO
+                                    
+                                        <span class="px-1 py-1 rounded bg-gray-200 text-xs text-black mr-1">INACTIVO </span>
                                     @endif
                                 </td>
                                 <td>
@@ -66,7 +68,63 @@
         </div>
 
 
+<!-- BEGIN: Modal Content  check event listener--> 
 
+<div id="oficial-modal" class="modal overflow-y-auto {{$dialog_oficial?'show':'hide'}}" data-backdrop="static" tabindex="-1" aria-hidden="false" style="padding-left: 0px; margin-top: 0px; margin-left: 0px; z-index: 10000;">
+    <div class="modal-dialog modal-lg">
+        
+            <div class="modal-content"  > 
+                <form wire:submit.prevent='addOfficial' >
+                <div class="modal-header">
+                    <h2 class="font-medium text-base mr-auto">Registro de Oficial</h2> 
+                    {{-- <button class="btn btn-outline-secondary hidden sm:flex"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs </button> --}}
+                    
+                </div> <!-- END: Modal Header -->
+                <div class="modal-body ">
+                    <div class="grid grid-cols-12 gap-4 items-center col-span-12 sm:col-span-12">
+                        <div class="col-span-12 sm:col-span-6">
+                            <label class="form-label">Nombres</label>
+                            <input wire:model='nombres' type="text" class="form-control" placeholder="Jose Luis">
+                        </div>
+                        <div class="col-span-12 sm:col-span-6">
+                            <label class="form-label">Apellido Paterno</label>
+                            <input wire:model='paterno' type="text" class="form-control" placeholder="Delgado">
+                        </div>
+                        <div class="col-span-12 sm:col-span-6">
+                            <label class="form-label">Apellido Materno</label>
+                            <input wire:model='materno' type="text" class="form-control" placeholder="Mamani">
+                        </div>
+                        <div class="col-span-12 sm:col-span-6">
+                            <label class="form-label">Correo</label>
+                            <input wire:model='correo' type="text" class="form-control" placeholder="micorreo@gmail.com">
+                        </div>
+                        <div class="col-span-12 sm:col-span-6">
+                            <label class="form-label">Rol</label>
+                            <select wire:model="rolleOfficial" class="form-select">
+                                <option value="">Seleccione un opcion</option>
+                                <option value="oficial">Oficial Operativo</option>
+                                <option value="responsable">Responsable Técnico Administrativo</option>
+                                <option value="fiduciario">Fiduciario</option>
+                            </select>
+                        </div>
+                        {{-- <div class="col-span-12 sm:col-span-1 pt-6">
+                            <a wire:click='referencia' class="btn btn-secondary">Añadir</a>
+                        </div>
+                         --}}
+                        
+                    </div>
+                </div>
+                <div class="modal-footer text-right"> 
+                    <button type="button" wire:click="closeOficial" class="btn btn-outline-secondary w-20 mr-1">Cancelar</button>
+                    <button type="submit" class="btn btn-primary w-20">Guardar</button>
+                 </div> <!-- END: Modal Footer -->
+                </form>
+            </div>
+       
+    </div>
+</div>
+
+<!-- END: Modal Content -->
 
 
 {{-- 

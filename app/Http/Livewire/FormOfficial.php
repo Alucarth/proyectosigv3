@@ -18,12 +18,29 @@ class FormOfficial extends Component
     public $materno;
     public $correo;
     public $rolleOfficial;
+    public $dialog_oficial;
+
+
+    public function mount()
+    {
+        $this->dialog_oficial = false;
+    }
 
     public function render()
     {
         $officials = Official::OrderBy('id', 'desc')->paginate(10);
         
         return view('livewire.form-official', compact('officials'));
+    }
+
+    public function showOficial()
+    {
+        $this->dialog_oficial = true;
+    }
+
+    public function closeOficial()
+    {
+        $this->dialog_oficial = false;
     }
 
     public function addOfficial()
@@ -72,8 +89,9 @@ class FormOfficial extends Component
 
     public function softDeleteOfficial($id)
     {
-        $user = User::where('official_id', $id)->first();
         $official = Official::find($id);
+        // $user = User::where('official_id', $id)->first();
+        $user = User::find($official->user_id);
         if ($user->id == 1) {
             session()->flash('alert', 'No se puede eliminar al administrador.');
         } else {
@@ -87,8 +105,8 @@ class FormOfficial extends Component
 
     public function activateOfficial($id)
     {
-        $user = User::where('official_id', $id)->first();
         $official = Official::find($id);
+        $user = User::find($official->user_id);
         $user->activation = 1;
         $user->save();
         $official->estado = "INACTIVO";

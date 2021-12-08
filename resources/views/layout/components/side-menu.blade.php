@@ -33,7 +33,7 @@
                 <div class="side-menu__title"> Empresas </div>
             </a>
         </li>
-       
+    
     </ul>
     </li>
     @endrole

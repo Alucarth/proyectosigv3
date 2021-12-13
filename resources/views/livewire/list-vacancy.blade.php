@@ -3,7 +3,18 @@
     @include('layout.partials.flashMessage')
     @if ($ventana == 1)
         <div class="box py-8 px-6">
-            <h1 class="text-xl text-gray-900">Lista de Vacancias Pendientes</h1>
+            <h1 class="text-xl text-gray-900">Lista de Vacancias  </h1>
+
+                <div class="dropdown">
+                    <button class="dropdown-toggle btn btn-primary" aria-expanded="false">{{$state?'Activas':'Pendientes'}} <i data-feather="chevron-down" class="w-4 h-4 ml-2"></i></button>
+                        <div class="dropdown-menu w-40">
+                            <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                                <a href="#"   wire:click="setState(true)" class="block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">Activas</button>
+                                <a href="#" wire:click="setState(false)"class="block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">Pendientes</a>
+                            </div>
+                        </div>
+                </div>
+
             <div class="overflow-x-auto mt-6">
                 <table class="table">
                     <thead>
@@ -133,7 +144,7 @@
                     <option value="1">Si</option>
                     <option value="0">No</option>
                 </select>
-            </div>            
+            </div>
             <div class="col-span-12 sm:col-span-3 pt-6">
                 <button wire:click='clearList' class="btn btn-secondary">
                     <x-feathericon-refresh-cw class="w-4 h-4 mr-1" /> Reiniciar

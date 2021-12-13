@@ -16,10 +16,10 @@
                         <div class="col-span-12 mt-8">
                             <div class="intro-y flex items-center h-10">
                                 <h2 class="text-lg font-medium truncate mr-5">
-                                    Vacancias.
+
                                 </h2>
                             </div>
-                            @livewire('list-vacancy',['vacancies' => $vacancies])
+                            @livewire('list-vacancy')
                         </div>
                     </div>
                 </div>

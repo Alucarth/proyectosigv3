@@ -28,6 +28,32 @@ class ListVacancy extends Component
     public $genero;
     public $hijo;
     public $estadoCivil;
+    public $state;
+
+    public function mount()
+    {
+        $this->state= false;
+        $this->loadVacancies();
+    }
+
+    public function loadVacancies()
+    {
+        if($this->state)
+        {
+            $this->vacancies = Vacancy::where('estado','ACTIVO')->get();
+
+        }else{
+
+            $this->vacancies = Vacancy::all();
+        }
+    }
+
+    public function setState($state)
+    {
+        $this->state = $state;
+
+        $this->loadVacancies();
+    }
 
     public function render()
     {
@@ -122,7 +148,7 @@ class ListVacancy extends Component
     public function downloadPDF()
     {
         $today = Carbon::now()->format('d/m/Y');
-        $view = view('exports.shortlist', compact('today'))->render(); 
+        $view = view('exports.shortlist', compact('today'))->render();
         $pdf = PDF::loadView($view);
 
         return $pdf->download('listacorta.pdf');

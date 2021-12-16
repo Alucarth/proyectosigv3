@@ -6,11 +6,11 @@
             <h1 class="text-xl text-gray-900">Lista de Vacancias  </h1>
 
                 <div class="dropdown">
-                    <button class="dropdown-toggle btn btn-primary" aria-expanded="false">{{$state?'Activas':'Pendientes'}} <i data-feather="chevron-down" class="w-4 h-4 ml-2"></i></button>
+                    <button class="dropdown-toggle btn btn-primary" aria-expanded="false">{{$state?'Activas':'Pendientes'}} <i class="fas fa-chevron-down w-4 h-4 ml-2"></i></button>
                         <div class="dropdown-menu w-40">
                             <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-                                <a href="#"   wire:click="setState(true)" class="block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">Activas</button>
-                                <a href="#" wire:click="setState(false)"class="block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">Pendientes</a>
+                                <a href="#" data-dismiss="dropdown"  wire:click="setState(true)" class="block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">Activas</button>
+                                <a href="#" data-dismiss="dropdown" wire:click="setState(false)"class="block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">Pendientes</a>
                             </div>
                         </div>
                 </div>
@@ -39,7 +39,7 @@
                                     </span>
                                 </td>
                                 <td class="border-b dark:border-dark-5">
-                                    {{ $vacancy->branch->department->nombre }}
+                                    {{ $vacancy->branch->department->nombre }}"/"
                                 </td>
                                 <td class="border-b dark:border-dark-5">
                                     {{ $vacancy->nombre }}

@@ -30,7 +30,7 @@ use App\Http\Controllers\ReportController;
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
-
+Route::get('login',[AuthController::class, "ExpiredSession"])->name('auth.expired');
 Route::post('login', [AuthController::class, "login"])->name('auth.login');
 Route::get('registro-postulante', [RegisterPersonController::class, "register"])->name('form.person');
 Route::post('registro-persona', [RegisterPersonController::class, "store"])->name('register.person');

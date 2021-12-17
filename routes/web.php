@@ -46,6 +46,7 @@ Route::get('habilidades-persona', [AbilityPersonController::class, "index"])->na
 
 
 Route::get('listas-generales', [GeneralListController::class, "index"])->name('general.list')->middleware(['auth', 'role:oficial']);
+Route::get('lista-general/{vacancy_id}',[GeneralListController::class, "generalList"])->name('lista.general')->middleware(['auth', 'role:oficial']);
 Route::get('convenios', [AgreementInstitutionController::class, "index"])->name('agreement.institution')->middleware(['auth', 'role:oficial']);
 Route::get('contratos', [ContractInstitutionController::class, "index"])->name('contract.institution')->middleware(['auth', 'role:oficial']);
 Route::get('reposiciones', [ReplacementInstitutionController::class, "index"])->name('replacement.institution')->middleware(['auth', 'role:oficial']);

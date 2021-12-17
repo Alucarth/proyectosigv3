@@ -28,9 +28,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($vacancies as $vacancy)
+                        @foreach ($vacancies as $index => $vacancy)
                             <tr>
-                                <td class="border-b dark:border-dark-5">{{ $vacancy->id }}</td>
+                                <td class="border-b dark:border-dark-5">{{ $index + 1 }}</td>
                                 <td class="border-b dark:border-dark-5 text-gray-700 uppercase">
                                     {{ $vacancy->institution->nombre_comercial }}
                                     <br>
@@ -39,7 +39,7 @@
                                     </span>
                                 </td>
                                 <td class="border-b dark:border-dark-5">
-                                    {{ $vacancy->branch->department->nombre }}"/"
+                                    {{ $vacancy->branch->department->nombre }}
                                 </td>
                                 <td class="border-b dark:border-dark-5">
                                     {{ $vacancy->nombre }}
@@ -52,7 +52,13 @@
                                         class="flex items-center mr-3 cursor-pointer">
                                         <x-feathericon-file-text class="w-4 h-4 mr-1" /> Generar Lista
                                     </a>-->
-                                    @if ($vacancy->payrolls()->where('estado', 'ACTIVO')->count() == 3)
+                                    @if($state)
+                                        <a href="{{url('lista-general/'.$vacancy->id)}}" class="btn btn-primary"> Lista General</button>
+                                    @else
+                                        <button type="button" class="btn btn-outline-success" wire:click="activateVacancy({{$vacancy->id}})" > Activar </button>
+
+                                    @endif
+                                    {{-- @if ($vacancy->payrolls()->where('estado', 'ACTIVO')->count() == 3)
                                         <div class="mt-2">
                                             <div class="form-check">
                                                 <input wire:model='ver' class="form-check-switch" type="checkbox"
@@ -72,7 +78,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    @endif
+                                    @endif --}}
                                 </td>
                             </tr>
                         @endforeach

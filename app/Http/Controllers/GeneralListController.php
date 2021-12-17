@@ -13,4 +13,15 @@ class GeneralListController extends Controller
 
         return view('pages.generalList');
     }
+
+    public function generalList($vacancy_id)
+    {
+        $vacancy = Vacancy::find($vacancy_id);
+        if($vacancy)
+        {
+            return view('pages.generalListVacancy',compact('vacancy_id'));
+        }
+        return redirect('/');
+
+    }
 }

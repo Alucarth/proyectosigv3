@@ -28,11 +28,14 @@ class ListVacancy extends Component
     public $genero;
     public $hijo;
     public $estadoCivil;
+    /**
+     * $state Activo/Pendiente
+     */
     public $state;
 
     public function mount()
     {
-        $this->state= false;
+        $this->state = false;
         $this->loadVacancies();
     }
 
@@ -44,7 +47,7 @@ class ListVacancy extends Component
 
         }else{
 
-            $this->vacancies = Vacancy::all();
+            $this->vacancies = Vacancy::where('estado','PENDIENTE')->get();
         }
     }
 
@@ -152,5 +155,13 @@ class ListVacancy extends Component
         $pdf = PDF::loadView($view);
 
         return $pdf->download('listacorta.pdf');
+    }
+
+    public function activateVacancy($id)
+    {
+        $vacancia = Vacancy::find($id);
+        $vacancia->estado = 'ACTIVO';
+        $vacancia->save();
+        $this->loadVacancies();
     }
 }

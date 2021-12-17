@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Society;
 use App\Models\Institution;
+use App\Models\Branch;
+use App\Models\Coordinator;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Util;
+use PDF;
 // use Log;
 
 class RegisterInstitutionController extends Controller
@@ -82,7 +85,6 @@ class RegisterInstitutionController extends Controller
 
         try {
             
-
             $user = new User();            
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
@@ -113,5 +115,27 @@ class RegisterInstitutionController extends Controller
         DB::commit();
 
         return redirect()->intended('/')->with("message", "Registrado correctamente, Ahora puede iniciar Sesión.");
+    }
+
+
+    public function pdfRegistroInstitution()
+    {
+
+        $institution = Institution::where('user_id', auth()->user()->id)->first();
+        $branchs = Branch::where('institution_id', $institution->id)->get();
+        $cordinators = Coordinator::where('institution_id', $institution->id)->get();
+
+        $data = [
+            'title' => 'DATOS DE LA EMPRESA',
+            'date' => date('m/d/Y'),
+            'institution' => $institution,
+            'branchs'=> $branchs,
+            'cordinators'=> $cordinators,
+        ];
+          
+        $pdf = PDF::loadView('reports.pdfReistroEmpresa', $data);
+    
+        //return $pdf->download('DATOS-EMPRESA.pdf');
+        return $pdf->stream('DATOS-EMPRESA.pdf');
     }
 }

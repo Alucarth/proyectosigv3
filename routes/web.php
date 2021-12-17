@@ -41,6 +41,9 @@ Route::post('logout', [AuthController::class, "logout"])->name('auth.logout')->m
 Route::get('cambiar-password', [AuthController::class, "updatePassword"])->name('auth.updatePassword')->middleware('auth');
 Route::view('dashboard', 'pages.dashboard')->name('page.dashboard')->middleware('auth');
 Route::get('datos-persona', [RegisterPersonController::class, "person"])->name('data.person')->middleware(['auth', 'role:persona']);
+Route::get('persona-pdf-registro', [RegisterPersonController::class, "pdfRegistroPerson"])->name('person.pdfRegistroPerson')->middleware(['auth', 'role:persona']);
+
+
 Route::get('habilidades-persona', [AbilityPersonController::class, "index"])->name('abilities.person')->middleware(['auth', 'role:persona']);
 
 
@@ -65,3 +68,4 @@ Route::get('vacancias', [VacancyInstitutionController::class, "index"])->name('v
 Route::get('datos-empresa', [RegisterInstitutionController::class, "institution"])->name('data.institution')->middleware(['auth', 'role:empresa']);
 Route::get('datos-empresa-edit', [RegisterInstitutionController::class, "editEstadoIntitution"])->name('institution.editEstadoIntitution')->middleware(['auth', 'role:empresa']);
 Route::get('institution-estado-vacancias', [RegisterInstitutionController::class, "activeVacanciasIntitution"])->name('institution.activeVacanciasIntitution')->middleware(['auth', 'role:empresa']);
+Route::get('institution-pdf-registro', [RegisterInstitutionController::class, "pdfRegistroInstitution"])->name('institution.pdfRegistroInstitution');//->middleware(['auth', 'role:empresa']);

@@ -80,6 +80,16 @@
                                     </a>
                                 </div>
                                 @endif
+                                <div class="text-center rounded-md w-20 py-3">
+                                    <a href="{{ route('institution.pdfRegistroInstitution') }}">
+                                        <div class="btn font-medium text-theme-1 dark:text-theme-10 text-xl">
+                                            <span style="font-size: 1em; color: #444444;">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </span>
+                                        </div>
+                                        <div class="text-gray-600" style="font-size: 11px;">Registro</div>
+                                    </a>
+                                </div>
                                 {{-- <div class="text-center rounded-md w-20 py-3">
                                     <div class="font-medium text-theme-1 dark:text-theme-10 text-xl">492</div>
                                     <div class="text-gray-600">Reviews</div>

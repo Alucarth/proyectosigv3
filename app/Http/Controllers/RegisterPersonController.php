@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use Util;
+use PDF;
 
 class RegisterPersonController extends Controller
 {
@@ -70,5 +71,26 @@ class RegisterPersonController extends Controller
         DB::commit();
 
         return redirect()->intended('/')->with("message", "Registrado correctamente");
+    }
+
+    public function pdfRegistroPerson()
+    {
+
+        $person = Person::where('user_id', auth()->user()->id)->first();
+        // $branchs = Branch::where('institution_id', $institution->id)->get();
+        // $cordinators = Coordinator::where('institution_id', $institution->id)->get();
+
+        $data = [
+            'title' => 'DATOS DEL SOLICITANTE',
+            'date' => date('m/d/Y'),
+            'person' => $person,
+            // 'branchs'=> $branchs,
+            // 'cordinators'=> $cordinators,
+        ];
+          
+        $pdf = PDF::loadView('reports.pdfRegistroPersona', $data);
+    
+        //return $pdf->download('DATOS-EMPRESA.pdf');
+        return $pdf->stream('DATOS-PERSONA.pdf');
     }
 }

@@ -37,7 +37,7 @@
                         @enderror
                     </div>
                     <div class="col-span-12 sm:col-span-3">
-                        <label class="form-label">Grado Académico</label>
+                        <label class="form-label">Perfil Académico</label>
                         <select wire:model='gradoAcademico' class="form-select">
                             <option value="">Seleccione un opcion</option>
                             <option>TÉCNICO</option>

@@ -10,7 +10,18 @@ class GeneralListController extends Controller
 {
     public function index()
     {
-        $vacancies = Vacancy::where('estado', 'ACTIVO')->get();
-        return view('pages.generalList', compact('vacancies'));
+
+        return view('pages.generalList');
+    }
+
+    public function generalList($vacancy_id)
+    {
+        $vacancy = Vacancy::find($vacancy_id);
+        if($vacancy)
+        {
+            return view('pages.generalListVacancy',compact('vacancy_id'));
+        }
+        return redirect('/');
+
     }
 }

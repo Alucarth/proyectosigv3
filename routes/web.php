@@ -30,7 +30,7 @@ use App\Http\Controllers\ReportController;
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
-
+Route::get('login',[AuthController::class, "ExpiredSession"])->name('auth.expired');
 Route::post('login', [AuthController::class, "login"])->name('auth.login');
 Route::get('registro-postulante', [RegisterPersonController::class, "register"])->name('form.person');
 Route::post('registro-persona', [RegisterPersonController::class, "store"])->name('register.person');
@@ -49,6 +49,7 @@ Route::get('habilidades-persona', [AbilityPersonController::class, "index"])->na
 
 
 Route::get('listas-generales', [GeneralListController::class, "index"])->name('general.list')->middleware(['auth', 'role:oficial']);
+Route::get('lista-general/{vacancy_id}',[GeneralListController::class, "generalList"])->name('lista.general')->middleware(['auth', 'role:oficial']);
 Route::get('convenios', [AgreementInstitutionController::class, "index"])->name('agreement.institution')->middleware(['auth', 'role:oficial']);
 Route::get('contratos', [ContractInstitutionController::class, "index"])->name('contract.institution')->middleware(['auth', 'role:oficial']);
 Route::get('reposiciones', [ReplacementInstitutionController::class, "index"])->name('replacement.institution')->middleware(['auth', 'role:oficial']);

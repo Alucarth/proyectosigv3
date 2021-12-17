@@ -3,7 +3,18 @@
     @include('layout.partials.flashMessage')
     @if ($ventana == 1)
         <div class="box py-8 px-6">
-            <h1 class="text-xl text-gray-900">Lista de Vacancias Pendientes</h1>
+            <h1 class="text-xl text-gray-900">Lista de Vacancias  </h1>
+
+                <div class="dropdown">
+                    <button class="dropdown-toggle btn btn-primary" aria-expanded="false">{{$state?'Activas':'Pendientes'}} <i class="fas fa-chevron-down w-4 h-4 ml-2"></i></button>
+                        <div class="dropdown-menu w-40">
+                            <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                                <a href="#" data-dismiss="dropdown"  wire:click="setState(true)" class="block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">Activas</button>
+                                <a href="#" data-dismiss="dropdown" wire:click="setState(false)"class="block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">Pendientes</a>
+                            </div>
+                        </div>
+                </div>
+
             <div class="overflow-x-auto mt-6">
                 <table class="table">
                     <thead>
@@ -17,9 +28,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($vacancies as $vacancy)
+                        @foreach ($vacancies as $index => $vacancy)
                             <tr>
-                                <td class="border-b dark:border-dark-5">{{ $vacancy->id }}</td>
+                                <td class="border-b dark:border-dark-5">{{ $index + 1 }}</td>
                                 <td class="border-b dark:border-dark-5 text-gray-700 uppercase">
                                     {{ $vacancy->institution->nombre_comercial }}
                                     <br>
@@ -41,7 +52,13 @@
                                         class="flex items-center mr-3 cursor-pointer">
                                         <x-feathericon-file-text class="w-4 h-4 mr-1" /> Generar Lista
                                     </a>-->
-                                    @if ($vacancy->payrolls()->where('estado', 'ACTIVO')->count() == 3)
+                                    @if($state)
+                                        <a href="{{url('lista-general/'.$vacancy->id)}}" class="btn btn-primary"> Lista General</button>
+                                    @else
+                                        <button type="button" class="btn btn-outline-success" wire:click="activateVacancy({{$vacancy->id}})" > Activar </button>
+
+                                    @endif
+                                    {{-- @if ($vacancy->payrolls()->where('estado', 'ACTIVO')->count() == 3)
                                         <div class="mt-2">
                                             <div class="form-check">
                                                 <input wire:model='ver' class="form-check-switch" type="checkbox"
@@ -61,7 +78,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    @endif
+                                    @endif --}}
                                 </td>
                             </tr>
                         @endforeach
@@ -133,7 +150,7 @@
                     <option value="1">Si</option>
                     <option value="0">No</option>
                 </select>
-            </div>            
+            </div>
             <div class="col-span-12 sm:col-span-3 pt-6">
                 <button wire:click='clearList' class="btn btn-secondary">
                     <x-feathericon-refresh-cw class="w-4 h-4 mr-1" /> Reiniciar

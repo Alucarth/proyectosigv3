@@ -62,7 +62,7 @@ class AssignmentOfficial extends Component
     public function setOficial($id)
     {
         $this->oficial = Official::find($id);
-     
+
         $this->actualizarInformacion();
     }
 
@@ -79,7 +79,7 @@ class AssignmentOfficial extends Component
             ->where('official_id',$this->oficial->id)
             ->get();
             $ids_ban = Assignment::where('estado','ACTIVO')->pluck('institution_id');
-            $this->institutions = Institution::where('estado','REGISTRADO')->whereNotIn('id',$ids_ban)->get();
+            $this->institutions = Institution::where('estado','ACTIVO')->whereNotIn('id',$ids_ban)->get();
         }
     }
 

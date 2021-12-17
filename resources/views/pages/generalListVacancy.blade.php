@@ -19,7 +19,7 @@
 
                                 </h2>
                             </div>
-                            @livewire('list-vacancy')
+                            @livewire('general-list-component',['vacancy_id'=> $vacancy_id])
                         </div>
                     </div>
                 </div>

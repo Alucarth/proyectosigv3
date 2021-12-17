@@ -17,9 +17,9 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ])) {
-            $request->session()->regenerate();                    
+            $request->session()->regenerate();
 
-            if (auth()->user()->activation == 1) {               
+            if (auth()->user()->activation == 1) {
 
                 $res = Person::where('user_id', auth()->user()->id)->count();
 
@@ -58,6 +58,11 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->intended('/');
+    }
+
+    public function ExpiredSession()
+    {
+        return redirect('/');
     }
 
     public function updatePassword()

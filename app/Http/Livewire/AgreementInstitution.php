@@ -137,7 +137,7 @@ class AgreementInstitution extends Component
             'fechaConvenio.required' => 'El campo Fecha inicio es obligatorio!',
             'finConvenio.required' => 'El campo Fecha fin Principal es obligatorio!',
             'archivoConvenio.required' => 'El archivo digital de convenio es obligatorio!',
-            'finConvenio.after_or_equal' => 'La Fecha fin debe ser igual o mayo a la fecha inicial.',            
+            'finConvenio.after_or_equal' => 'La Fecha fin debe ser igual o mayor a la fecha inicial.',            
         ]
         );
 

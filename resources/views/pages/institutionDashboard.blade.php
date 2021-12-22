@@ -29,30 +29,29 @@
                                     <div class="text-gray-600">NIT: {{ $institution->nit }}</div>
                                     <div class="text-gray-600">ESTADO: {{ $institution->estado }}</div>
                                 </div>
-
                             </div>
                             <div
                                 class="mt-6 lg:mt-0 flex-1 dark:text-gray-300 px-5 border-l border-r border-gray-200 dark:border-dark-5 border-t lg:border-t-0 pt-5 lg:pt-0">
                                 <div class="font-medium text-center lg:text-left lg:mt-3">DETALLE DE CONTACTO</div>
-                                <div class="flex flex-col justify-center items-center lg:items-start mt-4">
-                                    <div class="truncate sm:whitespace-normal flex items-center">
+                                <div class="flex flex-col justify-center items-center lg:items-start">
+                                    <div class="text-gray-600">
                                         <span style="font-size: 1em; color: #444444;" class="pr-2">
                                             <i class="fas fa-user"></i>
                                         </span>
-                                        {{ $institution->nombre }} {{ $institution->paterno }}
-                                        {{ $institution->materno }}
+                                        <b>{{ $institution->nombre }} {{ $institution->paterno }}
+                                        {{ $institution->materno }}</b>
                                     </div>
-                                    <div class="truncate sm:whitespace-normal flex items-center mt-3">
+                                    <div class="text-gray-600">
                                         <span style="font-size: 1em; color: #444444;" class="pr-2">
                                             <i class="fas fa-envelope"></i>
                                         </span>
-                                        {{ $institution->email }}
+                                        <b>{{ $institution->email }}</b>
                                     </div>
-                                    <div class="truncate sm:whitespace-normal flex items-center mt-3">
+                                    <div class="text-gray-600">
                                         <span style="font-size: 1em; color: #444444;" class="pr-2">
                                             <i class="fas fa-phone-square-alt"></i>
                                         </span>
-                                        {{ $institution->telefono }}
+                                        <b>{{ $institution->telefono }}</b>
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +86,7 @@
                                                 <i class="fas fa-file-pdf"></i>
                                             </span>
                                         </div>
-                                        <div class="text-gray-600" style="font-size: 11px;">Registro</div>
+                                        <div class="text-gray-600" style="font-size: 11px;">Ficha Personal</div>
                                     </a>
                                 </div>
                                 {{-- <div class="text-center rounded-md w-20 py-3">

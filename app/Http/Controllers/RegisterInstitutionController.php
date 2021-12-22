@@ -126,7 +126,7 @@ class RegisterInstitutionController extends Controller
         $cordinators = Coordinator::where('institution_id', $institution->id)->get();
 
         $data = [
-            'title' => 'DATOS DE LA EMPRESA',
+            'title' => 'FICHA DE EMPRESA',
             'date' => date('m/d/Y'),
             'institution' => $institution,
             'branchs'=> $branchs,

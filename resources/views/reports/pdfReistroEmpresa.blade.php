@@ -2,79 +2,8 @@
 <html>
 
 <head>
-    <title>Hi</title>
-    <style type="text/css">
-        @page {
-            margin-left: 1.5cm;
-            margin-right: 1.5cm;
-            margin-top: 3cm;
-            margin-bottom: 2cm;
-            font-family: Times;
-        }
-
-
-        #footer {
-            position: fixed;
-            left: 0;
-            right: 0;
-            font-size: 0.9em;
-        }
-
-        #header {
-
-            position: fixed;
-            top: -90px;
-
-        }
-
-        #footer {
-            bottom: .1em;
-            text-align: center;
-            font-size: 0.7em;
-        }
-
-        #header table,
-        #footer table {
-            width: 100%;
-            border-collapse: collapse;
-            border: none;
-        }
-
-        #header td,
-        #footer td {
-            width: 50%;
-        }
-
-        .page-number {
-            text-align: center;
-        }
-
-        .page-number:before {
-            content: " Página "counter(page);
-        }
-
-        hr {
-            page-break-after: always;
-            border: 0;
-        }
-
-        table {
-
-            border-collapse: collapse;
-            margin-bottom: -.1em;
-            border-spacing: 0;
-        }
-
-        #watermark {
-            position: fixed;
-            top: 20%;
-            opacity: .4;
-            transform: rotate(-35deg);
-            transform-origin: 85% 50%;
-            font-size: 65pt;
-        }
-
-    </style>
+    <title>MPD</title>
+    <link href="{{ asset('css/pdfhtml.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -90,32 +19,15 @@
             </tr>
         </table>
     </div>
-
     <div id="footer">
         www.planificacion.gob.bo<br />
         Av. Mariscal Santa Cruz Esq. Calle Oruro Edif. #1092, Ex Edificio Comibol, Tel&eacute;fono Fax: (591-2) 2189000
     </div>
-
-    {{-- <p>{{ $date }}</p> --}}
-    {{-- <div>
-        <table style="width: 100%;">
-            <tr>
-                <td style="width: 100%; text-align: left; font-size: 9pt;  ">I. RESULTADOS ESPERADOS.
-                    (En este ac&aacute;pite, se debe elaborar un informe detallado de actividades realizadas por el
-                    servidor p&uacute;blico indicado, para el cumplimiento de los Resultados Esperados que se encuentran
-                    registrados en el POAI del puesto).</td>
-            </tr>
-        </table>
-    </div> --}}
-
     <div>
         <table style="width: 100%;">
             <tr>
                 <td style="text-align: center; font-size: 12pt; font-weight: bold;">{{ $title }}</td>
             </tr>
-            {{-- <tr>
-            <td style="text-align: right; font-size: 10pt; font-weight: bold;">Form. SAP EVD 019</td>
-          </tr> --}}
             <tr>
                 <td style="text-align: right; font-size: 8pt; font-weight: bold;">Fecha:
                     {{ Carbon\Carbon::parse($date)->format('d/m/Y') }}</td>
@@ -125,96 +37,126 @@
 
 
     <div>
-        <table style="width: 100%;" border="1">
-            <tr style="background:#8D9897; color:floralwhite;">
-                <td style="text-align: left ; font-size: 12pt; font-weight: bold;" colspan="2">DATOS GENERALES</td>
-            </tr>
-            <tr>
-                <td style="width: 35%; text-align: left; font-size: 11pt; font:bold;"> RAZON SOCIAL</td>
-                <td style="width: 65%; text-align: left; font-size: 9pt;"> {{ $institution->razon_social }}</td>
-            </tr>
-            <tr>
-                <td style=" text-align: left; font-size: 11pt;font:bold;"> NIT</td>
-                <td style=" text-align: left; font-size: 9pt;"> {{ $institution->nit }}</td>
-            </tr>
-            <tr>
-                <td style="text-align: left; font-size: 11pt;font:bold;"> GRAN ACTIVIDAD</td>
-                <td style="text-align: left; font-size: 9pt;">{{ $institution->rubro }}</td>
-            </tr>
-            <tr>
-                <td style="text-align: left; font-size: 11pt;font:bold;"> ACTIVIDAD PRINCIPAL</td>
-                <td style="text-align: left; font-size: 9pt;">{{ $institution->actividad }}</td>
-            </tr>
+        <table class="table-info w-100" style="width: 100%;"   >
+            <thead class="bg-grey-darker">
+                <tr style="background:#E5E7E6;  ">
+                    <td class="pa fzt tb" style="text-align: center ; font-weight: bold;" colspan="2">DATOS
+                        DE LA EMPRESA</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="tablePaddin fzh" style="text-align: left;font:bold;"> RAZON SOCIAL</td>
+                    <td class="tablePaddin fzh" style="text-align: left;font:bold;"> NIT</td>
+
+                </tr>
+                <tr>
+                    <td class="tablePaddin fzd"
+                        style="text-align: left;border-bottom: 2px solid #E5E7E6;">
+                        {{ $institution->razon_social }}</td>
+                    <td class="tablePaddin fzd"
+                        style="text-align: left;border-bottom: 2px solid #E5E7E6;">
+                        {{ $institution->nit }}</td>
+                </tr>
+                <tr>
+                    <td class="tablePaddin fzh" style="text-align: left;font:bold;"> GRAN ACTIVIDAD
+                    </td>
+                    <td class="tablePaddin fzh" style="text-align: left;font:bold;"> ACTIVIDAD PRINCIPAL</td>
+
+
+                </tr>
+                <tr>
+                    <td class="tablePaddin fzd"
+                        style="text-align: left;border-bottom: 2px solid #E5E7E6;">
+                        {{ $institution->rubro }}</td>
+                    <td class="tablePaddin fzd"
+                        style="text-align: left;border-bottom: 2px solid #E5E7E6;">
+                        {{ $institution->actividad }}</td>
+
+                </tr>
+            </tbody>
         </table>
-    </div>
-    <br>
-    <div>
-        <table style="width: 100%;" border="1">
-            <tr style="background:#8D9897; color:floralwhite;">
-                <td style="text-align: left ; font-size: 12pt; font-weight: bold;" colspan="4">REPRESENTATE LEGAL</td>
+        <br>
+        <table style="width: 100%;"   >
+            <tr style="background:#E5E7E6;  ">
+                <td class="pa fzt tb" style="text-align: center; font-weight: bold;" colspan="2">
+                    REPRESENTATE LEGAL</td>
             </tr>
             <tr>
-                <td style="width: 25%; text-align: left; font-size: 11pt; font:bold;">NOMBRE COMPLETO</td>
-                <td style="width: 75%; text-align: left; font-size: 9pt;" colspan="3"> {{ $institution->nombre }}
-                    {{ $institution->paterno }} {{ $institution->materno }}</td>
+                <td class="tablePaddin fzh" style="text-align: left;font:bold;" colspan="2"> NOMBRE REPRESENTANTE
+                </td>
+
             </tr>
             <tr>
-                <td style="width: 25%; text-align: left; font-size: 11pt;font:bold;"> TELEFONO<br>CELULAR</td>
-                <td style="width: 33%; text-align: left; font-size: 9pt;"> {{ $institution->telefono }}</td>
-                <td style="width: 10%; text-align: left; font-size: 11pt;font:bold;"> CORREO</td>
-                <td style="width: 32%; text-align: left; font-size: 9pt;">{{ $institution->email }}</td>
+                <td class="tablePaddin fzd" style="text-align: center; border-bottom: 2px solid #E5E7E6;" colspan="2">
+                    {{ $institution->nombre }} {{ $institution->paterno }} {{ $institution->materno }}</td>
             </tr>
-        </table>
-    </div>
-    <br>
-    <div>
-        <table style="width: 100%;" border="1">
-            <tr style="background:#8D9897; color:floralwhite;">
-                <td style="text-align: left ; font-size: 12pt; font-weight: bold;" colspan="5">CASA MATRIZ/SUCURSALES</td>
+            <tr>
+                <td class="tablePaddin fzh" style="text-align: left;font:bold;"> TELEFONO/CELULAR
+                </td>
+                <td class="tablePaddin fzh" style="text-align: left;font:bold;"> CORREO</td>
+
+
             </tr>
-            <tr style="font-size:11pt;">
-                <th style="width: 5%; text-align: center;">N°</th>
-                <th style="width: 15%; text-align: center;">TIPO</th>
-                <th style="width: 15%; text-align: center;">DEPARTAMENTO</th>
-                <th style="width: 45%; text-align: center;">DIRECCIÓN</th>
-                <th style="width: 20%; text-align: center;">TELEFONO<br>CELULAR</th>
+            <tr>
+                <td class="tablePaddin fzd"
+                    style="text-align: left;border-bottom: 2px solid #E5E7E6;">
+                    {{ $institution->telefono }}</td>
+                <td class="tablePaddin fzd"
+                    style="text-align: left;border-bottom: 2px solid #E5E7E6;">
+                    {{ $institution->email }}</td>
+
             </tr>
 
-            @foreach ($branchs as $branch)
-                <tr style="font-size:9pt;">
-                    <td style="text-align: center;">{{ $loop->iteration }}</td>
-                    <td style="text-align: left;">{{ $branch->tipo }}</td>
-                    <td style="text-align: left;">{{ $branch->department->nombre }}</td>
-                    <td style="text-align: left;">{{ $branch->direccion }}</td>
-                    <td style="text-align: left;">{{ $branch->telefono }}</td>
+        </table>
+
+        <br>
+        <table class="tb" style="width: 100%;">
+            <tr style="background:#E5E7E6;  ">
+                <td class="pa fzt" style="text-align: center;font-weight: bold;" colspan="5">
+                    CASA MATRIZ/SUCURSALES</td>
+            </tr>
+            <tr>
+                <td class="pa fzh tb" style="width: 4%; text-align: center;font:bold;"> N°</td>
+                <td class="pa fzh tb" style="text-align: center;font:bold;"> TIPO</td>
+                <td class="pa fzh tb" style="text-align: center;font:bold;"> DEPARTAMENTO</td>
+                <td class="pa fzh tb" style="text-align: center;font:bold;"> DIRECCIÓN</td>
+                <td class="pa fzh tb" style="text-align: center;font:bold;"> TELEFONO/CELULAR</td>
+            </tr>
+            @foreach ($branchs as $data)
+                <tr>
+                    <td class="pa fzd tb" style="text-align: center;"> {{ $loop->iteration }}</td>
+                    <td class="pa fzd tb" style="text-align: center;">{{ $data->tipo }}</td>
+                    <td class="pa fzd tb" style="text-align: center;">{{ $data->department->nombre  }}</td>
+                    <td class="pa fzd tb" style="text-align: left;">{{ $data->direccion }}</td>
+                    <td class="pa fzd tb" style="text-align: center;">{{ $data->telefono }}</td>
+                </tr>
+            @endforeach
+        </table>
+        <br>
+        <table class="tb" style="width: 100%;" >
+
+            <tr style="background:#E5E7E6;  ">
+                <td class="pa fzt tb" style="text-align: center;font-weight: bold;" colspan="4">
+                    REGISTRO DE CONTACTOS</td>
+            </tr>
+            <tr>
+                <td class="pa fzh tb" style="width: 4%;text-align: center;font:bold;"> N°</td>
+                <td class="pa fzh tb" style="text-align: center;font:bold;"> NOMBRE COMPLETO</td>
+                <td class="pa fzh tb" style="text-align: center;font:bold;"> TELEFONO/CELULAR</td>
+                <td class="pa fzh tb" style="text-align: center;font:bold;"> CORREO</td>
+            </tr>
+            @foreach ($cordinators as $data)
+                <tr>
+                    <td class="pa fzd tb" style="text-align: center;"> {{ $loop->iteration }}</td>
+                    <td class="pa fzd tb" style="text-align: left;">{{ $data->nombres  }} {{ $data->paterno  }} {{ $data->naterno  }}</td>
+                    <td class="pa fzd tb" style="text-align: center;">{{ $data->telefono}}</td>
+                    <td class="pa fzd tb" style="text-align: center;">{{ $data->email }}</td>
                 </tr>
             @endforeach
         </table>
     </div>
     <br>
-    <div>
-        <table style="width: 100%;" border="1">
-            <tr style="background:#8D9897; color:floralwhite;">
-                <td style="text-align: left ; font-size: 12pt; font-weight: bold;" colspan="4">REGISTRO DE CONTACTOS</td>
-            </tr>
-            <tr style="font-size: 11pt; ">
-                <th style="width: 5%; text-align: center;">N°</th>
-                <th style="width: 45%; text-align: center;">NOMBRE COMPLETO</th>
-                <th style="width: 25%; text-align: center;">TELEFONO<br>CELULAR</th>
-                <th style="width: 25%; text-align: center;">CORREO</th>                
-            </tr>
-
-            @foreach ($cordinators as $cordinator)
-                <tr style="style: font-size: 9pt;">
-                    <td style="text-align: center;">{{ $loop->iteration }}</td>
-                    <td style="text-align: left;">{{ $cordinator->nombres  }} {{ $cordinator->paterno  }} {{ $cordinator->naterno  }}</td>
-                    <td style="text-align: left;">{{ $cordinator->telefono}}</td>
-                    <td style="text-align: left;">{{ $cordinator->email }}</td>                    
-                </tr>
-            @endforeach
-        </table>
-    </div>
-
 </body>
 
 </html>

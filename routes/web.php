@@ -39,7 +39,8 @@ Route::post('registro-empresa', [RegisterInstitutionController::class, "store"])
 
 Route::post('logout', [AuthController::class, "logout"])->name('auth.logout')->middleware('auth');
 Route::get('cambiar-password', [AuthController::class, "updatePassword"])->name('auth.updatePassword')->middleware('auth');
-Route::view('dashboard', 'pages.dashboard')->name('page.dashboard')->middleware('auth');
+// Route::view('dashboard', 'pages.dashboard')->name('page.dashboard')->middleware('auth');
+Route::get('dashboard', [RegisterPersonController::class, "dashboard"])->name('page.dashboard')->middleware('auth');
 Route::get('datos-persona', [RegisterPersonController::class, "person"])->name('data.person')->middleware(['auth', 'role:persona']);
 Route::get('persona-pdf-registro', [RegisterPersonController::class, "pdfRegistroPerson"])->name('person.pdfRegistroPerson')->middleware(['auth', 'role:persona']);
 

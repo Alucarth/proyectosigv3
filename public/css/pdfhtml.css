@@ -1,0 +1,96 @@
+@page {
+    margin-left: 1.5cm;
+    margin-right: 1.5cm;
+    margin-top: 3cm;
+    margin-bottom: 2cm;
+    font-family: Helvetica;
+}
+
+
+#footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    font-size: 0.9em;
+}
+
+#header {
+
+    position: fixed;
+    top: -90px;
+
+}
+
+#footer {
+    bottom: .1em;
+    text-align: center;
+    font-size: 0.7em;
+}
+
+#header table,
+#footer table {
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
+}
+
+#header td,
+#footer td {
+    width: 50%;
+}
+
+.page-number {
+    text-align: center;
+}
+
+.page-number:before {
+    content: " Página "counter(page);
+}
+
+hr {
+    page-break-after: always;
+    border: 0;
+}
+
+table {
+    border-collapse: collapse;
+    margin-bottom: -.1em;
+    border-spacing: 0;
+}
+
+table td {
+    margin: 10px !important;
+
+}
+
+.tablePaddin {
+    padding-top: 5px;
+}
+
+.pa {
+    padding: 3px;
+}
+
+.fzt {
+    font-size: 11px;
+}
+
+.fzh {
+    font-size: 10px;
+}
+
+.fzd {
+    font-size: 11px;
+}
+.tb {
+    border: 1px solid rgb(119, 119, 119); 
+}
+
+#watermark {
+    position: fixed;
+    top: 20%;
+    opacity: .4;
+    transform: rotate(-35deg);
+    transform-origin: 85% 50%;
+    font-size: 65pt;
+}

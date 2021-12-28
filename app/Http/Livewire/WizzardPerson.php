@@ -17,6 +17,7 @@ use Livewire\WithPagination;
 use Illuminate\Support\Facades\Http;
 use Util;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 class WizzardPerson extends Component
 {
 
@@ -108,13 +109,13 @@ class WizzardPerson extends Component
             $date1 = Carbon::createFromDate($exp->fecha_inicio);
             $date2 = Carbon::createFromDate($exp->fecha_fin);
             $totalyears +=  $date1->diffInYears($date2);
-    
+
         }
         $contacts = Contact::where('person_id', $this->person_id)->where('institution', '!=', null)->get();
         return view('livewire.wizzard-person', compact('departments', 'problems', 'decendants', 'difficulties', 'personContacts', 'careers', 'studies', 'experiences', 'contacts', 'totalyears'));
     }
 
-    //steps 
+    //steps
     public function step1()
     {
         $this->step = 1;
@@ -166,7 +167,7 @@ class WizzardPerson extends Component
         $this->filecounter = 0;
         //$this->archivod = $this->person->archivod;
     }
-    
+
     public function updatedNacimiento()
     {
         $this->edad = Util::calculateYear($this->nacimiento);
@@ -197,12 +198,12 @@ class WizzardPerson extends Component
         $decendant = Decendant::find($id);
         if($decendant)
         {
-            
+
             $this->urlfile = "/storage".substr($decendant->certificado, 6);
             // $this->urlfile = $decendant->certificado;
             $this->dialog =true;
         }
-        
+
     }
 
     public function closeModal()
@@ -314,7 +315,7 @@ class WizzardPerson extends Component
                     'tipoDiscapacidad' => 'required',
                     'archivod' => 'required|mimes:jpg,bmp,png,pdf|max:5120'
                 ]);
-            } 
+            }
         } else {
             $this->validate([
                 'ci' => 'required',
@@ -330,7 +331,7 @@ class WizzardPerson extends Component
                 'discapacidad' => 'required'
             ]);
         }
-        
+
         $this->validate([
             'ci' => 'required',
             'expedido' => 'required',
@@ -355,6 +356,11 @@ class WizzardPerson extends Component
         $person->hijos = $this->hijos;
         $person->estado_civil = $this->estadoCivil;
         $person->telefono = $this->telefonoPersona;
+        $person->discapacidad = $this->discapacidad;
+
+        $person->tipo_discapacidad = $this->tipoDiscapacidad;
+        $person->certificado_discapacidad = $this->archivod->store('public');
+        Log::info(json_encode($person));
         $person->step = 2;
         $person->save();
 
@@ -362,7 +368,7 @@ class WizzardPerson extends Component
 
         $this->step2();
 
-        
+
         // $response = Http::post('https://sig.planificacion.gob.bo:8080/pge/v1/soapapiservicioexterno/consultadatopersonacertificacion', [
         //     'numeroDocumento' => $this->ci
         // ])->throw()->json();
@@ -549,12 +555,12 @@ class WizzardPerson extends Component
         $career = CareerPerson::find($id);
         if($career)
         {
-            
+
             $this->urlfile = "/storage".substr($career->certificado, 6);
             // $this->urlfile = $decendant->certificado;
             $this->dialog =true;
         }
-        
+
     }
 
     public function defaultFormacion()
@@ -579,7 +585,7 @@ class WizzardPerson extends Component
     public function experiencia()
     {
         $this->dialog_experiencia = false;
-        
+
         $this->validate([
             'institutionLaboral' => 'required',
             'cargoLaboral' => 'required',
@@ -587,7 +593,7 @@ class WizzardPerson extends Component
             'fecha_fin' => 'required|date',
             'archivoLaboral' => 'required|mimes:jpg,bmp,png,pdf|max:5120'
         ]);
-       
+
         $experience = new Experience();
         $experience->person_id = $this->person_id;
         $experience->institution = mb_strtoupper( $this->institutionLaboral);
@@ -627,12 +633,12 @@ class WizzardPerson extends Component
         $experiencia = Experience::find($id);
         if($experiencia)
         {
-            
+
             $this->urlfile = "/storage".substr($experiencia->certificado, 6);
             // $this->urlfile = $decendant->certificado;
             $this->dialog =true;
         }
-        
+
     }
 
 
@@ -689,7 +695,7 @@ class WizzardPerson extends Component
     {
         $this->dialog_referencia = false;
     }
-   
+
     public function deleteContact($id)
     {
         $contact = Contact::find($id);

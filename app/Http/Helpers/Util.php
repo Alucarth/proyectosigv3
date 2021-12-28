@@ -16,36 +16,36 @@ class Util
     public static $METRO = 4;
 
     public static function calculateYear($birthday)
-    {   
+    {
         $age = strtotime($birthday);
-        
-        if($age === false){ 
-            return false; 
-        } 
-        
-        list($y1,$m1,$d1) = explode("-",date("Y-m-d",$age)); 
-        
-        $now = strtotime("now"); 
-        
-        list($y2,$m2,$d2) = explode("-",date("Y-m-d",$now)); 
-        
-        $age = $y2 - $y1; 
-        
-        if((int)($m2.$d2) < (int)($m1.$d1)) 
-            $age -= 1; 
+
+        if($age === false){
+            return false;
+        }
+
+        list($y1,$m1,$d1) = explode("-",date("Y-m-d",$age));
+
+        $now = strtotime("now");
+
+        list($y2,$m2,$d2) = explode("-",date("Y-m-d",$now));
+
+        $age = $y2 - $y1;
+
+        if((int)($m2.$d2) < (int)($m1.$d1))
+            $age -= 1;
         return $age;
     }
 
     public static function SendMailWelcome($usermail)
-    {       
-        
+    {
+
         try {
-            
+
             $mail = new PHPMailer(true);
             $mail->SMTPDebug = 0;  // Sacar esta línea para no mostrar salida debug
             $mail->isSMTP();
             $mail->Host = env('MAIL_HOST', 'mail.planificacion.gob.bo');  // Host de conexión SMTP
-            $mail->SMTPAuth = true;    
+            $mail->SMTPAuth = true;
             $mail->Username = env('MAIL_USERNAME','planificacion\registro.pge');                 // Usuario SMTP
             $mail->Password = env('MAIL_PASSWORD','Pl%4n21***');                           // Password SMTP
             $mail->SMTPSecure = env('MAIL_ENCRYPTION', 'tls');                            // Activar seguridad TLS
@@ -62,10 +62,10 @@ class Util
             #$mail->SMTPOptions = ['ssl'=> ['allow_self_signed' => true]];  // Descomentar si el servidor SMTP tiene un certificado autofirmado
             #$mail->SMTPSecure = false;             // Descomentar si se requiere desactivar cifrado (se suele usar en conjunto con la siguiente línea)
             #$mail->SMTPAutoTLS = false;            // Descomentar si se requiere desactivar completamente TLS (sin cifrado)
-        
+
             $mail->setFrom('registro.pge@planificacion.gob.bo');        // Mail del remitente
             $mail->addAddress($usermail);     // Mail del destinatario
-        
+
             $mail->isHTML(true);
             $mail->Subject = 'Registro Plan Nacional de Empleo';  // Asunto del mensaje
             $mail->Body    = '<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -75,7 +75,7 @@ class Util
               <meta name="viewport" content="width=device-width,initial-scale=1">
               <meta name="x-apple-disable-message-reformatting">
               <title></title>
-            
+
               <style>
                 table,
                 td,
@@ -86,7 +86,7 @@ class Util
                 }
               </style>
             </head>
-            
+
             <body style="margin:0;padding:0;">
               <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;background:#ffffff;">
                 <tr>
@@ -99,7 +99,7 @@ class Util
                               <td style="padding:0 0 36px 0;color:#153643;">
                                 <h1 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;">Bienvenido(a),</h1>
                                 <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Gracias por mostrar interés en registrarte en la base de datos para futuras oportunidades laborales del Plan Nacional de Empleo.
-            
+
                                   Para continuar con tu registro, debe completar su informacion iniciando sesion en el portal web: </p>
                                 <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><a href="https://sig.plandeempleo.bo/" style="color:#ee4c50;text-decoration:underline;">Iniciar sesión</a></p>
                               </td>
@@ -115,7 +115,7 @@ class Util
                                 <a href="https://plandeempleo.bo/" style="color:#ffffff;text-decoration:underline;"><img src="https://plandeempleo.bo/wp-content/uploads/2021/11/logo_corto-300x174.png" alt="" width="100" style="height:auto;display:block" /></a>
                                 <p style="margin:0;font-size:14px;line-height:16px;font-family:Arial,sans-serif;color:#000000;">
                                   &reg; Ministerio de Planificacion del Desarrollo 2021<br />
-            
+
                                 </p>
                               </td>
                             </tr>
@@ -126,12 +126,12 @@ class Util
                   </td>
                 </tr>
               </table>
-            </body>            
+            </body>
             </html>';    // Contenido del mensaje (acepta HTML)
             $mail->AltBody = 'Este es el contenido del mensaje en texto plano';    // Contenido del mensaje alternativo (texto plano)
-        
+
             $mail->send();
-            
+
 
         } catch (Exception $e) {
             //echo 'El mensaje no se ha podido enviar, error: ', $mail->ErrorInfo;
@@ -209,11 +209,6 @@ class Util
     {
         $val = number_format((float)$value);
         return $val;
-    }
-
-
-    public static function convertirNumeroLetra($numero,$currency){
-
         $decimal = explode(".",$numero); //dividendo la parte entera de la fraccionaria
 
         $numf = self::milmillon($decimal[0]);
@@ -561,13 +556,13 @@ class Util
                     'nit' => $nit
                 ])->throw(function ($response, $e) {
                     return false;
-                })->json();                
+                })->json();
                 if($response["ok"]==true AND $response["estado"]=="ACTIVO"){
                     return true;
                 }
             }catch (\Exception $e) {
                 return false;
-            } 
+            }
         }
         return false;
     }
@@ -579,10 +574,10 @@ class Util
                 ])->throw(function ($response, $e) {
                     return false;
                 })->json();
-                return $response["razonSocial"];            
+                return $response["razonSocial"];
             }catch (\Exception $e) {
                 return false;
-            } 
+            }
         }
         return false;
     }

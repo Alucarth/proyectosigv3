@@ -17,6 +17,7 @@ class GeneralListController extends Controller
     public function generalList($vacancy_id)
     {
         $vacancy = Vacancy::find($vacancy_id);
+        // return $vacancy;
         if($vacancy)
         {
             return view('pages.generalListVacancy',compact('vacancy_id'));

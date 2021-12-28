@@ -9,5 +9,15 @@ class GeneralList extends Model
 {
     use HasFactory;
 
+    public function people()
+    {
+        return $this->belongsTo(Person::class);
+    }
+
+    public function institution()
+    {
+        return $this->belongsTo(Institution::class);
+    }
+
 
 }

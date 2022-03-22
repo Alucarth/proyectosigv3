@@ -40,6 +40,7 @@
                                 <th class="whitespace-nowrap uppercase">Apellido MAterno</th>
                                 {{-- <th class="whitespace-nowrap uppercase">Estado </th> --}}
                                 <th class="whitespace-nowrap uppercase">Acciones</th>
+                                <th> <button class="btn btn-outline-success btn-sm" wire:click="reportGeneralList()"> Descargar Reporte</button> </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -66,6 +67,7 @@
                                                 <button class="btn btn-sm btn-twitter" wire:click="addList({{$item->id}})">  Agregar <i class="fas fa-angle-right w-4 h-4 ml-2"></i> </button>
                                                                                           </div>
                                         </td>
+                                        <td></td>
                                     </tr>
 
                             @endforeach
@@ -104,6 +106,7 @@
                                     <th class="whitespace-nowrap uppercase">Apellido MAterno</th>
                                     {{-- <th class="whitespace-nowrap uppercase">Estado </th> --}}
                                     <th class="whitespace-nowrap uppercase">Acciones</th>
+                                    <th> <button class="btn btn-outline-success btn-sm" wire:click="reportShortlList()"> Descargar Reporte</button> </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -129,9 +132,10 @@
 
                                                     <button class="btn btn-sm btn-secondary" wire:click="removeList({{$item->id}})"> <i class="fas fa-angle-left w-4 h-4 mr-2"></i>  devolver   </button>
 
-                                                    <button class="btn btn-sm btn-danger"> <i class="fas fa-trash w-4 h-4 mr-2"></i>  Eliminar </button>
+                                                    <button class="btn btn-sm btn-danger" wire:click="deleteList({{$item->id}})" > <i class="fas fa-trash w-4 h-4 mr-2"></i>  Eliminar </button>
                                                 </div>
                                             </td>
+                                            <td></td>
                                         </tr>
 
                                 @endforeach

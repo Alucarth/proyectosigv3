@@ -38,37 +38,39 @@
                                 <th class="whitespace-nowrap uppercase">Nombres</th>
                                 <th class="whitespace-nowrap uppercase">Apellido Paterno</th>
                                 <th class="whitespace-nowrap uppercase">Apellido MAterno</th>
-                                <th class="whitespace-nowrap uppercase">Estado </th>
+                                {{-- <th class="whitespace-nowrap uppercase">Estado </th> --}}
                                 <th class="whitespace-nowrap uppercase">Acciones</th>
+                                <th> <button class="btn btn-outline-success btn-sm" wire:click="reportGeneralList()"> Descargar Reporte</button> </th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{json_encode($persons)}}
-                            {{-- @foreach ($officials as $index => $official)
-                                @if ($official->user->getRoleNames()[0] == 'oficial')
+
+                            @foreach ($general_list as $index => $item)
+
                                     <tr>
                                         <td class="border-b dark:border-dark-5">{{ $index+1 }}</td>
                                         <td class="border-b dark:border-dark-5 text-gray-700 uppercase">
-                                            {{ $official->nombres }}
+                                            {{ $item->people->nombres }}
                                         </td>
                                         <td class="border-b dark:border-dark-5 uppercase">
-                                            {{ $official->paterno }}
+                                            {{ $item->people->paterno }}
                                         </td>
                                         <td class="border-b dark:border-dark-5 uppercase">
-                                            {{ $official->materno }}
+                                            {{ $item->people->materno }}
                                         </td>
-                                        <td class="border-b dark:border-dark-5">
-                                            {{ $official->estado }}
-                                        </td>
+                                        {{-- <td class="border-b dark:border-dark-5">
+                                            {{ $item->estado }}
+                                        </td> --}}
                                         <td class="border-b dark:border-dark-5">
                                             <div class="mt-2">
 
-                                                <button class="btn btn-sm btn-twitter" wire:click="setOficial({{$official->id}})">  Asignaciones <i class="fas fa-angle-right w-4 h-4 ml-2"></i> </button>
+                                                <button class="btn btn-sm btn-twitter" wire:click="addList({{$item->id}})">  Agregar <i class="fas fa-angle-right w-4 h-4 ml-2"></i> </button>
                                                                                           </div>
                                         </td>
+                                        <td></td>
                                     </tr>
-                                @endif
-                            @endforeach --}}
+
+                            @endforeach
                         </tbody>
                     </table>
 
@@ -88,60 +90,91 @@
                         <span style="font-size: 2em; color: #C5CAE9;">
                             <i class="fas fa-list-ol"></i>
                         </span>
-                        {{-- {{$oficial->getFullname()}} --}}
                         Lista Corta
-
                     </h2>
-                    {{-- <button type="button" class="btn btn-primary btn-sm"  wire:click="showAsignacion()">  <i class="fa fa-plus w-4 h-4 mr-2 "></i>  Adicionar </button> --}}
-
                 </div>
                 <div class="p-5">
-                    <strong>Lista de Empresas Asignadas</strong>
+                    {{-- <strong>Lista de Empresas Asignadas</strong> --}}
                     <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
 
-                        <table class="table col-span-12 sm:col-span-12">
+                        <table class="table">
                             <thead>
                                 <tr class="bg-gray-700 dark:bg-dark-1 text-white">
                                     <th class="whitespace-nowrap uppercase">#</th>
-                                    {{-- <th class="whitespace-nowrap uppercase">Nombre Comercial</th> --}}
-                                    <th class="whitespace-nowrap uppercase">Razon Social</th>
-                                    <th class="whitespace-nowrap uppercase">Estado </th>
-                                    <th class="whitespace-nowrap uppercase">Registrado por</th>
+                                    <th class="whitespace-nowrap uppercase">Nombres</th>
+                                    <th class="whitespace-nowrap uppercase">Apellido Paterno</th>
+                                    <th class="whitespace-nowrap uppercase">Apellido MAterno</th>
+                                    {{-- <th class="whitespace-nowrap uppercase">Estado </th> --}}
                                     <th class="whitespace-nowrap uppercase">Acciones</th>
+                                    <th> <button class="btn btn-outline-success btn-sm" wire:click="reportShortlList()"> Descargar Reporte</button> </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($assignments as $index => $assignament)
-                                    <tr>
-                                        <td class="border-b dark:border-dark-5">{{ $index+1 }}</td>
 
-                                        <td class="border-b dark:border-dark-5">{{ $assignament->institution->razon_social  }}</td>
-                                        <td class="border-b dark:border-dark-5">{{ $assignament->estado  }}</td>
-                                        <td class="border-b dark:border-dark-5">{{ $assignament->user->email  }}</td>
+                                @foreach ($short_list as $index => $item)
 
-                                        <td class="border-b dark:border-dark-5">
-                                            <div class="text-theme-6">
-                                                <a wire:click='softdeletedAssignment({{ $assignament->id }})'
-                                                    class="flex items-center mr-3 cursor-pointer">
-                                                    <x-feathericon-trash class="w-4 h-4 mr-1" /> Dar de Baja
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach --}}
+                                        <tr>
+                                            <td class="border-b dark:border-dark-5">{{ $index+1 }}</td>
+                                            <td class="border-b dark:border-dark-5 text-gray-700 uppercase">
+                                                {{ $item->people->nombres }}
+                                            </td>
+                                            <td class="border-b dark:border-dark-5 uppercase">
+                                                {{ $item->people->paterno }}
+                                            </td>
+                                            <td class="border-b dark:border-dark-5 uppercase">
+                                                {{ $item->people->materno }}
+                                            </td>
+                                            {{-- <td class="border-b dark:border-dark-5">
+                                                {{ $item->estado }}
+                                            </td> --}}
+                                            <td class="border-b dark:border-dark-5">
+                                                <div class="mt-2">
+
+                                                    <button class="btn btn-sm btn-secondary" wire:click="removeList({{$item->id}})"> <i class="fas fa-angle-left w-4 h-4 mr-2"></i>  devolver   </button>
+
+                                                    <button class="btn btn-sm btn-danger" wire:click="deleteList({{$item->id}})" > <i class="fas fa-trash w-4 h-4 mr-2"></i>  Eliminar </button>
+                                                </div>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+
+                                @endforeach
                             </tbody>
                         </table>
-
 
                     </div>
                 </div>
             </div>
 
-
         {{-- end panel asignaciones --}}
 
+    </div>
+<!-- BEGIN: Modal Content  check event listener-->
 
+<div id="referencia-delete" class="modal overflow-y-auto {{$dialog_delete?'show':'hide'}}" data-backdrop="static" tabindex="-1" aria-hidden="false" style="padding-left: 0px; margin-top: 0px; margin-left: 0px; z-index: 10000;">
+    <div class="modal-dialog modal-lg">
+
+            <div class="modal-content"  >
+
+                {{-- <div class="modal-header">
+                    <h2 class="font-medium text-base mr-auto">Registro de Referencia Laboral</h2>
+
+
+                </div>
+                 <!-- END: Modal Header --> --}}
+                <div class="modal-body ">
+                    <div class="p-5 text-center"> <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+                        <div class="text-3xl mt-5">Are you sure?</div>
+                        <div class="text-gray-600 mt-2">Do you really want to delete these records? <br>This process cannot be undone.</div>
+                    </div>
+                    <div class="px-5 pb-8 text-center"> <button type="button" data-dismiss="modal" class="btn btn-outline-secondary w-24 dark:border-dark-5 dark:text-gray-300 mr-1">Cancel</button> <button type="button" class="btn btn-danger w-24">Delete</button> </div>
+                </div>
+                {{-- <div class="modal-footer text-right"> <button type="button" wire:click="closeReferencia" class="btn btn-outline-secondary w-20 mr-1">Cancelar</button> <button wire:click='referencia' class="btn btn-primary w-20">Guardar</button> </div> <!-- END: Modal Footer --> --}}
+
+            </div>
 
     </div>
+</div>
 
+<!-- END: Modal Content -->
 </div>

@@ -25,7 +25,7 @@
                         </span>
                        Datos complementarios
                     </h2>
-                    
+
                     {{-- <button class="btn btn-outline-secondary hidden sm:flex"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file w-4 h-4 mr-2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg> Download Excel </button> --}}
                 </div>
                 <div class="p-5">
@@ -67,20 +67,20 @@
                             </div>
                             @error('genero') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                         </div>
-                        
-                        
+
+
                         <div class="col-span-12 sm:col-span-3">
                             <label class="form-label">Fecha de Nacimiento</label>
                             <input wire:model="nacimiento" class="form-control block mx-auto" type="date">
                             @error('nacimiento') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                         </div>
-                   
+
                         <div class="col-span-12 sm:col-span-3">
                             <label class="form-label">Edad</label>
                             <input wire:model="edad" type="text" class="form-control" placeholder="" disabled>
                             @error('edad') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                         </div>
-                    
+
                         <div class="col-span-12 sm:col-span-3">
                             <label class="form-label">Departamento</label>
                             <select wire:model="departamento" class="form-select">
@@ -130,11 +130,11 @@
                             @error('hijos') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                         </div>
                         @endif
-                       
+
                         <div class="col-span-12 sm:col-span-3">
                         </div>
-                        
-                       
+
+
                         <div class="col-span-12 sm:col-span-6">
                             <label>Presenta alguna Discapacidad?</label>
                             <div class="flex flex-col sm:flex-row mt-2">
@@ -152,29 +152,29 @@
                             @error('discapacidad') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                         </div>
                         @if ($discapacidad)
-                            <form class="col-span-12 gap-2 sm:col-span-12 flex items-center"
-                                wire:submit.prevent="updateDiscapacidad" enctype="multipart/form-data">
+                            {{-- <form class="col-span-12 gap-2 sm:col-span-12 flex items-center"
+                                wire:submit.prevent="updateDiscapacidad" enctype="multipart/form-data"> --}}
                                 <div class="col-span-12 sm:col-span-3">
                                     <label for="input-wizard-3" class="form-label">Cual?</label>
                                     <select wire:model="tipoDiscapacidad" class="form-select">
                                         <option value="">Seleccione un opcion</option>
-                                        <option>Físico</option>
-                                        <option>Motora</option>
-                                        <option>Intelectual</option>
-                                        <option>Auditiva</option>
-                                        <option>Visual</option>
-                                        <option>Mental/psíquica</option>
-                                        <option>Múltiple</option>
+                                        <option>FÍSICO</option>
+                                        <option>MOTORA</option>
+                                        <option>INTELECTUAL</option>
+                                        <option>AUDITIVA</option>
+                                        <option>VISUAL</option>
+                                        <option>MENTAL/PSÍQUICA</option>
+                                        <option>MÚLTIPLE</option>
                                     </select>
                                 </div>
                                 <div class="col-span-12 sm:col-span-3">
                                     <label for="input-wizard-3" class="form-label">Certificado de Discapacidad</label>
                                     <input wire:model='archivod' type="file" class="form-control" placeholder="22">
                                 </div>
-                                <div class="col-span-12 sm:col-span-3 pt-6">
+                                {{-- <div class="col-span-12 sm:col-span-3 pt-6">
                                     <button type="submit" class="btn btn-secondary">Guardar</button>
-                                </div>
-                            </form>
+                                </div> --}}
+                            {{-- </form> --}}
                         @endif
                         {{-- <div class="col-span-12 flex items-center justify-center sm:justify-end mt-5">
                             <button wire:click="updatePerson" class="btn btn-primary w-24 ml-2">Siguiente</button>
@@ -224,20 +224,20 @@
                         </div>
                         @error('genero') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                     </div>
-                    
-                    
+
+
                     <div class="col-span-12 sm:col-span-3">
                         <label class="form-label">Fecha de Nacimiento</label>
                         <input wire:model="nacimiento" class="form-control block mx-auto" type="date">
                         @error('nacimiento') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                     </div>
-               
+
                     <div class="col-span-12 sm:col-span-3">
                         <label class="form-label">Edad</label>
                         <input wire:model="edad" type="text" class="form-control" placeholder="" disabled>
                         @error('edad') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                     </div>
-                
+
                     <div class="col-span-12 sm:col-span-3">
                         <label class="form-label">Departamento</label>
                         <select wire:model="departamento" class="form-select">
@@ -287,11 +287,11 @@
                         @error('hijos') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                     </div>
                     @endif
-                   
+
                     <div class="col-span-12 sm:col-span-3">
                     </div>
-                    
-                   
+
+
                     <div class="col-span-12 sm:col-span-6">
                         <label>Presenta alguna Discapacidad?</label>
                         <div class="flex flex-col sm:flex-row mt-2">
@@ -347,8 +347,8 @@
                         <span style="font-size: 2em; color: #C5CAE9;">
                             <i class="fas fa-user-friends"></i>
                         </span>
-                        Registro de Hijo(a) 
-                       
+                        Registro de Hijo(a)
+
                     </h2>
                     <button type="button" class="btn btn-primary btn-sm"  wire:click="showHijo()">  <i class="fa fa-plus w-4 h-4 mr-2 "></i>  Adicionar </button>
                     {{-- <button class="btn btn-outline-secondary hidden sm:flex"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file w-4 h-4 mr-2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg> Download Excel </button> --}}
@@ -374,7 +374,7 @@
                                         </td>
                                         <td class="border-b dark:border-dark-5">
                                                 <button type="button" wire:click="setArchivo({{$decendant->id}})"  class="btn btn-secondary" > <i class="fa fa-file-alt "></i></button>
-                                                                                    
+
                                         </td>
                                         <td>
                                             <button type="button" wire:click="deleteHijo({{$decendant->id}})" class="btn btn-danger btn-sm" >
@@ -385,14 +385,14 @@
                                 @endforeach
                             </tbody>
                         </table>
-                    
-        
+
+
                     </div>
                 </div>
             </div>
             <br>
             @endif
-            
+
             <div class="intro-y box col-span-12 lg:col-span-6">
                 <div class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200 dark:border-dark-5">
                     <h2 class="font-medium text-base mr-auto">
@@ -402,11 +402,11 @@
                         Dificultad Laboral
                     </h2>
                     <button type="button" class="btn btn-primary btn-sm"  wire:click="showDificultad()">  <i class="fa fa-plus   w-4 h-4 mr-2"></i>  Adicionar </button>
-                    
+
                 </div>
                 <div class="p-5">
                     <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
-                        
+
                         {{-- <div class="col-span-12 sm:col-span-4">
                             <label class="form-label">Dificultad para conseguir
                                 trabajo</label>
@@ -449,13 +449,13 @@
                                             <button wire:click="deleteDifficulty({{$difficulty->id}})" class="btn btn-danger btn-sm" >
                                                 <i  class="fa fa-trash" ></i>
                                            </button>
-                                            
+
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-        
+
                     </div>
                 </div>
             </div>
@@ -492,11 +492,11 @@
                         Persona de Contacto
                     </h2>
                     <button type="button" class="btn btn-primary btn-sm"  wire:click="showContacto()">  <i class="fa fa-plus   w-4 h-4 mr-2"></i>  Adicionar </button>
-                    
+
                 </div>
                 <div class="p-5">
                     <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
-                        
+
 
                         <table class="table col-span-12 sm:col-span-12">
                             <thead>
@@ -522,7 +522,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-        
+
                     </div>
                 </div>
             </div>
@@ -532,11 +532,11 @@
                 <button type="button" wire:click="updateStep3" class="btn btn-primary w-24 ml-2">Siguiente</button>
             </div>
 
-           
+
         </div>
     @endif
     @if ($step == 3)
-        
+
             <div class=" py-10 sm:py-20 mt-5">
                 <div class="flex justify-center">
                     <button type="button"
@@ -563,12 +563,12 @@
                             Información de Formación Profesional
                         </h2>
                         <button type="button" class="btn btn-primary btn-sm"  wire:click="showFormacion()">  <i class="fa fa-plus   w-4 h-4 mr-2"></i>  Adicionar </button>
-                        
+
                     </div>
                     <div class="p-5">
                         <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
-                            
-    
+
+
                             <table class="table col-span-12 sm:col-span-12">
                                 <thead>
                                     <tr class="bg-gray-700 dark:bg-dark-1 text-white">
@@ -594,7 +594,7 @@
                                             <td class="border-b dark:border-dark-5">{{ $study->egreso }}</td>
                                             <td class="border-b dark:border-dark-5">
                                                 <button  type="button" wire:click="setArchivoFormacion({{$study->id}})"  class="btn btn-secondary " > <i class="fa fa-file-alt "></i></button>
-                                                
+
                                             </td>
                                             <td>
                                                 <button type="button" wire:click="deleteFormacion({{$study->id}})" class="btn btn-danger btn-sm" >
@@ -605,20 +605,20 @@
                                     @endforeach
                                 </tbody>
                             </table>
-            
+
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-span-12 flex items-center justify-center sm:justify-end mt-5">
                     <button type="button" wire:click='step2' class="btn btn-dark w-24">Atras</button>
                     <button type="button" wire:click='updateStep4'
                         class="btn btn-primary w-24 ml-2">Siguiente</button>
                 </div>
 
-               
+
             </div>
-       
+
     @endif
     @if ($step == 4)
         <div class=" py-10 sm:py-20 mt-5">
@@ -646,11 +646,11 @@
                         Información de Experiencia Laboral
                     </h2>
                     <button type="button" class="btn btn-primary btn-sm"  wire:click="showExperiencia()">  <i class="fa fa-plus   w-4 h-4 mr-2"></i>  Adicionar </button>
-                    
+
                 </div>
                 <div class="p-5">
                     <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
-                        
+
 
                         <table class="table col-span-12 sm:col-span-12">
                             <thead>
@@ -674,7 +674,7 @@
                                         <td class="border-b dark:border-dark-5">{{ $experience->fecha_inicio }}</td>
                                         <td class="border-b dark:border-dark-5">{{ $experience->fecha_fin }}</td>
                                         <td class="border-b dark:border-dark-5">
-                                            
+
                                             <button  type="button" wire:click="setArchivoExperiencia({{$experience->id}})"  class="btn btn-secondary " > <i class="fa fa-file-alt "></i></button>
                                         </td>
                                         <td>
@@ -691,7 +691,7 @@
                                 </tr>
                             </tbody>
                         </table>
-        
+
                     </div>
                 </div>
             </div>
@@ -701,13 +701,13 @@
                 <button wire:click="updateStep5" class="btn btn-primary w-24 ml-2">Siguiente</button>
             </div>
 
-            
+
         </div>
-      
+
 
     @endif
     @if ($step == 5)
-        
+
             <div class=" py-10 sm:py-20 mt-5">
                 <div class="flex justify-center">
                     <button type="button"
@@ -733,12 +733,12 @@
                             Información de Referencia Laboral
                         </h2>
                         <button type="button" class="btn btn-primary btn-sm"  wire:click="showReferencia()">  <i class="fa fa-plus   w-4 h-4 mr-2"></i>  Adicionar </button>
-                        
+
                     </div>
                     <div class="p-5">
                         <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
-                            
-    
+
+
                             <table class="table col-span-12 sm:col-span-12">
                                 <thead>
                                     <tr class="bg-gray-700 dark:bg-dark-1 text-white">
@@ -770,7 +770,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-            
+
                         </div>
                     </div>
                 </div>
@@ -779,17 +779,17 @@
                     <a href="{{ route('page.dashboard') }}" class="btn btn-primary w-24 ml-2">Finalizar</a>
                 </div>
 
-             
+
             </div>
-       
+
     @endif
 
-<!-- BEGIN: Modal Content  check event listener--> 
+<!-- BEGIN: Modal Content  check event listener-->
 
 <div id="preview-modal" class="modal overflow-y-auto {{$dialog?'show':'hide'}}" data-backdrop="static" tabindex="-1" aria-hidden="false" style="padding-left: 0px; margin-top: 0px; margin-left: 0px; z-index: 10000;">
     <div class="modal-dialog modal-lg">
-        
-            <div class="modal-content"  style="height: 500px;"> 
+
+            <div class="modal-content"  style="height: 500px;">
                 <div class=" text-right"> <button type="button" wire:click="closeModal()" class="btn btn-default  "> <i class="fa fa-times"></i> </button> </div>
                 {{-- <button  type="button" class=" w-8 h-8"  wire::click="closeModal()"> <i  class="fa fa-times"></i> </button> --}}
                 <div class="modal-body p-0">
@@ -798,20 +798,20 @@
                     </iframe>
                 </div>
             </div>
-       
+
     </div>
 </div>
 
 <!-- END: Modal Content -->
- 
-<!-- BEGIN: Modal Content  check event listener--> 
+
+<!-- BEGIN: Modal Content  check event listener-->
 
 <div id="hijo-modal" class="modal overflow-y-auto {{$dialog_hijo?'show':'hide'}}" data-backdrop="static" tabindex="-1" aria-hidden="false" style="padding-left: 0px; margin-top: 0px; margin-left: 0px; z-index: 10000;">
     <div class="modal-dialog modal-lg">
-        
-            <div class="modal-content"  > 
+
+            <div class="modal-content"  >
                 <div class="modal-header">
-                    <h2 class="font-medium text-base mr-auto">Registro de Hijo(a)</h2> 
+                    <h2 class="font-medium text-base mr-auto">Registro de Hijo(a)</h2>
                     {{-- <button class="btn btn-outline-secondary hidden sm:flex"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs </button> --}}
                     <div class="dropdown sm:hidden"> <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false"> <i data-feather="more-horizontal" class="w-5 h-5 text-gray-600 dark:text-gray-600"></i> </a>
                         <div class="dropdown-menu w-40">
@@ -843,20 +843,20 @@
                 </div>
                 <div class="modal-footer text-right"> <button type="button" wire:click="closeHijo" class="btn btn-outline-secondary w-20 mr-1">Cancelar</button> <button wire:click='saveHijo' type="button" class="btn btn-primary w-20">Guardar</button> </div> <!-- END: Modal Footer -->
             </div>
-       
+
     </div>
 </div>
 
 <!-- END: Modal Content -->
 
-<!-- BEGIN: Modal Content  check event listener--> 
+<!-- BEGIN: Modal Content  check event listener-->
 
 <div id="dificultad-modal" class="modal overflow-y-auto {{$dialog_dificultad?'show':'hide'}}" data-backdrop="static" tabindex="-1" aria-hidden="false" style="padding-left: 0px; margin-top: 0px; margin-left: 0px; z-index: 10000;">
     <div class="modal-dialog modal-lg">
-        
-            <div class="modal-content"  > 
+
+            <div class="modal-content"  >
                 <div class="modal-header">
-                    <h2 class="font-medium text-base mr-auto">Dificultad Laboral</h2> 
+                    <h2 class="font-medium text-base mr-auto">Dificultad Laboral</h2>
                     {{-- <button class="btn btn-outline-secondary hidden sm:flex"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs </button> --}}
                     <div class="dropdown sm:hidden"> <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false"> <i data-feather="more-horizontal" class="w-5 h-5 text-gray-600 dark:text-gray-600"></i> </a>
                         <div class="dropdown-menu w-40">
@@ -884,7 +884,7 @@
                                 placeholder="Detalle de la dificultad">
                             @error('problema') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                         </div>
-                        
+
                         {{-- <div class="col-span-12 sm:col-span-3 pt-6">
                             <button wire:click='saveHijo' class="btn btn-secondary">Guardar</button>
                         </div> --}}
@@ -892,22 +892,22 @@
                 </div>
                 <div class="modal-footer text-right"> <button type="button" wire:click="closeDificultad" class="btn btn-outline-secondary w-20 mr-1">Cancelar</button> <button wire:click='saveDifficulty' type="button" class="btn btn-primary w-20">Guardar</button> </div> <!-- END: Modal Footer -->
             </div>
-       
+
     </div>
 </div>
 
 <!-- END: Modal Content -->
 
-<!-- BEGIN: Modal Content  check event listener--> 
+<!-- BEGIN: Modal Content  check event listener-->
 
 <div id="contact-modal" class="modal overflow-y-auto {{$dialog_contacto?'show':'hide'}}" data-backdrop="static" tabindex="-1" aria-hidden="false" style="padding-left: 0px; margin-top: 0px; margin-left: 0px; z-index: 10000;">
     <div class="modal-dialog modal-lg">
-        
-            <div class="modal-content"  > 
+
+            <div class="modal-content"  >
                 <div class="modal-header">
-                    <h2 class="font-medium text-base mr-auto">Nuevo Contacto</h2> 
+                    <h2 class="font-medium text-base mr-auto">Nuevo Contacto</h2>
                     {{-- <button class="btn btn-outline-secondary hidden sm:flex"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs </button> --}}
-                    
+
                 </div> <!-- END: Modal Header -->
                 <div class="modal-body ">
                     <div class="grid grid-cols-12 gap-4 items-center col-span-12 sm:col-span-12">
@@ -937,23 +937,23 @@
                 </div>
                 <div class="modal-footer text-right"> <button type="button" wire:click="closeContacto" class="btn btn-outline-secondary w-20 mr-1">Cancelar</button> <button wire:click='contactoPersonal' type="button" class="btn btn-primary w-20">Guardar</button> </div> <!-- END: Modal Footer -->
             </div>
-       
+
     </div>
 </div>
 
 <!-- END: Modal Content -->
 
-<!-- BEGIN: Modal Content  check event listener--> 
+<!-- BEGIN: Modal Content  check event listener-->
 
 <div id="formacion-modal" class="modal overflow-y-auto {{$dialog_formacion?'show':'hide'}}" data-backdrop="static" tabindex="-1" aria-hidden="false" style="padding-left: 0px; margin-top: 0px; margin-left: 0px; z-index: 10000;">
     <div class="modal-dialog modal-lg">
-        
-            <div class="modal-content"  > 
+
+            <div class="modal-content"  >
                 <form wire:submit.prevent="formacion" enctype="multipart/form-data">
                 <div class="modal-header">
-                    <h2 class="font-medium text-base mr-auto">Registro de Formacion Laboral</h2> 
+                    <h2 class="font-medium text-base mr-auto">Registro de Formacion Laboral</h2>
                     {{-- <button class="btn btn-outline-secondary hidden sm:flex"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs </button> --}}
-                    
+
                 </div> <!-- END: Modal Header -->
                 <div class="modal-body ">
                     <div class="grid grid-cols-12 gap-4 items-center col-span-12 sm:col-span-12">
@@ -1001,23 +1001,23 @@
                 <div class="modal-footer text-right"> <button type="button" wire:click="closeFormacion" class="btn btn-outline-secondary w-20 mr-1">Cancelar</button> <button  type="submit" class="btn btn-primary w-20">Guardar</button> </div> <!-- END: Modal Footer -->
                 </form>
             </div>
-       
+
     </div>
 </div>
 
 <!-- END: Modal Content -->
 
-<!-- BEGIN: Modal Content  check event listener--> 
+<!-- BEGIN: Modal Content  check event listener-->
 
 <div id="experiencia-modal" class="modal overflow-y-auto {{$dialog_experiencia?'show':'hide'}}" data-backdrop="static" tabindex="-1" aria-hidden="false" style="padding-left: 0px; margin-top: 0px; margin-left: 0px; z-index: 10000;">
     <div class="modal-dialog modal-lg">
-        
-            <div class="modal-content"  > 
+
+            <div class="modal-content"  >
                 <form wire:submit.prevent="experiencia" enctype="multipart/form-data">
                 <div class="modal-header">
-                    <h2 class="font-medium text-base mr-auto">Registro de Experiencia Laboral</h2> 
+                    <h2 class="font-medium text-base mr-auto">Registro de Experiencia Laboral</h2>
                     {{-- <button class="btn btn-outline-secondary hidden sm:flex"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs </button> --}}
-                    
+
                 </div> <!-- END: Modal Header -->
                 <div class="modal-body ">
                     <div class="grid grid-cols-12 gap-4 items-center col-span-12 sm:col-span-12">
@@ -1035,9 +1035,9 @@
                             <input wire:model="fecha_inicio" class="form-control block mx-auto" type="date">
                              @error('fecha_inicio') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
                         </div>
-                        
+
                         <div class="col-span-12 sm:col-span-6">
-                        
+
                             <label class="form-label">Fecha Fin</label>
                             <input wire:model="fecha_fin" class="form-control block mx-auto" type="date">
                              @error('fecha_fin') <small class="intro-x sm:ml-auto mt-1 sm:mt-0 text-theme-6 block ">{{ $message }}</small> @enderror
@@ -1047,30 +1047,30 @@
                             <label class="form-label">Certificado de trabajo</label>
                             <input wire:model='archivoLaboral' type="file" class="form-control" placeholder="22" id="uploadExperiencia{{$filecounter}}">
                         </div>
-                        
-                        
+
+
                     </div>
                 </div>
                 <div class="modal-footer text-right"> <button type="button" wire:click="closeExperiencia" class="btn btn-outline-secondary w-20 mr-1">Cancelar</button> <button  type="submit" class="btn btn-primary w-20">Guardar</button> </div> <!-- END: Modal Footer -->
                 </form>
             </div>
-       
+
     </div>
 </div>
 
 <!-- END: Modal Content -->
 
-<!-- BEGIN: Modal Content  check event listener--> 
+<!-- BEGIN: Modal Content  check event listener-->
 
 <div id="referencia-modal" class="modal overflow-y-auto {{$dialog_referencia?'show':'hide'}}" data-backdrop="static" tabindex="-1" aria-hidden="false" style="padding-left: 0px; margin-top: 0px; margin-left: 0px; z-index: 10000;">
     <div class="modal-dialog modal-lg">
-        
-            <div class="modal-content"  > 
-                
+
+            <div class="modal-content"  >
+
                 <div class="modal-header">
-                    <h2 class="font-medium text-base mr-auto">Registro de Referencia Laboral</h2> 
+                    <h2 class="font-medium text-base mr-auto">Registro de Referencia Laboral</h2>
                     {{-- <button class="btn btn-outline-secondary hidden sm:flex"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs </button> --}}
-                    
+
                 </div> <!-- END: Modal Header -->
                 <div class="modal-body ">
                     <div class="grid grid-cols-12 gap-4 items-center col-span-12 sm:col-span-12">
@@ -1103,13 +1103,13 @@
                             <a wire:click='referencia' class="btn btn-secondary">Añadir</a>
                         </div>
                          --}}
-                        
+
                     </div>
                 </div>
                 <div class="modal-footer text-right"> <button type="button" wire:click="closeReferencia" class="btn btn-outline-secondary w-20 mr-1">Cancelar</button> <button wire:click='referencia' class="btn btn-primary w-20">Guardar</button> </div> <!-- END: Modal Footer -->
-               
+
             </div>
-       
+
     </div>
 </div>
 

@@ -42,8 +42,9 @@
                                         <i class="fa fas fa-file w-4 h-4 mr-2"></i> Firmados
                                     </a>
                                 </div>
-                            </div>
+                            </div>                            
                         </div>
+                        <a href="/doc/formato_convenio.docx" class="pl-5"><i class="fa fa-file fa-2x" style="color:#6e9ffa"></i> Formato Convenio<a>
                     </div>
                 </div>
 

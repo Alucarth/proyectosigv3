@@ -87,6 +87,7 @@ class RegisterPersonController extends Controller
 
     public function pdfRegistroPerson()
     {
+        set_time_limit(0);
 
         $person = Person::where('user_id', auth()->user()->id)->first();
         $decendants = Decendant::where('person_id', $person->id)->get();
@@ -97,6 +98,8 @@ class RegisterPersonController extends Controller
         $contactsLaboral = Contact::where('person_id', $person->id)->where('institution', '!=', null)->get();
         // $branchs = Branch::where('institution_id', $institution->id)->get();
         // $cordinators = Coordinator::where('institution_id', $institution->id)->get();
+
+  
 
         $data = [
             'title' => 'FICHA DE SOLICITANTE',

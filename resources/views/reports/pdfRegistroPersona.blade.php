@@ -3,7 +3,7 @@
 
 <head>
     <title>MPD</title>
-    <link href="{{ asset('css/pdfhtml.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/pdfhtml.css') }}" rel="stylesheet"> --}}
 
 </head>
 

@@ -28,7 +28,7 @@ class PetitionInstitution extends Component
 
     public function mount()
     {
-        $this->institution_id = auth()->user()->institution_id;
+        $this->institution_id = auth()->user()->institution->id;
     }
 
     public function render()

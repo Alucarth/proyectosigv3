@@ -14,7 +14,9 @@
             <th class="whitespace-nowrap uppercase">paquete</th>
             <th class="whitespace-nowrap uppercase">total Ganado</th>
             <th class="whitespace-nowrap uppercase">total Convenio</th>
-            <th class="whitespace-nowrap uppercase">Reposición</th>
+            <th class="whitespace-nowrap uppercase">30% Al Salario basico</th>
+            <th class="whitespace-nowrap uppercase">16.71% del salario basico</th>            
+            <th class="whitespace-nowrap uppercase">Monto del incentivo a transferir</th>
         </tr>
     </thead>
     <tbody>
@@ -47,6 +49,22 @@
                         {{ round((4000 / 30) * $form->dias, 2) }} Bs
                     @else
                         {{ round(($form->contract->vacancy->salario / 30) * $form->dias, 2) }} Bs
+                    @endif
+                </td>
+
+                <td class="border-b dark:border-dark-5 text-center">
+                    @if ($form->contract->vacancy->salario > 4000)
+                        {{ round((4000 / 30) * $form->dias, 2) }} Bs
+                    @else
+                        {{ round(($form->contract->vacancy->salario / 30) * $form->dias, 2) }} Bs
+                    @endif
+                </td>
+
+                <td class="border-b dark:border-dark-5 text-center">
+                    @if ($form->contract->vacancy->salario > 4000)
+                        {{ round((4000 / 16.71) * $form->dias, 2) }} Bs
+                    @else
+                        {{ round(($form->contract->vacancy->salario / 16.71) * $form->dias, 2) }} Bs
                     @endif
                 </td>
                 <td class="border-b dark:border-dark-5 text-center">

@@ -72,8 +72,8 @@
                         <option value="">Seleccione un opcion</option>
                         @foreach ($payrolls as $payroll)
                             <option class="uppercase" value="{{ $payroll->id }}">
-                                {{ $payroll->person->nombres }} {{ $payroll->person->paterno }}
-                                {{ $payroll->person->materno }}</option>
+                                {{ $payroll->people->nombres }} {{ $payroll->people->paterno }}
+                                {{ $payroll->people->materno }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -107,7 +107,63 @@
                 </div>
             </form>
         </div>
+
+        <div class="overflow-x-auto mt-6">
+            <table class="table">
+                <thead>
+                    <tr class="bg-gray-700 dark:bg-dark-1 text-white">
+                        <th class="whitespace-nowrap">#</th>
+                        <th class="whitespace-nowrap">Nombre Beneficiario</th>
+                        <th class="whitespace-nowrap">Cite</th>
+                        <th class="whitespace-nowrap">Contrato</th>
+                        <th class="whitespace-nowrap"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    @foreach ($contratos as $key=>$contrato)
+                        <tr>
+                            <td class="border-b dark:border-dark-5">{{ $key+=1 }}</td>
+                            <td class="border-b dark:border-dark-5 text-gray-700 uppercase">
+                                
+                                <span class="text-gray-600">
+                                    {{ $contrato->person->nombres }} {{ $contrato->person->paterno }} {{ $contrato->person->materno }}
+                                </span>
+                            </td>
+                            <td class="border-b dark:border-dark-5">
+                                {{ $contrato->codigo }}
+                            </td>
+                            <td class="border-b dark:border-dark-5">
+                                <button type="button" wire:click="verArchivo({{$contrato->id}})"  class="" > <i class="fa fa-file-pdf fa-2x" style="color:#E70012"></i></button>
+                            </td>
+                            <td class="border-b dark:border-dark-5">
+                                <button class="btn btn-sm btn-danger" wire:click="deleteContrato({{$contrato->id}})" > <i class="fas fa-trash w-4 h-4 mr-2"></i> </button>
+                            </td>
+                            
+                           
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
         <a class="btn btn-outline-primary py-3 px-4 xl:w-80 mt-3 xl:mt-2 align-left"
-        href="{{ route('contract.institution') }}">Finalizar</a>
+        href="{{ route('contract.institution') }}">Salir</a>
     @endif
+    <div id="ver-archivo-modal-contrato" class="modal overflow-y-auto {{$dialogArchivo?'show':'hide'}}" data-backdrop="static" tabindex="-1" aria-hidden="false" style="padding-left: 0px; margin-top: 0px; margin-left: 0px; z-index: 10000;">
+        <div class="modal-dialog modal-lg">
+            
+                <div class="modal-content"  style="height: 500px;"> 
+                    <div class=" text-right"> <button type="button" wire:click="closeModal()" class="btn btn-default  "> <i class="fa fa-times"></i> </button> </div>
+                    {{-- <button  type="button" class=" w-8 h-8"  wire::click="closeModal()"> <i  class="fa fa-times"></i> </button> --}}
+                    <div class="modal-body p-0">
+                        {{-- {{$urlfile}} --}}
+                        <iframe src="{{$urlfile}}" frameborder="0" class="w-full" style="height: 500px;" >
+                        </iframe>
+                    </div>
+                </div>
+            
+        </div>
+    </div>
 </div>
+

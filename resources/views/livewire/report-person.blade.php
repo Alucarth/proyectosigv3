@@ -4,7 +4,7 @@
     {{ $estadistica_edad }}
     <br>
     {{ $estadistica_estado_civil }} --}}
-    {{-- <div class="box py-5 px-8 sm:py-20 mt-5">
+    <div class="box py-5 px-8 sm:py-20 mt-5">
         <canvas id="myChart" width="200" height="200" data ="{{$estadistica}}"></canvas>
     </div>
     <div class="box py-5 px-8 sm:py-20 mt-5">
@@ -12,7 +12,7 @@
     </div>
     <div class="box py-5 px-8 sm:py-20 mt-5">
         <canvas id="chartCivil" width="200" height="200" data ="{{$estadistica_estado_civil}}"></canvas>
-    </div> --}}
+    </div>
     <div class="box py-10 px-8 sm:py-20 mt-5">
         <div class="grid grid-cols-12 gap-2 items-center">
             <div class="col-span-12 sm:col-span-3">

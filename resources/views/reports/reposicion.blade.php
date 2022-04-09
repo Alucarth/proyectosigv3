@@ -93,10 +93,13 @@
                 Total Ganado (Bs)
             </td>
             <td class="px-15 py text-center text-xxs">
-                Total Percibido (Bs)
+                30% al salario basico (Bs)
             </td>
             <td class="px-15 py text-center text-xxs">
-                Reposicion total PAE (Bs)
+                16.71% del salario basico (Bs)
+            </td>
+            <td class="px-15 py text-center text-xxs">
+                Monto del incentivo a transferir (Bs)
             </td>
         </tr>
     </thead>
@@ -104,7 +107,7 @@
 
         @foreach ($forms as $index => $form)
             <tr class="text-sm">
-                <td class="text-center text-xxs uppercase font-bold px-5 py-3">{{ $index++ }}</td>
+                <td class="text-center text-xxs uppercase font-bold px-5 py-3">{{ $index+=1 }}</td>
                 <td class="text-center text-xxs uppercase font-bold px-5 py-3">{{ $form->contract->person->nombres }} {{ $form->contract->person->paterno }} {{ $form->contract->person->materno }}</td>
                 <td class="text-center text-xxs uppercase font-bold px-5 py-3">{{ $form->contract->person->ci  }} {{ $form->contract->person->expedido }}</td>
                 <td class="text-center text-xxs uppercase font-bold px-5 py-3">{{  Carbon\Carbon::parse($form->contract->fecha_inicio, 'UTC')->format('d-m-Y') }}</td>
@@ -120,6 +123,13 @@
                         {{ round((4000 / 30) * $form->dias, 2) }} Bs
                     @else
                         {{ round(($form->salario / 30) * $form->dias, 2) }} Bs
+                    @endif
+                </td>
+                <td class="text-center text-xxs uppercase font-bold px-5 py-3"> 
+                    @if ($form->salario > 4000)
+                        {{ round((4000 / 16.71) * $form->dias, 2) }} Bs
+                    @else
+                        {{ round(($form->salario / 16.71) * $form->dias, 2) }} Bs
                     @endif
                 </td>
                 <td class="text-center text-xxs uppercase font-bold px-5 py-3">  

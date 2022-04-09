@@ -27,12 +27,12 @@
                 <div class="side-menu__title"> Personas </div>
                 </a>
         </li>
-        <li>
+        {{-- <li>
             <a href="simple-menu-dark-dashboard-overview-1.html" class="side-menu">
                 <div class="side-menu__icon"> <i class="fas fa-laptop-house "></i> </div>
                 <div class="side-menu__title"> Empresas </div>
             </a>
-        </li>
+        </li> --}}
     
     </ul>
     </li>
@@ -97,12 +97,12 @@
                 <div class="side-menu__title"> Vacancias </div>
             </a>
         </li>
-        {{-- <li>
+        <li>
             <a href="{{ route('petition.institution') }}" class="side-menu">
                 <div class="side-menu__icon"> <i data-feather="book"></i> </div>
                 <div class="side-menu__title"> Reposiciones </div>
             </a>
-        </li> --}}
+        </li>
     @endif
     @endrole
     @role('responsable')

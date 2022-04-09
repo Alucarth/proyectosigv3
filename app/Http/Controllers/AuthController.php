@@ -34,7 +34,7 @@ class AuthController extends Controller
 
                 $res = Official::where('user_id', auth()->user()->id)->count();
                 if ($res > 0) {
-                    return redirect()->route('page.dashboard');
+                    return redirect()->route('page.dashboardOficial');
                 }
                 //return redirect()->intended('dashboard');
 

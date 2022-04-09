@@ -5,7 +5,7 @@
     <div class="grid grid-cols-12 gap-4 items-center col-span-12 sm:col-span-12">
 
         {{-- panel lista --}}
-        <div class="intro-y box col-span-12 lg:col-span-6">
+        <div class="intro-y box col-span-12 lg:col-span-12">
             <div class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200 dark:border-dark-5">
                 <h2 class="font-medium text-base mr-auto">
                     <span style="font-size: 2em; color: #C5CAE9;">
@@ -18,7 +18,7 @@
                 {{-- <button class="btn btn-outline-secondary hidden sm:flex"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file w-4 h-4 mr-2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg> Download Excel </button> --}}
             </div>
             <div class="p-5">
-                <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+                <div class=" gap-4 gap-y-5 mt-5">
                     <table class="table">
                         <thead>
                             <tr class="bg-gray-700 dark:bg-dark-1 text-white">
@@ -80,7 +80,7 @@
 
         @if($oficial)
 
-            <div class="intro-y box col-span-12 lg:col-span-6">
+            <div class="intro-y box col-span-12 lg:col-span-12">
                 <div class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200 dark:border-dark-5">
                     <h2 class="font-medium text-base mr-auto">
                         <span style="font-size: 2em; color: #1E88E5;">

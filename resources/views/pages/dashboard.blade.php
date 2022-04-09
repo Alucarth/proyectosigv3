@@ -24,34 +24,26 @@
                                     </span>
                                 </div>
                                 <div class="ml-5">
-                                    <div class="font-medium text-lg">
+                                    <div class="font-medium text-lg">{{ $person->nombres }} {{ $person->paterno }}
+                                        {{ $person->materno }}
                                     </div>
-                                    <div class="text-gray-600">Detalle 1: </div>
-                                    <div class="text-gray-600">Detalle 2: </div>
+                                    <div class="text-gray-600">Cedula identidad: <b> {{ $person->ci }}
+                                            {{ $person->expedido }} </b> </div>
+                                    <div class="text-gray-600">Fecha nacimiento: <b>
+                                            {{ Carbon\Carbon::parse($person->nacimiento)->format('d/m/Y') }} </b> </div>
                                 </div>
 
                             </div>
                             <div
                                 class="mt-6 lg:mt-0 flex-1 dark:text-gray-300 px-5 border-l border-r border-gray-200 dark:border-dark-5 border-t lg:border-t-0 pt-5 lg:pt-0">
-                                <div class="font-medium text-center lg:text-left lg:mt-3">DETALLE 3</div>
-                                <div class="flex flex-col justify-center items-center lg:items-start mt-4">
-                                    <div class="truncate sm:whitespace-normal flex items-center">
-                                        <span style="font-size: 1em; color: #444444;" class="pr-2">
-                                            <i class="fas fa-user"></i>
-                                        </span>
-
+                                <div class="font-medium text-center lg:text-left lg:mt-3">LUGAR DE RECIDENCIA</div>
+                                <div class="flex flex-col justify-center items-center lg:items-start ">
+                                    <div class="">
+                                        <div class="text-gray-600">Departamento: <b> {{ $person->department->nombre }}
+                                            </b> </div>
                                     </div>
-                                    <div class="truncate sm:whitespace-normal flex items-center mt-3">
-                                        <span style="font-size: 1em; color: #444444;" class="pr-2">
-                                            <i class="fas fa-envelope"></i>
-                                        </span>
-
-                                    </div>
-                                    <div class="truncate sm:whitespace-normal flex items-center mt-3">
-                                        <span style="font-size: 1em; color: #444444;" class="pr-2">
-                                            <i class="fas fa-phone-square-alt"></i>
-                                        </span>
-
+                                    <div class="">
+                                        <div class="text-gray-600">Dirección: <b> {{ $person->direccion }} </b> </div>
                                     </div>
                                 </div>
                             </div>
@@ -65,7 +57,7 @@
                                                 <i class="fas fa-file-pdf"></i>
                                             </span>
                                         </div>
-                                        <div class="text-gray-600" style="font-size: 11px;">Registro</div>
+                                        <div class="text-gray-600" style="font-size: 11px;">Ficha Personal</div>
                                     </a>
                                 </div>
 

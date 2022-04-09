@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use App\Mail\Confirmation;
 use App\Models\User;
 use App\Models\Person;
+use App\Models\Decendant;
+use App\Models\PersonProblem;
+use App\Models\Contact;
+use App\Models\CareerPerson;
+use App\Models\Experience;
+
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +25,12 @@ class RegisterPersonController extends Controller
     {
         $person = Person::where('user_id', auth()->user()->id)->first();
         return view('pages.dataPerson', compact("person"));
+    }
+
+    public function dashboard()
+    {
+        $person = Person::where('user_id', auth()->user()->id)->first();
+        return view('pages.dashboard', compact("person"));
     }
 
     public function register()
@@ -75,15 +87,30 @@ class RegisterPersonController extends Controller
 
     public function pdfRegistroPerson()
     {
+        set_time_limit(0);
 
         $person = Person::where('user_id', auth()->user()->id)->first();
+        $decendants = Decendant::where('person_id', $person->id)->get();
+        $personProblem = PersonProblem::where('person_id', $person->id)->get();
+        $contacts = Contact::where('person_id', $person->id)->where('institution', null)->get();
+        $studies = CareerPerson::where('person_id', $person->id)->get();
+        $experiences = Experience::where('person_id', $person->id)->get();
+        $contactsLaboral = Contact::where('person_id', $person->id)->where('institution', '!=', null)->get();
         // $branchs = Branch::where('institution_id', $institution->id)->get();
         // $cordinators = Coordinator::where('institution_id', $institution->id)->get();
 
+  
+
         $data = [
-            'title' => 'DATOS DEL SOLICITANTE',
+            'title' => 'FICHA DE SOLICITANTE',
             'date' => date('m/d/Y'),
             'person' => $person,
+            'decendants'=> $decendants,
+            'personProblem'=>$personProblem,
+            'contacts' => $contacts,
+            'studies' => $studies,
+            'experiences' => $experiences,
+            'contactsLaboral'=>$contactsLaboral
             // 'branchs'=> $branchs,
             // 'cordinators'=> $cordinators,
         ];

@@ -42,8 +42,9 @@
                                         <i class="fa fas fa-file w-4 h-4 mr-2"></i> Firmados
                                     </a>
                                 </div>
-                            </div>
+                            </div>                            
                         </div>
+                        <a href="/doc/formato_convenio.docx" class="pl-5"><i class="fa fa-file fa-2x" style="color:#6e9ffa"></i> Formato Convenio<a>
                     </div>
                 </div>
 
@@ -73,7 +74,7 @@
                                 <td class="border-b dark:border-dark-5">
                                     {{ $assignament->razon_social }}
                                 </td>
-                                <td class="border-b dark:border-dark-5">{{ ($assignament->institution_estado == 'ACTIVO')?'FIRMADO':'PENDIENTE' }}</td>
+                                <td class="border-b dark:border-dark-5">{{ ($assignament->fecha_convenio != null)?'FIRMADO':'PENDIENTE' }}</td>
 
                                 <td class="border-b dark:border-dark-5">
                                     {{ ($assignament->fecha_convenio!="")? date('d/m/Y', strtotime($assignament->fecha_convenio)):"" }}
@@ -86,13 +87,13 @@
                                 </td>
 
                                 <th class="whitespace-nowrap uppercase">
-                                    @if ($assignament->institution_estado == 'ACTIVO')
+                                    @if ($assignament->fecha_convenio != null)
                                         <button type="button" wire:click="verArchivo({{$assignament->institution_id}})"  class="" > <i class="fa fa-file-pdf fa-2x" style="color:#E70012"></i></button>    
                                     @endif                                    
                                 </th>
 
                                 <td class="border-b dark:border-dark-5">
-                                    @if ($assignament->institution_estado == 'ACTIVO')
+                                    @if ($assignament->fecha_convenio != null)
                                         <button type="button" wire:click="alertEliminarConvenio({{$assignament->institution_id}})" class="btn  p-1" ><i class="fa fa-trash fa-lg" style="color:rgba(255, 0, 0, 0.801)"> </i></button>    
                                     @else
                                         <button type="button" wire:click="showModal({{$assignament->institution_id}})"  class="btn btn-linkedin p-1" ><i class="fa fa-file-upload fa-lg"> </i></button>

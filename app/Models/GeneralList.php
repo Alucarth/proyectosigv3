@@ -17,6 +17,11 @@ class GeneralList extends Model
         return $this->belongsTo(Person::class);
     }
 
+    public function person()
+    {
+        return $this->belongsTo(Person::class);
+    }
+
     public function institution()
     {
         return $this->belongsTo(Institution::class);

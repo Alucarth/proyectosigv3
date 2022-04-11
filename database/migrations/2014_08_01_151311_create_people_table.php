@@ -16,8 +16,8 @@ class CreatePeopleTable extends Migration
         Schema::create('people', function (Blueprint $table) {
             $table->id();
             $table->string('nombres');
-            $table->string('paterno');
-            $table->string('materno');
+            $table->string('paterno')->nullable();
+            $table->string('materno')->nullable();
             $table->string('ci')->nullable();
             $table->enum('expedido', [
                 'CH',

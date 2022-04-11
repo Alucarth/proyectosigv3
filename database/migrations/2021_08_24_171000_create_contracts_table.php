@@ -16,14 +16,17 @@ class CreateContractsTable extends Migration
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('institution_id');
-            $table->unsignedBigInteger('vacancy_id');
+            $table->unsignedBigInteger('vacancy_id')->nullable();
             $table->unsignedBigInteger('person_id');
             $table->unsignedBigInteger('package_id');
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
-            $table->string('archivo');
+            $table->string('archivo')->nullable();
+            $table->string('cuenta')->nullable();
             $table->string('codigo');
-            $table->string('estado');
+            $table->string('estado')->nullable();
+            $table->double('monto_total', 8, 2)->nullable();
+            $table->double('salario_basico', 8, 2)->nullable();
             $table->timestamps();
 
             $table->foreign('institution_id')->references('id')->on('institutions');

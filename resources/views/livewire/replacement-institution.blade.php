@@ -1,7 +1,10 @@
 <div>
     @if ($ventana == 1)
         <div class="box py-8 px-6">
-            <h1 class="text-xl text-gray-900">Lista de Inserciones</h1>
+            <h1 class="text-xl text-gray-900">Lista de Inserciones   </h1>
+            <br>
+            <a href="{{url('importar-reposiciones')}}" class="btn btn-outline-success btn-sm" > Importar Reposiciones </a>
+           
             <div class="overflow-x-auto mt-6">
                 <table class="table">
                     <thead>

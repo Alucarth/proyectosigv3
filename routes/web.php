@@ -15,6 +15,7 @@ use App\Http\Controllers\RegisterInstitutionController;
 use App\Http\Controllers\AgreementInstitutionController;
 use App\Http\Controllers\ReplacementInstitutionController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ReplacementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,3 +72,7 @@ Route::get('datos-empresa', [RegisterInstitutionController::class, "institution"
 Route::get('datos-empresa-edit', [RegisterInstitutionController::class, "editEstadoIntitution"])->name('institution.editEstadoIntitution')->middleware(['auth', 'role:empresa']);
 Route::get('institution-estado-vacancias', [RegisterInstitutionController::class, "activeVacanciasIntitution"])->name('institution.activeVacanciasIntitution')->middleware(['auth', 'role:empresa']);
 Route::get('institution-pdf-registro', [RegisterInstitutionController::class, "pdfRegistroInstitution"])->name('institution.pdfRegistroInstitution');//->middleware(['auth', 'role:empresa']);
+
+//modulo para auditoria
+
+Route::get('importar-reposiciones',[ReplacementController::class, "import"])->name('import.repositions')->middleware(['auth', 'role:oficial']);

@@ -18,7 +18,7 @@ class CreateInstitutionsTable extends Migration
             $table->id();
             $table->string('razon_social');
             $table->string('nombre_comercial')->nullable();
-            $table->unsignedBigInteger('society_id');
+            $table->unsignedBigInteger('society_id')->nullable();
             $table->string('nit')->unique();
             $table->string('file_nit')->nullable();
             $table->boolean('roe')->default(0);

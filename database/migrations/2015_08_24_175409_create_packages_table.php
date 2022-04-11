@@ -16,9 +16,9 @@ class CreatePackagesTable extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->integer('porcentaje');
-            $table->string('descripcion');
-            $table->string('estado');
+            $table->integer('porcentaje')->nullable();
+            $table->string('descripcion')->nullable();
+            $table->string('estado')->nullable();
             $table->timestamps();
         });
     }

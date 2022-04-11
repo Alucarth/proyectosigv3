@@ -17,6 +17,11 @@ class ReplacementController extends Controller
         //
     }
 
+    public function import()
+    {
+        return view('pages.repositionImport');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

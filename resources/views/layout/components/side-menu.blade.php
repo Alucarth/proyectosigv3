@@ -33,7 +33,7 @@
                 <div class="side-menu__title"> Empresas </div>
             </a>
         </li> --}}
-    
+
     </ul>
     </li>
     @endrole
@@ -46,20 +46,20 @@
     </li>
     <li>
         <a href="{{ route('general.list') }}" class="side-menu">
-            <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+            <div class="side-menu__icon"> <i class="fas fa-people-arrows fa-2x"></i> </div>
             <div class="side-menu__title"> Emparejamiento </div>
         </a>
     </li>
     <li>
         <a href="{{ route('contract.institution') }}" class="side-menu">
-            <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+            <div class="side-menu__icon"> <i class="fas fa-file-signature fa-2x"></i> </div>
             <div class="side-menu__title"> Contratos </div>
         </a>
     </li>
     <li>
         <a href="{{ route('replacement.institution') }}" class="side-menu">
-            <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-            <div class="side-menu__title"> Reposicion </div>
+            <div class="side-menu__icon"> <i class="fas fa-money-check-alt fa-2x"></i> </div>
+            <div class="side-menu__title"> Reposiciones </div>
         </a>
     </li>
     @endrole

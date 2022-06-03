@@ -32,7 +32,7 @@ class RepositionImport extends Component
     {
         $this->path =(string) $this->file_name->store("excels");
         Log::info(storage_path('app/').$this->path);
-        $colections = Excel::toCollection(new RepositionImportExcel, storage_path("app\\".$this->path));
+        $colections = Excel::toCollection(new RepositionImportExcel, storage_path("app//".$this->path));
         $this->items =[];
         foreach($colections[0] as $row)
         {
@@ -40,9 +40,9 @@ class RepositionImport extends Component
             $item =(object) $item;
             array_push($this->items,$item);
         }
-        
+
         Log::info(json_encode($this->items));
-        
+
     }
 
     public function save()
@@ -50,7 +50,7 @@ class RepositionImport extends Component
         foreach($this->items as $objeto)
         {
             $item = (object) $objeto;
-           
+
             Log::info(json_encode($item));
             Log::info($item->beneficiario);
             $contrato =  Contract::where('codigo','=',$item->contrato)->first();
@@ -64,7 +64,7 @@ class RepositionImport extends Component
                     $institution->nit = $item->nit;
                     $institution->save();
                 }
-    
+
                 $beneficiario = Person::where('ci','=',$item->ci)->first();
                 if(!$beneficiario)
                 {
@@ -105,7 +105,7 @@ class RepositionImport extends Component
             $reposition->fecha_inicio = Carbon::parse($item->fecha_inicio_calculo);
             $reposition->fecha_fin = Carbon::parse($item->fecha_fin_calculo);
             $reposition->dias_cotizados = $item->dias_cotizados;
-            $reposition->fecha_periodo = Carbon::parse($item->periodo); 
+            $reposition->fecha_periodo = Carbon::parse($item->periodo);
             $reposition->nro_pago = $item->nro_pago;
             $reposition->monto = $item->monto;
             $reposition->descuentos_bonos = $item->descuento_bonificacion;
@@ -115,7 +115,7 @@ class RepositionImport extends Component
             $reposition->monto_incentivo = $item->monto_incentivo;
             $reposition->official_id = Auth::user()->id;
             $reposition->save();
-            
+
         }
         $this->file_name = '';
         $this->items=[];
@@ -124,9 +124,9 @@ class RepositionImport extends Component
 
     public function render()
     {
-        
+
         return view('livewire.reposition-import');
     }
 
-  
+
 }

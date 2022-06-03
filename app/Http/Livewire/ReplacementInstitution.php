@@ -19,7 +19,10 @@ class ReplacementInstitution extends Component
     public $petition_id;
     public $petition;
     public $suma;
-
+    public $replacement = [];
+    public $ci;
+    public $beneficiario;
+    public $empresa;
     /*public $ventana = 1;
     public $contract_id;
     public $fechaInicio;
@@ -115,18 +118,35 @@ class ReplacementInstitution extends Component
 
     public function render()
     {
-        if ($this->petition_id != null) {
-            $this->ventana = 2;
-            $this->petition = Petition::find($this->petition_id);
-            foreach ($this->petition->forms as $form) {
-                if ($form->contract->vacancy->salario > 4000) {
-                    $this->suma = $this->suma + round((4000 / 30) * $form->dias * ($form->contract->package->porcentaje / 100), 2);
-                } else {
-                    $this->suma = $this->suma + round(($form->contract->vacancy->salario / 30) * $form->dias * ($form->contract->package->porcentaje / 100), 2);
-                }
-            }
-        }
-        $petitions = Petition::where('estado', 'ENVIADO')->paginate(10);
-        return view('livewire.replacement-institution', compact('petitions'));
+        // if ($this->petition_id != null) {
+        //     $this->ventana = 2;
+        //     $this->petition = Petition::find($this->petition_id);
+        //     foreach ($this->petition->forms as $form) {
+        //         if ($form->contract->vacancy->salario > 4000) {
+        //             $this->suma = $this->suma + round((4000 / 30) * $form->dias * ($form->contract->package->porcentaje / 100), 2);
+        //         } else {
+        //             $this->suma = $this->suma + round(($form->contract->vacancy->salario / 30) * $form->dias * ($form->contract->package->porcentaje / 100), 2);
+        //         }
+        //     }
+        // }
+        // $petitions = Petition::where('estado', 'ENVIADO')->paginate(10);
+
+        return view('livewire.replacement-institution');
+    }
+
+
+    public function mount()
+    {
+        $this->replacement = [];
+        $this->ci = '';
+        $this->beneficiario = '';
+        $this->empresa ='';
+
+
+    }
+
+    public function buscar()
+    {
+        $this->ci = '6047054';
     }
 }

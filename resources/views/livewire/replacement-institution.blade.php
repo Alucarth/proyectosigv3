@@ -28,7 +28,7 @@
                     <a href="{{url('importar-reposiciones')}}" class="btn btn-outline-success btn-sm" > Importar Reposiciones </a>
 
                 </div>
-                {{json_encode($replacement)}}
+
             </div>
 
             <div class="overflow-x-auto mt-6">
@@ -47,7 +47,19 @@
                         </tr>
                     </thead>
                     <tbody>
-
+                        @foreach ($replacement as $index=>$r )
+                            <tr>
+                                <td>{{$index+1}}</td>
+                                <td>{{$r->ci}}</td>
+                                <td>{{$r->nombres}}</td>
+                                <td>{{$r->fecha_periodo}}</td>
+                                <td>{{$r->nro_pago}}</td>
+                                <td>{{$r->monto}}</td>
+                                <td>{{$r->descuentos_bonos}}</td>
+                                <td>{{$r->salario_basico}}</td>
+                                <td>{{$r->email}}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

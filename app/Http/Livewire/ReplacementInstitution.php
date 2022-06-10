@@ -9,6 +9,7 @@ use App\Models\Validation;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\DB;
 
 class ReplacementInstitution extends Component
 {
@@ -147,6 +148,20 @@ class ReplacementInstitution extends Component
 
     public function buscar()
     {
-        $this->ci = '6047054';
+        $conditions = array();
+        $ci = ''.$this->ci;
+        if(isset($ci) && $ci !==  '')
+        {
+            array_push($conditions,['ci','like',"%{$ci}%"]);
+        }
+
+        $this->beneficiario = "buscando";
+        // $this->replacement = DB::table('people_replacement')->get();
+        $this->replacement = DB::table('people_replacement')
+                            ->where($conditions)
+                            // ->where('ci','like',$this->ci)
+                            // ->orderBy('nro_pago')
+                            ->get();
+
     }
 }

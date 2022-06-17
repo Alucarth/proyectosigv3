@@ -1,5 +1,5 @@
 // require('./bootstrap');
-require('./knockout-3.5.1');
+
 import '@fortawesome/fontawesome-free/js/all.js';
 console.log('iniciando modulo js ')
 // window.Chart = require('chart.js');

@@ -10,6 +10,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ReplacementInstitution extends Component
 {
@@ -21,7 +22,7 @@ class ReplacementInstitution extends Component
     public $petition;
     public $suma;
     public $replacement = [];
-    public $ci;
+    public $cedula;
     public $beneficiario;
     public $empresa;
     /*public $ventana = 1;
@@ -139,29 +140,39 @@ class ReplacementInstitution extends Component
     public function mount()
     {
         $this->replacement = [];
-        $this->ci = '';
+        $this->cedula = '';
         $this->beneficiario = '';
         $this->empresa ='';
 
 
     }
 
+
+
     public function buscar()
     {
         $conditions = array();
-        $ci = ''.$this->ci;
+        $ci = ''.$this->cedula;
+        Log::info($ci);
         if(isset($ci) && $ci !==  '')
         {
             array_push($conditions,['ci','like',"%{$ci}%"]);
         }
-
+        $array = DB::table('people_replacement')
+                ->where($conditions)
+                // ->where('ci','like',$this->ci)
+                // ->orderBy('nro_pago')
+                ->get();
+        Log::info($array);
+        $this->setReplacement([]);
+        $this->setReplacement($array);
         $this->beneficiario = "buscando";
-        // $this->replacement = DB::table('people_replacement')->get();
-        $this->replacement = DB::table('people_replacement')
-                            ->where($conditions)
-                            // ->where('ci','like',$this->ci)
-                            // ->orderBy('nro_pago')
-                            ->get();
 
+
+    }
+
+    public function setReplacement($array)
+    {
+        $this->replacement = $array;
     }
 }

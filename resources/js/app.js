@@ -1,10 +1,14 @@
 // require('./bootstrap');
+require('./knockout-3.5.1');
 import '@fortawesome/fontawesome-free/js/all.js';
 console.log('iniciando modulo js ')
 // window.Chart = require('chart.js');
 window.iziToast = require('izitoast');
+const axios = require('axios').default;
+console.log('instalando axios');
 
 var error_tag = document.getElementById('error_message')
+
 // var previewModal = document.getElementById('modal-preview')
 
 // console.log(previewModal)

@@ -49,12 +49,15 @@ class RegisterPersonController extends Controller
             'captcha' => 'required|captcha'
         ];
 
+
+        return redirect()->intended('/')->with("alert", "Mediante Instructivo MPD/UGCPNE-IN 0002/2020 se suspende el registro debido a que el programa se encuentra en etapa de cierre. Gracias por su comprension");
+
         $request->validate($rules);
 
         DB::beginTransaction();
 
         try {
-            
+
 
             $user = new User();
             // $user->person_id = $person->id;
@@ -99,7 +102,7 @@ class RegisterPersonController extends Controller
         // $branchs = Branch::where('institution_id', $institution->id)->get();
         // $cordinators = Coordinator::where('institution_id', $institution->id)->get();
 
-  
+
 
         $data = [
             'title' => 'FICHA DE SOLICITANTE',
@@ -114,9 +117,9 @@ class RegisterPersonController extends Controller
             // 'branchs'=> $branchs,
             // 'cordinators'=> $cordinators,
         ];
-          
+
         $pdf = PDF::loadView('reports.pdfRegistroPersona', $data);
-    
+
         //return $pdf->download('DATOS-EMPRESA.pdf');
         return $pdf->stream('DATOS-PERSONA.pdf');
     }

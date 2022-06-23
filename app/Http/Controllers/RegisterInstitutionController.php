@@ -56,6 +56,10 @@ class RegisterInstitutionController extends Controller
 
     public function store(Request $request)
     {
+
+
+        return redirect()->intended('/')->with("alert", "Mediante Instructivo MPD/UGCPNE-IN 0002/2020 se suspende el registro debido a que el programa se encuentra en etapa de cierre. Gracias por su comprension");
+
         $rules = [
             'razonSocial' => 'required',
              // 'nombreComercial' => 'required',
@@ -72,10 +76,10 @@ class RegisterInstitutionController extends Controller
             'society.required' => 'El campo Tipo de Sociedad es obligatorio!',
             'nit.required' => 'El campo NIT es obligatorio!',
             'nit.numeric' => 'El campo NIT debe ser numérico!',
-            'email.required' => 'El campo Email es obligatorio!',            
+            'email.required' => 'El campo Email es obligatorio!',
             'email.email' => 'Email no valido!',
             'password.required' => 'El campo Contraseña es obligatorio!',
-            'captcha.required' => 'El campo Captcha es obligatorio!',            
+            'captcha.required' => 'El campo Captcha es obligatorio!',
             'captcha.captcha' => 'Captcha no valido!',
         ];
 
@@ -84,8 +88,8 @@ class RegisterInstitutionController extends Controller
         DB::beginTransaction();
 
         try {
-            
-            $user = new User();            
+
+            $user = new User();
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
             $user->codigo = Str::uuid()->toString();
@@ -132,9 +136,9 @@ class RegisterInstitutionController extends Controller
             'branchs'=> $branchs,
             'cordinators'=> $cordinators,
         ];
-          
+
         $pdf = PDF::loadView('reports.pdfReistroEmpresa', $data);
-    
+
         //return $pdf->download('DATOS-EMPRESA.pdf');
         return $pdf->stream('DATOS-EMPRESA.pdf');
     }

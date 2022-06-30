@@ -67,7 +67,7 @@
                                                 <th class="whitespace-nowrap">Descuentos/Bonos </th>
                                                 <th class="whitespace-nowrap">Salario Basico </th>
                                                 <th class="whitespace-nowrap">Oficial Operativo </th>
-                                                <th class="whitespace-nowrap">Total Ganado </th>
+                                                <th class="whitespace-nowrap">Monto Incentivo</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="foreach: reposiciones">
@@ -83,13 +83,31 @@
                                                 <td data-bind="text: descuentos_bonos"> </td>
                                                 <td data-bind="text: salario_basico"> </td>
                                                 <td data-bind="text: email"> </td>
-                                                <td data-bind="text: total_ganado"> </td>
+                                                <td data-bind="text: monto_incentivo"> </td>
+                                            </tr>
+
+
+                                        </tbody>
+                                        <tbody>
+                                            <tr class="bg-gray-700 dark:bg-dark-1 text-white" >
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>Total Incentivo</td>
+
+                                                <td> <strong data-bind="text: total_repo"></strong></td>
                                             </tr>
 
 
                                         </tbody>
                                     </table>
-                                    <table class="table">
+                                    {{-- <table class="table">
 
                                         <tbody>
                                             <tr class="bg-gray-700 dark:bg-dark-1 text-white" >
@@ -109,7 +127,7 @@
 
 
                                         </tbody>
-                                    </table>
+                                    </table> --}}
 
                                 </div>
                             </div>
@@ -154,7 +172,7 @@
 
                     var total = 0;
                     viewModel.reposiciones().forEach(item => {
-                        total += parseFloat(item.total_ganado)
+                        total += parseFloat(item.monto_incentivo)
                     });
 
                     viewModel.total_repo(total)

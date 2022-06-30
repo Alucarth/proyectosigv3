@@ -14,6 +14,7 @@ use App\Models\Replacement;
 use Carbon\Carbon;
 use Log;
 use Auth;
+
 class RepositionImport extends Component
 {
     use WithFileUploads;
@@ -41,7 +42,9 @@ class RepositionImport extends Component
             array_push($this->items,$item);
         }
 
+        unlink(storage_path('app/'.$this->path));
         Log::info(json_encode($this->items));
+        Log::info('Se elimino el archivo temporal XD');
 
     }
 

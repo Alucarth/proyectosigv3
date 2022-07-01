@@ -43,7 +43,7 @@ class ReplacementController extends Controller
     {
 
         $items =[];
-
+        $has_error=false;
         if($request->file('fileExcel'))
         {
             $path = $request->file('fileExcel')->store('excels');
@@ -51,10 +51,189 @@ class ReplacementController extends Controller
             // Log::info(storage_path('app/').$path);
             $colections = Excel::toCollection(new RepositionImportExcel, storage_path("app//".$path));
 
+            $indice = 1;
             foreach($colections[0] as $row)
             {
+                $has_error=false;
                 $item =json_decode( json_encode($row));
                 $item =(object) $item;
+                /* validando informacion */
+
+                $item->indice = $indice;
+                $indice++;
+
+                if(!property_exists($item,'empresa') )
+                {
+                    $item->empresa = 'x';
+                    $has_error = true;
+                }else
+                {
+                    $item->empresa = mb_strtoupper($item->empresa, 'UTF-8');
+                }
+
+                if(!property_exists($item,'contrato') )
+                {
+                    $item->contrato = 'x';
+                    $has_error = true;
+                }else
+                {
+                    $item->contrato = mb_strtoupper($item->contrato, 'UTF-8');
+                }
+
+                if(!property_exists($item,'beneficiario') )
+                {
+                    $item->beneficiario = 'x';
+                    $has_error = true;
+                }else
+                {
+                    $item->beneficiario = mb_strtoupper($item->beneficiario, 'UTF-8');
+                }
+
+
+                if(!property_exists($item,'observacion') )
+                {
+                    $item->observacion = ' ';
+
+                }else
+                {
+                    $item->observacion = mb_strtoupper($item->observacion, 'UTF-8');
+                }
+
+
+                if(!property_exists($item,'tipo_reposicion') )
+                {
+                    $item->tipo_reposicion = 'x';
+                    $has_error = true;
+                }
+
+                if(!property_exists($item,'periodo') )
+                {
+                    $item->periodo = 'x';
+                    $has_error = true;
+                }else
+                {
+                    $item->periodo = self::convertDate($item->periodo);
+                }
+
+                if(!property_exists($item,'fecha_inicio') )
+                {
+                    $item->fecha_inicio = 'x';
+                    $has_error = true;
+                }else
+                {
+                    $item->fecha_inicio = self::convertDate($item->fecha_inicio);
+                    // $UNIX_DATE = ($item->fecha_inicio - 25569) * 86400;
+                    // $item->fecha_inicio  = gmdate("d-m-Y", $UNIX_DATE);
+                }
+
+                if(!property_exists($item,'fecha_fin') )
+                {
+                    $item->fecha_fin = 'x';
+                    $has_error = true;
+                }else
+                {
+                    $item->fecha_fin = self::convertDate($item->fecha_fin);
+                }
+
+
+                if(!property_exists($item,'fecha_inicio_calculo') )
+                {
+                    $item->fecha_inicio_calculo = 'x';
+                    $has_error = true;
+                }else
+                {
+                    $item->fecha_inicio_calculo = self::convertDate($item->fecha_inicio_calculo);
+                }
+
+                if(!property_exists($item,'fecha_fin_calculo') )
+                {
+                    $item->fecha_fin_calculo = 'x';
+                    $has_error = true;
+                }else
+                {
+                    $item->fecha_fin_calculo = self::convertDate($item->fecha_fin_calculo);
+                }
+
+                //valores numericos
+
+                if(!property_exists($item,'nit') )
+                {
+                    $item->nit = 'x';
+                    $has_error = true;
+                }
+
+                if(!property_exists($item,'ci') )
+                {
+                    $item->ci = 'x';
+                    $has_error = true;
+                }
+
+                if(!property_exists($item,'monto') )
+                {
+                    $item->monto = 'x';
+                    $has_error = true;
+                }
+
+                if(!property_exists($item,'salario_basico') )
+                {
+                    $item->salario_basico = 'x';
+                    $has_error = true;
+                }
+
+
+                if(!property_exists($item,'paquete') )
+                {
+                    $item->paquete = 'x';
+                    $has_error = true;
+                }
+
+                if(!property_exists($item,'nro_pago') )
+                {
+                    $item->nro_pago = 'x';
+                    $has_error = true;
+                }
+
+                if(!property_exists($item,'dias_cotizados') )
+                {
+                    $item->dias_cotizados = 'x';
+                    $has_error = true;
+                }
+
+                if(!property_exists($item,'descuento_bonificacion') )
+                {
+                    $item->descuento_bonificacion = 'x';
+                    $has_error = true;
+                }
+
+                if(!property_exists($item,'liquido_pagable') )
+                {
+                    $item->liquido_pagable = 'x';
+                    $has_error = true;
+                }
+
+                if(!property_exists($item,'primer_sb') )
+                {
+                    $item->primer_sb = 'x';
+                    $has_error = true;
+                }
+
+                if(!property_exists($item,'segundo_sb') )
+                {
+                    $item->segundo_sb = 'x';
+                    $has_error = true;
+                }
+
+
+                if(!property_exists($item,'monto_incentivo') )
+                {
+                    $item->monto_incentivo = 'x';
+                    $has_error = true;
+                }
+
+
+                $item->has_error = $has_error;
+
+                // Log::info(json_encode($item));
                 array_push($items,$item);
             }
 
@@ -67,6 +246,12 @@ class ReplacementController extends Controller
 
         return response()->json(compact('items'));
 
+    }
+
+    public function convertDate($excel_date)
+    {
+        $UNIX_DATE = ($excel_date - 25569) * 86400;
+        return gmdate("d-m-Y", $UNIX_DATE);
     }
     /**
      * Store a newly created resource in storage.

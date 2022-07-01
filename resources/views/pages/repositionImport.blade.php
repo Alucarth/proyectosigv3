@@ -52,6 +52,7 @@
                                                 <thead>
                                                     <tr class="bg-gray-700 dark:bg-dark-1 text-white text-xs ">
                                                         <th class="whitespace-nowrap uppercase">#</th>
+                                                        <th  class="whitespace-nowrap uppercase">NRO PAGO  </th>
                                                         <th class="whitespace-nowrap uppercase">Empresa</th>
                                                         <th class="whitespace-nowrap uppercase">NIT</th>
                                                         <th class="whitespace-nowrap uppercase">PERIODO</th>
@@ -61,14 +62,13 @@
                                                         <th  class="whitespace-nowrap uppercase">CI </th>
                                                         <th  class="whitespace-nowrap uppercase">FECHA INICIO </th>
                                                         <th  class="whitespace-nowrap uppercase">FECHA FIN </th>
-                                                        <th  class="whitespace-nowrap uppercase">MONTO TOTAL </th>
+                                                        <th  class="whitespace-nowrap uppercase">MONTO</th>
                                                         <th  class="whitespace-nowrap uppercase">SALARIO BASICO DEL MES  </th>
                                                         <th  class="whitespace-nowrap uppercase">PAQUETE  </th>
-                                                        <th  class="whitespace-nowrap uppercase">NRO PAGO  </th>
                                                         <th  class="whitespace-nowrap uppercase">FECHA INICIO CALCULO </th>
                                                         <th  class="whitespace-nowrap uppercase">FECHA FIN CALCULO </th>
                                                         <th  class="whitespace-nowrap uppercase">DIAS COTIZADOS</th>
-                                                        <th  class="whitespace-nowrap uppercase">SALARIO BASICO MES</th>
+                                                        <th  class="whitespace-nowrap uppercase">SALARIO BASICO</th>
                                                         <th  class="whitespace-nowrap uppercase">DESCUENTOS/BONOS </th>
                                                         <th  class="whitespace-nowrap uppercase">LIQUIDO PAGABLE </th>
                                                         <th  class="whitespace-nowrap uppercase">30% S.B. </th>
@@ -76,10 +76,40 @@
                                                         <th  class="whitespace-nowrap uppercase">TIPO </th>
                                                         <th  class="whitespace-nowrap uppercase">OBSERVACION</th>
                                                         <th  class="whitespace-nowrap uppercase">MONTO INCENTIVO </th>
+                                                        <th></th>
 
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody data-bind="foreach: items">
+
+                                                    <tr >
+                                                        <td data-bind="text: indice"> </td>
+                                                        <td data-bind="text: nro_pago"> </td>
+                                                        <td data-bind="text: empresa"> </td>
+                                                        <td data-bind="text: nit"> </td>
+                                                        <td data-bind="text: periodo"> </td>
+                                                        <td data-bind="text: contrato"> </td>
+                                                        <td data-bind="text: cuenta"> </td>
+                                                        <td data-bind="text: beneficiario"> </td>
+                                                        <td data-bind="text: ci"> </td>
+                                                        <td data-bind="text: fecha_inicio"> </td>
+                                                        <td data-bind="text: fecha_fin"> </td>
+                                                        <td data-bind="text: monto"> </td>
+                                                        <td data-bind="text: salario_basico_mes"> </td>
+                                                        <td data-bind="text: paquete"> </td>
+                                                        <td data-bind="text: fecha_inicio_calculo"> </td>
+                                                        <td data-bind="text: fecha_fin_calculo"> </td>
+                                                        <td data-bind="text: dias_cotizados"> </td>
+                                                        <td data-bind="text: salario_basico"> </td>
+                                                        <td data-bind="text: descuento_bonificacion"> </td>
+                                                        <td data-bind="text: liquido_pagable"> </td>
+                                                        <td data-bind="text: primer_sb"> </td>
+                                                        <td data-bind="text: segundo_sb"> </td>
+                                                        <td data-bind="text: tipo_reposicion"> </td>
+                                                        <td data-bind="text: observacion"> </td>
+                                                        <td data-bind="text: monto_incentivo"> </td>
+                                                        <td > <button type="button" class="btn btn-danger btn-sm" data-bind="click: $parent.removeItem" ><i class="fas fa-trash"></i> </button>   </td>
+                                                    </tr>
 
 
                                                 </tbody>
@@ -107,8 +137,7 @@
 <script>
      console.log("Cargando modulo de posiciones")
     var viewModel = {
-        ci: ko.observable(""),
-        nombres: ko.observable(""),
+        items: ko.observableArray([]),
         loadExcel()
         {
             var formData = new FormData();
@@ -120,9 +149,15 @@
                     'Content-type': 'multipart/form-data'
                 }
             }).then(response => (
-                console.log(response.data)
+                // console.log(response.data)
+                viewModel.items(response.data.items)
+                // console.log(viewModel.items())
             ))
 
+        },
+        removeItem()
+        {
+            viewModel.items.remove(this);
         }
 
 

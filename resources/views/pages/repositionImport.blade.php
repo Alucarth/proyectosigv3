@@ -39,10 +39,11 @@
 
                                             </div>
                                         </h2>
-                                            <button type="button" class="btn btn-outline-success btn-sm" data-bind="click: loadExcel()"  > <i class="fas fa-file-excel w-4 h-4 mr-2"></i> Analizar Excel </button>
+
+                                        <button type="button" class="btn btn-outline-success btn-sm" data-bind="click: loadExcel()"  > <i class="fas fa-file-excel w-4 h-4 mr-2"></i> Analizar Excel </button>
 
 
-                                        <button type="button" class="btn btn-success btn-sm"> <i class="fas fa-save w-4 h-4 mr-2"></i> Registrar Reposiciones  </button>
+                                        <button type="button" class="btn btn-success btn-sm" data-bind="click: saveItems() "> <i class="fas fa-save w-4 h-4 mr-2"></i> Registrar Reposiciones  </button>
 
                                     </div>
                                     <div class="p-5">
@@ -158,6 +159,14 @@
         removeItem()
         {
             viewModel.items.remove(this);
+        },
+        saveItems()
+        {
+            axios.post('save_repositions',{items: JSON.stringify(viewModel.items()) }).then(response => (
+                 console.log(response.data)
+
+                // console.log(viewModel.items())
+            ))
         }
 
 

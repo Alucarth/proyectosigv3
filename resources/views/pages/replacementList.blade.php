@@ -212,7 +212,7 @@
 
                     var total = 0;
                     viewModel.reposiciones().forEach(item => {
-                        total += parseFloat(item.total_ganado)
+                        total += parseFloat(item.monto_incentivo)
                     });
 
                     viewModel.total_repo(total)

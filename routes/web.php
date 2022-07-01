@@ -76,4 +76,5 @@ Route::get('institution-pdf-registro', [RegisterInstitutionController::class, "p
 //modulo para auditoria
 
 Route::get('importar-reposiciones',[ReplacementController::class, "import"])->name('import.repositions')->middleware(['auth', 'role:oficial']);
+Route::post('load_excel',[ReplacementController::class, "loadExcel"])->name('import.load_excel')->middleware(['auth', 'role:oficial']);
 Route::get('repositions',[ReplacementInstitutionController::class, "data"])->name('replacement.data')->middleware(['auth', 'role:oficial']);

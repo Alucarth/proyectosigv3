@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Replacement;
 use Illuminate\Http\Request;
+use Symfony\Contracts\Service\Attribute\Required;
+use App\Imports\RepositionImportExcel;
+use Maatwebsite\Excel\Facades\Excel;
+use Log;
+
 
 class ReplacementController extends Controller
 {
@@ -32,6 +37,30 @@ class ReplacementController extends Controller
         //
     }
 
+    /** Load file excel to view  */
+
+    public function loadExcel(Request $request)
+    {
+        $path = $request->file('fileExcel')->store('excels');
+
+        // $this->path =(string) $this->file_name->store("excels");
+        Log::info(storage_path('app/').$path);
+        $colections = Excel::toCollection(new RepositionImportExcel, storage_path("app//".$path));
+        $items =[];
+        foreach($colections[0] as $row)
+        {
+            $item =json_decode( json_encode($row));
+            $item =(object) $item;
+            array_push($items,$item);
+        }
+
+        unlink(storage_path('app/'.$path));
+        Log::info(json_encode($items));
+        Log::info('Se elimino el archivo temporal XD');
+
+        return response()->json(compact('items'));
+
+    }
     /**
      * Store a newly created resource in storage.
      *

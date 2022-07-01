@@ -144,7 +144,7 @@
 
 @section('script')
 <script>
-    console.log("haber si funciona")
+    console.log("Cargando modulo de posiciones")
     var viewModel = {
         ci: ko.observable(""),
         nombres: ko.observable(""),

@@ -9,6 +9,14 @@ console.log('instalando axios');
 
 var error_tag = document.getElementById('error_message')
 
+// ES6 Modules or TypeScript
+// import Swal from 'sweetalert2'
+
+// CommonJS
+// const Swal = require('sweetalert2')
+
+
+
 // var previewModal = document.getElementById('modal-preview')
 
 // console.log(previewModal)

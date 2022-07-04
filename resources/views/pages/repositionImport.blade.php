@@ -38,12 +38,15 @@
                                                 <input type="file" class="form-control" id="excelFile" >
 
                                             </div>
+                                            <br>
+                                            <button type="button" class="btn btn-outline-success btn-sm" data-bind="click: loadExcel()"  > <i class="fas fa-file-excel w-4 h-4 mr-2"></i> Analizar Excel </button>
                                         </h2>
 
-                                        <button type="button" class="btn btn-outline-success btn-sm" data-bind="click: loadExcel()"  > <i class="fas fa-file-excel w-4 h-4 mr-2"></i> Analizar Excel </button>
 
+                                        <div data-bind="visible: items().length > 0">
+                                            <button type="button" class="btn btn-success btn-sm" data-bind="click: saveItems() "> <i class="fas fa-save w-4 h-4 mr-2"></i> Registrar Reposiciones  </button>
+                                        </div>
 
-                                        <button type="button" class="btn btn-success btn-sm" data-bind="click: saveItems() "> <i class="fas fa-save w-4 h-4 mr-2"></i> Registrar Reposiciones  </button>
 
                                     </div>
                                     <div class="p-5">
@@ -52,8 +55,8 @@
                                             <table class="table">
                                                 <thead>
                                                     <tr class="bg-gray-700 dark:bg-dark-1 text-white text-xs ">
-                                                        <th class="whitespace-nowrap uppercase">#</th>
-                                                        <th  class="whitespace-nowrap uppercase">NRO PAGO  </th>
+                                                        <th class="whitespace-nowrap uppercase" >#</th>
+                                                        <th  class="whitespace-nowrap uppercase">N° PAGO</th>
                                                         <th class="whitespace-nowrap uppercase">Empresa</th>
                                                         <th class="whitespace-nowrap uppercase">NIT</th>
                                                         <th class="whitespace-nowrap uppercase">PERIODO</th>
@@ -83,7 +86,7 @@
                                                 </thead>
                                                 <tbody data-bind="foreach: items">
 
-                                                    <tr >
+                                                    <tr class="text-xs">
                                                         <td data-bind="text: indice"> </td>
                                                         <td data-bind="text: nro_pago"> </td>
                                                         <td data-bind="text: empresa"> </td>
@@ -135,43 +138,82 @@
 @endsection
 
 @section('script')
-<script>
+<script defer>
      console.log("Cargando modulo de posiciones")
+
+    var loaded = false
+
     var viewModel = {
         items: ko.observableArray([]),
         loadExcel()
         {
-            var formData = new FormData();
-            var excelFile = document.querySelector('#excelFile')
-            formData.append('fileExcel',excelFile.files[0])
-            console.log(formData)
-            axios.post('load_excel',formData,{
-                headers: {
-                    'Content-type': 'multipart/form-data'
+            if(loaded)
+            {
+
+                var excelFile = document.querySelector('#excelFile')
+                if(excelFile.value != '' &&  excelFile.value != null)
+                {
+                    swal("Analizando Excel ...", {
+                            button: false,
+                            icon: "info"
+                        });
+
+                    var formData = new FormData();
+
+                    formData.append('fileExcel',excelFile.files[0])
+                    console.log(formData)
+
+                    axios.post('load_excel',formData,{
+                        headers: {
+                            'Content-type': 'multipart/form-data'
+                        }
+                    }).then(response => (
+                        // console.log(response.data)
+                        viewModel.items(response.data.items),
+                        swal.close()
+                        // console.log(viewModel.items())
+                    ))
                 }
-            }).then(response => (
-                // console.log(response.data)
-                viewModel.items(response.data.items)
-                // console.log(viewModel.items())
-            ))
+
+            }
+
+
 
         },
         removeItem()
         {
-            viewModel.items.remove(this);
+            if(loaded)
+            {
+                viewModel.items.remove(this);
+            }
         },
-        saveItems()
+        saveItems: function ()
         {
-            axios.post('save_repositions',{items: JSON.stringify(viewModel.items()) }).then(response => (
-                 console.log(response.data)
+            if(loaded)
+            {
+                swal("Registrando Reposiciones ...", {
+                            button: false,
+                            icon: "info"
+                        });
+                if(viewModel.items().length > 0)
+                {
+                    axios.post('save_repositions',{items: JSON.stringify(viewModel.items()) }).then(response => {
 
-                // console.log(viewModel.items())
-            ))
+                        console.log(response.data)
+                        swal("Importacion Exitosa!", response.data.message, "success");
+                        viewModel.items([]);
+
+                    })
+                }
+            }
         }
 
 
     }
     ko.applyBindings(viewModel);
+
+    loaded = true
+
 
 </script>
 @endsection

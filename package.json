@@ -21,6 +21,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.4",
         "chart.js": "^3.5.1",
-        "izitoast": "^1.4.0"
+        "izitoast": "^1.4.0",
+        "sweetalert2": "^11.4.19"
     }
 }

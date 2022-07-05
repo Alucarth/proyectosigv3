@@ -339,6 +339,9 @@ class ReplacementController extends Controller
             $reposition->salario_basico2 = $item->segundo_sb;
             $reposition->monto_incentivo = $item->monto_incentivo;
             $reposition->official_id = Auth::user()->id;
+            $reposition->tipo = $item->tipo_reposicion;
+            $reposition->observacion = $item->observacion;
+
             $reposition->save();
 
         }

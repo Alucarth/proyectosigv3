@@ -67,6 +67,8 @@
                                                 <th class="whitespace-nowrap">Descuentos/Bonos </th>
                                                 <th class="whitespace-nowrap">Salario Basico </th>
                                                 <th class="whitespace-nowrap">Oficial Operativo </th>
+                                                <th class="whitespace-nowrap">Tipo</th>
+                                                <th class="whitespace-nowrap">Observacion</th>
                                                 <th class="whitespace-nowrap">Monto Incentivo</th>
                                             </tr>
                                         </thead>
@@ -83,6 +85,9 @@
                                                 <td data-bind="text: descuentos_bonos"> </td>
                                                 <td data-bind="text: salario_basico"> </td>
                                                 <td data-bind="text: email"> </td>
+                                                <td data-bind="text: tipo"> </td>
+                                                <td data-bind="text: observacion"> </td>
+
                                                 <td data-bind="text: monto_incentivo"> </td>
                                             </tr>
 
@@ -99,6 +104,9 @@
                                                 <td>&nbsp;</td>
                                                 <td>&nbsp;</td>
                                                 <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+
                                                 <td>Total Incentivo</td>
 
                                                 <td> <strong data-bind="text: total_repo"></strong></td>
@@ -174,8 +182,10 @@
                     viewModel.reposiciones().forEach(item => {
                         total += parseFloat(item.monto_incentivo)
                     });
+                    let total_text = total.toFixed(2)+' Bs ';
 
-                    viewModel.total_repo(total)
+                    viewModel.total_repo(total_text)
+
                     console.log(viewModel.total_repo())
                     // response.data.repositions.forEach(item => {
                     //     viewModel.reposiciones.push(item)
@@ -214,8 +224,9 @@
                     viewModel.reposiciones().forEach(item => {
                         total += parseFloat(item.monto_incentivo)
                     });
+                    let total_text = total.toFixed(2)+' Bs ';
 
-                    viewModel.total_repo(total)
+                    viewModel.total_repo(total_text)
                     // response.data.repositions.forEach(item => {
                     //     viewModel.reposiciones.push(item)
 

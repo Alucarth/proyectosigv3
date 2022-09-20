@@ -176,12 +176,21 @@
                 .then(function (response) {
                     // handle success
                     console.log(response.data.repositions)
+
+                    var total = 0 ;
+                    response.data.repositions.forEach(item => {
+                        total += parseFloat(item.monto_incentivo)
+                        item.monto_incentivo = parseFloat(item.monto_incentivo).toFixed(2)
+                        return item
+                    });
+                    // console.log('array con conversion de datos', response.data.repositions) 
                     viewModel.reposiciones(response.data.repositions)
 
-                    var total = 0;
-                    viewModel.reposiciones().forEach(item => {
-                        total += parseFloat(item.monto_incentivo)
-                    });
+                    // var total = 0;
+                    // viewModel.reposiciones().forEach(item => {
+                    //     total += parseFloat(item.monto_incentivo)
+                    // });
+                    
                     let total_text = total.toFixed(2)+' Bs ';
 
                     viewModel.total_repo(total_text)
@@ -218,12 +227,18 @@
                 .then(function (response) {
                     // handle success
                     console.log(response.data.repositions)
+                    var total = 0 ;
+                    response.data.repositions.forEach(item => {
+                        total += parseFloat(item.monto_incentivo)
+                        item.monto_incentivo = parseFloat(item.monto_incentivo).toFixed(2)
+                        return item
+                    });
                     viewModel.reposiciones(response.data.repositions)
 
-                    var total = 0;
-                    viewModel.reposiciones().forEach(item => {
-                        total += parseFloat(item.monto_incentivo)
-                    });
+                    // var total = 0;
+                    // viewModel.reposiciones().forEach(item => {
+                    //     total += parseFloat(item.monto_incentivo)
+                    // });
                     let total_text = total.toFixed(2)+' Bs ';
 
                     viewModel.total_repo(total_text)
